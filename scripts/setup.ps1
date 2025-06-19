@@ -9,7 +9,7 @@ function Install-Dotfiles {
     }
 
     # Define 
-    $repoUrl = "https://github.com/excalith/.dotfiles/archive/main.zip"
+    $repoUrl = "https://github.com/marcobre/bootstrap/archive/main.zip"
     $downloadPath = "$env:TEMP"
 
     # Check if dotfiles folder exists

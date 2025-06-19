@@ -7,12 +7,10 @@
 . "$HOME/.dotfiles/scripts/utils/utils.sh"
 . "$HOME/.dotfiles/scripts/utils/utils_ubuntu.sh"
 
-
 #==================================
 # Print Section Title
 #==================================
 print_section "Applying Ubuntu Defaults"
-
 
 #==================================
 # General UI / UX
@@ -49,7 +47,6 @@ gsettings set org.gnome.shell.keybindings switch-to-application-6 []
 gsettings set org.gnome.shell.keybindings switch-to-application-7 []
 gsettings set org.gnome.shell.keybindings switch-to-application-8 []
 gsettings set org.gnome.shell.keybindings switch-to-application-9 []
-
 
 #==================================
 # Key Bindings
@@ -97,8 +94,6 @@ dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-up "['disabled
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-down "['disabled']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left "['disabled']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right "['disabled']"
-
-
 
 #==================================
 # Extensions
@@ -168,3 +163,4 @@ dconf write /org/gnome/shell/extensions/search-light/scale-width 0.07
 dconf write /org/gnome/shell/extensions/search-light/shortcut-search "['<Control>space']"
 dconf write /org/gnome/shell/extensions/search-light/show-panel-icon false
 print_success "Search Light"
+

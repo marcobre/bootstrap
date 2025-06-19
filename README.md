@@ -1,5 +1,5 @@
 <p align="center">
-	<h1 align="center">Excalith Dotfiles</h1>
+ <h1 align="center">Excalith Dotfiles</h1>
 </p>
 
 ![Screenshot of alacritty terminal using fish shell with spaceship prompt and tmux, displaying neofetch, nvim and custom scripts](assets/screenshots/dotfiles.png)
@@ -33,7 +33,7 @@ bash -c "$(curl -LsS https://raw.github.com/excalith/.dotfiles/main/scripts/setu
 ### Ubuntu 22.04 Jammy Jellyfish (and above)
 
 ```bash
-bash -c "$(wget --no-cache -qO - https://raw.github.com/excalith/.dotfiles/main/scripts/setup.sh)"
+bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
 ### Arch Linux

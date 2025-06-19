@@ -7,12 +7,10 @@
 . "$HOME/.dotfiles/scripts/utils/utils.sh"
 . "$HOME/.dotfiles/scripts/utils/utils_ubuntu.sh"
 
-
 #==================================
 # Print Section Title
 #==================================
 print_section "Installing Packages"
-
 
 #==================================
 # Add keys to apt
@@ -23,8 +21,8 @@ apt_install "gpg" "gpg"
 sudo mkdir -p /etc/apt/keyrings
 
 # Eza
-wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg &> /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list &> /dev/null
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg &>/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list &>/dev/null
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 
 # Mono
@@ -32,8 +30,8 @@ sudo mkdir -p /etc/apt/keyrings
 execute "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" "Mono (Add Key)"
 
 # Charm
-curl -fsSL --silent https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg &> /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list &> /dev/null
+curl -fsSL --silent https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg &>/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list &>/dev/null
 
 #==================================
 # Add repositories to apt
@@ -46,12 +44,10 @@ apt_add_repo "Fish" "ppa:fish-shell/release-3"
 apt_add_repo "OBS Studio" "ppa:obsproject/obs-studio"
 apt_add_repo "Alacritty" "ppa:aslatter/ppa"
 
-
 #==================================
 # Add sources to APT
 #==================================
 # print_title "Adding Sources"
-
 
 #==================================
 # Update APT packages
@@ -60,7 +56,6 @@ print_title "Update & Upgrade APT"
 
 apt_update
 apt_upgrade
-
 
 #==================================
 # Install package managers
@@ -71,7 +66,6 @@ apt_install "nala" "nala"
 apt_install "flatpak" "flatpak"
 apt_install "flatpak gnome plugin" "gnome-software-plugin-flatpak"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
-
 
 #==================================
 # Install APT packages
@@ -133,19 +127,18 @@ apt_install "nudoku" "nudoku"
 
 apt_install "Alacritty" "alacritty"
 apt_install "Caffeine" "caffeine"
-apt_install "Notion" "notion"
+#apt_install "Notion" "notion"
 apt_install "OBS Studio" "obs-studio"
-
 
 #==================================
 # Install Snap packages
 #==================================
-print_title "Install Snap Packages"
+#print_title "Install Snap Packages"
 
-snap_install "spt" "spt"
-snap_install "GitKraken" "gitkraken"
-snap_install "VS Code" "code"
-snap_install "1Password" "1password"
+#snap_install "spt" "spt"
+#snap_install "GitKraken" "gitkraken"
+#snap_install "VS Code" "code"
+#snap_install "1Password" "1password"
 
 # #==================================
 # # Install Cargo packages
@@ -160,20 +153,19 @@ snap_install "1Password" "1password"
 print_title "Install Flatpak Packages"
 
 flatpak_install "Firefox" "org.mozilla.firefox"
-flatpak_install "GitKraken" "com.axosoft.GitKraken"
-flatpak_install "Insomnia" "rest.insomnia.Insomnia"
-flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
+#flatpak_install "GitKraken" "com.axosoft.GitKraken"
+#flatpak_install "Insomnia" "rest.insomnia.Insomnia"
+#flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
 flatpak_install "Image Optimizer" "com.github.gijsgoudzwaard.image-optimizer"
-flatpak_install "Mailspring" "com.getmailspring.Mailspring"
+#flatpak_install "Mailspring" "com.getmailspring.Mailspring"
 flatpak_install "Telegram" "org.telegram.desktop"
 flatpak_install "Discord" "com.discordapp.Discord"
-flatpak_install "Zoom" "us.zoom.Zoom"
-flatpak_install "Dropbox" "com.dropbox.Client"
+#flatpak_install "Zoom" "us.zoom.Zoom"
+#flatpak_install "Dropbox" "com.dropbox.Client"
 flatpak_install "Transmission" "com.transmissionbt.Transmission"
 flatpak_install "Spotify" "com.spotify.Client"
 flatpak_install "VLC" "org.videolan.VLC"
-flatpak_install "Steam" "com.valvesoftware.Steam"
-
+#flatpak_install "Steam" "com.valvesoftware.Steam"
 
 #==================================
 # Install From Source
@@ -191,7 +183,7 @@ execute "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm" "TMU
 # sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 
 # LazyGit
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
 curl -Lo lazygit.tar.gz --silent --output /dev/null "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 rm -rf lazygit.tar.gz
@@ -207,30 +199,29 @@ print_success "lazygit"
 wget -qO ~/reversal.tar.gz https://github.com/yeyushengfan258/Reversal-icon-theme/archive/master.tar.gz
 mkdir -p ~/reversal-icons
 tar --extract \
-	--gzip \
-	--file ~/reversal.tar.gz \
-	--strip-components 1 \
-	--directory ~/reversal-icons
+  --gzip \
+  --file ~/reversal.tar.gz \
+  --strip-components 1 \
+  --directory ~/reversal-icons
 
-cd ~/reversal-icons && . install.sh -a &> /dev/null
+cd ~/reversal-icons && . install.sh -a &>/dev/null
 print_success "Reversal Icons"
 
 rm -rf ~/reversal-icons
 rm -rf ~/master.tar.gz
-
 
 #==================================
 # Install Extensions
 #==================================
 print_title "Install Gnome Extensions"
 
-extension_install "Dash To Dock (COSMIC)" "https://extensions.gnome.org/extension/5004/dash-to-dock-for-cosmic/"
-extension_install "User Themes" "https://extensions.gnome.org/extension/19/user-themes/"
-extension_install "Blur My Shell" "https://extensions.gnome.org/extension/3193/blur-my-shell/"
-extension_install "Rounded Corners" "https://extensions.gnome.org/extension/1514/rounded-corners/"
-extension_install "Places Status Indicator" "https://extensions.gnome.org/extension/8/places-status-indicator/"
-extension_install "Always Indicator" "https://extensions.gnome.org/extension/2594/always-indicator/"
-extension_install "Removable Drive Menu" "https://extensions.gnome.org/extension/7/removable-drive-menu/"
-extension_install "Caffeine" "https://extensions.gnome.org/extension/517/caffeine/"
-extension_install "Impatience" "https://extensions.gnome.org/extension/277/impatience/"
-extension_install "User Avatar" "https://extensions.gnome.org/extension/5506/user-avatar-in-quick-settings/"
+#extension_install "Dash To Dock (COSMIC)" "https://extensions.gnome.org/extension/5004/dash-to-dock-for-cosmic/"
+#extension_install "User Themes" "https://extensions.gnome.org/extension/19/user-themes/"
+#extension_install "Blur My Shell" "https://extensions.gnome.org/extension/3193/blur-my-shell/"
+#extension_install "Rounded Corners" "https://extensions.gnome.org/extension/1514/rounded-corners/"
+#extension_install "Places Status Indicator" "https://extensions.gnome.org/extension/8/places-status-indicator/"
+#extension_install "Always Indicator" "https://extensions.gnome.org/extension/2594/always-indicator/"
+#extension_install "Removable Drive Menu" "https://extensions.gnome.org/extension/7/removable-drive-menu/"
+#extension_install "Caffeine" "https://extensions.gnome.org/extension/517/caffeine/"
+#extension_install "Impatience" "https://extensions.gnome.org/extension/277/impatience/"
+#extension_install "User Avatar" "https://extensions.gnome.org/extension/5506/user-avatar-in-quick-settings/"
