@@ -1,0 +1,164 @@
+format = """
+$sudo\
+$os\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$fill\
+$aws\
+$c\
+$docker_context\
+$golang\
+$java\
+$lua\
+$package\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$cmd_duration $jobs $time\
+$line_break\
+$shell"""
+
+[fill]
+symbol = " "
+
+# Nice NerdFonts icons:               
+[shell]
+disabled = false
+format = "${indicator} "
+bash_indicator = '[](gray)'
+zsh_indicator = '[](purple)'
+fish_indicator = '[󰈺](purple)'
+cmd_indicator = '[](red)'
+powershell_indicator = '[󰨊](blue)'
+unknown_indicator = '[](red)'
+
+[sudo]
+symbol = ' '
+style = 'bold green'
+format = '[$symbol]($style)'
+disabled = false
+
+[directory]
+style = "bold green"
+home_symbol = '~'
+read_only = " "
+read_only_style = "bold red"
+truncation_length = 4
+truncation_symbol = ''
+truncate_to_repo = true
+
+[hostname]
+ssh_only = true
+format = '(bold blue)[$hostname](bold red): '
+trim_at = '.companyname.com'
+disabled = false
+
+[os]
+format = "[($symbol)]($style)"
+style = "bold red"
+disabled = false
+
+[os.symbols]
+Alpine = ' '
+Arch = ' '
+Debian = ' '
+Linux = ' '
+Macos = ' '
+Ubuntu = ' '
+Windows = ' '
+Unknown = ' '
+
+[memory_usage]
+symbol = "󰍛 "
+
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[cmd_duration]
+min_time = 5_000
+show_milliseconds = false
+format = "[ $duration]($style)"
+style = "fg:240"
+
+[time]
+disabled = false
+style = "fg:240"
+format = "[$time]($style)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style)"
+style = "bold bright-purple"
+
+[git_status]
+format = ' $all_status$ahead_behind$diverged'
+staged     = '[ ](bold green)'
+modified   = '[ ](bold yellow)'
+renamed    = '[ ](bold yellow)'
+deleted    = '[ ](bold red)'
+stashed    = '[󰜦 ](bold bright-purple)'
+untracked  = '[ ](bold bright-purple)'
+conflicted = '[ ](bold red)'
+up_to_date = '[ ](bold green)'
+ahead = '[⇡${count}](bold green)'
+behind = '[⇣${count}](bold red)'
+diverged = '[ ](bold red)([⇡${ahead_count} ](bold green)[⇣${behind_count}](bold red))'
+
+[git_state]
+format = '\([$state($progress_current/$progress_total)]($style)\) '
+style = "bright-purple"
+cherry_pick = '[ PICKING](bold red)'
+merge = '[󰦦 MERGING](bold red)'
+rebase = '[󰦦 REBASING](bold red)'
+
+[git_commit]
+commit_hash_length = 7
+tag_symbol = '󰓹 '
+disabled = false
+
+[aws]
+symbol = "  "
+
+[c]
+symbol = " "
+
+[docker_context]
+symbol = " "
+detect_files = [ "docker-compose.yml", "docker-compose.yaml", "Dockerfile" ]
+
+[dotnet]
+symbol = ' '
+heuristic = true
+
+[golang]
+symbol = " "
+
+[java]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[nodejs]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+
+[package]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
