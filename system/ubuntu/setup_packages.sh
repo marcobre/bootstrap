@@ -97,7 +97,7 @@ apt_install "git-all" "git-all"
 apt_install "git-lfs" "git-lfs"
 apt_install "apt-transport-https" "apt-transport-https"
 apt_install "software-properties-common" "software-properties-common"
-apt_install "libgconf-2-4" "libgconf-2-4"
+#apt_install "libgconf-2-4" "libgconf-2-4"
 apt_install "cargo" "cargo"
 
 apt_install "tmux" "tmux"
@@ -122,10 +122,10 @@ apt_install "neofetch" "neofetch"
 
 apt_install "ranger" "ranger"
 apt_install "midnight-commander" "mc"
-apt_install "node" "nodejs"
-apt_install "yarn" "yarn"
+#apt_install "node" "nodejs"
+#apt_install "yarn" "yarn"
 apt_install "gcc" "gcc"
-apt_install "micro" "micro"
+#apt_install "micro" "micro"
 apt_install "neovim" "neovim"
 apt_install "ffmpeg" "ffmpeg"
 
@@ -134,7 +134,7 @@ apt_install "nudoku" "nudoku"
 apt_install "Alacritty" "alacritty"
 apt_install "Caffeine" "caffeine"
 #apt_install "Notion" "notion"
-apt_install "OBS Studio" "obs-studio"
+#apt_install "OBS Studio" "obs-studio"
 
 #==================================
 # Install Snap packages
@@ -151,7 +151,7 @@ apt_install "OBS Studio" "obs-studio"
 # #==================================
 # print_title "Install Cargo Packages"
 
-# cargo_install "exa" "exa"
+cargo_install "exa" "exa"
 
 #==================================
 # Install Flatpak Packages
@@ -164,11 +164,11 @@ flatpak_install "Firefox" "org.mozilla.firefox"
 #flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
 flatpak_install "Image Optimizer" "com.github.gijsgoudzwaard.image-optimizer"
 #flatpak_install "Mailspring" "com.getmailspring.Mailspring"
-flatpak_install "Telegram" "org.telegram.desktop"
-flatpak_install "Discord" "com.discordapp.Discord"
+#flatpak_install "Telegram" "org.telegram.desktop"
+#flatpak_install "Discord" "com.discordapp.Discord"
 #flatpak_install "Zoom" "us.zoom.Zoom"
 #flatpak_install "Dropbox" "com.dropbox.Client"
-flatpak_install "Transmission" "com.transmissionbt.Transmission"
+#flatpak_install "Transmission" "com.transmissionbt.Transmission"
 flatpak_install "Spotify" "com.spotify.Client"
 flatpak_install "VLC" "org.videolan.VLC"
 #flatpak_install "Steam" "com.valvesoftware.Steam"

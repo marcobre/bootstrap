@@ -1,11 +1,11 @@
 #!/bin/bash
 
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG=de_DE.UTF-8
+export LANGUAGE=de_DE.UTF-8
+export LC_ALL=de_DE.UTF-8
 
 # Dotfiles Path
-export DOTFILES_PATH="$HOME/.dotfiles"	
+export DOTFILES_PATH="$HOME/.dotfiles"
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/sbin:~/.local/bin:$PATH:~/.cargo/bin"
@@ -42,10 +42,10 @@ export FZF_CTRL_T_OPTS='fzf --preview "bat --style=numbers --color=always --line
 
 # Refresh shell config
 function sreload() {
-	source "$HOME/.bashrc"
-    source "$HOME/.bash.local"
-    source "$HOME/.config/bash/aliases.bash"
-    source "$HOME/.config/bash/functions.bash"
+  source "$HOME/.bashrc"
+  source "$HOME/.bash.local"
+  source "$HOME/.config/bash/aliases.bash"
+  source "$HOME/.config/bash/functions.bash"
 }
 export -f sreload
 
@@ -58,8 +58,8 @@ source "$HOME/.config/bash/functions.bash"
 export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
 
 # Set window title to current directory name
-function set_win_title(){
-    echo -ne "\033]0; $(basename "$PWD") \007"
+function set_win_title() {
+  echo -ne "\033]0; $(basename "$PWD") \007"
 }
 
 starship_precmd_user_func="set_win_title"
