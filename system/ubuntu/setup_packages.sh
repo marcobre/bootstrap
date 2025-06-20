@@ -149,7 +149,7 @@ apt_install "Caffeine" "caffeine"
 # #==================================
 # print_title "Install Cargo Packages"
 
-cargo_install "exa" "exa"
+#cargo_install "exa" "exa"
 
 #==================================
 # Install Flatpak Packages
