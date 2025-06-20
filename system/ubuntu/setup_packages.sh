@@ -12,12 +12,20 @@
 #==================================
 print_section "Installing Packages"
 
+
+
+#==================================
+# Install prerequirements
+#==================================
+apt_install "curl" "curl"
+apt_install "ca-certificates" "ca-certificates"
+apt_install "gpg" "gpg"
+
 #==================================
 # Add keys to apt
 #==================================
 print_title "Adding Keys"
 
-apt_install "gpg" "gpg"
 sudo mkdir -p /etc/apt/keyrings
 
 # Eza
@@ -30,7 +38,6 @@ sudo mkdir -p /etc/apt/keyrings
 execute "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" "Mono (Add Key)"
 
 # Charm
-apt_install "ca-certificates" "ca-certificates"
 curl -fsSL --silent https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg &>/dev/null
 echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list &>/dev/null
 
@@ -55,7 +62,7 @@ apt_add_repo "Alacritty" "ppa:aslatter/ppa"
 #==================================
 print_title "Update & Upgrade APT"
 
-apt_update
+apt_update"
 apt_upgrade
 
 #==================================
@@ -83,7 +90,6 @@ apt_install "heif-thumbnailer" "heif-thumbnailer"
 
 apt_install "gnupg" "gnupg"
 apt_install "dirmngr" "dirmngr"
-apt_install "curl" "curl"
 apt_install "wget" "wget"
 apt_install "pyhton3" "python3"
 apt_install "git" "git"
