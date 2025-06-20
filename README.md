@@ -122,7 +122,7 @@ If you want to create your own dotfiles based on my configuration, you should
 
 ## Credits
 
-This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
+This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/.dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
 
 I have modified this dotfiles with my own taste of config files and updated the Ubuntu related scripts and tested them on the current Ubuntu 24.04 LTS version.
 The other OS specific scripts will be modified in the new future and have not tested them yet.
