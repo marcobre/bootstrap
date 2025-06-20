@@ -79,7 +79,6 @@ dconf write /org/gnome/mutter/keybindings/toggle-tiled-left "['<Super><Ctrl><Alt
 dconf write /org/gnome/mutter/keybindings/toggle-tiled-right "['<Super><Ctrl><Alt>Right']"
 
 # Disable Rest
-gsettings set org.gnome.desktop.wm.keybindings toggle-shaded "['disabled']"
 dconf write /org/gnome/desktop/wm/keybindings/maximize "['disabled']"
 dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-up "['disabled']"
 dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-down "['disabled']"
