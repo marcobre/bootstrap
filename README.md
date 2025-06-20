@@ -1,5 +1,5 @@
 <p align="center">
- <h1 align="center">Excalith Dotfiles</h1>
+ <h1 align="center">Excalith Dotfiles Clone</h1>
 </p>
 
 ![Screenshot of alacritty terminal using fish shell with spaceship prompt and tmux, displaying neofetch, nvim and custom scripts](assets/screenshots/dotfiles.png)
@@ -24,7 +24,7 @@
 
 Depending on your OS, copy and paste the code to start installation. This code will download my dotfiles and start setup depending on your OS.
 
-### MacOS 12.0 Monterey (and above)
+### MacOS 12.0 Monterey (and above) WIP
 
 ```bash
 bash -c "$(curl -LsS https://raw.github.com/excalith/.dotfiles/main/scripts/setup.sh)"
@@ -36,13 +36,13 @@ bash -c "$(curl -LsS https://raw.github.com/excalith/.dotfiles/main/scripts/setu
 bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
-### Arch Linux
+### Arch Linux WIP
 
 ```bash
 bash -c "$(wget --no-cache -qO - https://raw.github.com/excalith/.dotfiles/main/scripts/setup.sh)"
 ```
 
-### Lite Version
+### Lite Version WIP
 
 This is a minimal installation for Termux app on Android.
 
@@ -50,7 +50,7 @@ This is a minimal installation for Termux app on Android.
 bash -c "$(curl -LsS https://raw.github.com/excalith/.dotfiles/main/system/lite/install.sh)"
 ```
 
-### Windows (10 and above)
+### Windows (10 and above) WIP
 
 #### Windows
 
@@ -122,9 +122,11 @@ If you want to create your own dotfiles based on my configuration, you should
 
 ## Credits
 
-This dotfiles repository is a heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
+This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
 
-I have modified this dotfiles with my own taste of config files and added a bunch of helpers and utilities to install packages, extensions etc. from different sources that I trust. I tried to seperate installation system and OS-spesific configurations as much as I can, so it would be easier to implement new OS setups which I might do later.
+I have modified this dotfiles with my own taste of config files and updated the Ubuntu related scripts and tested them on the current Ubuntu 24.04 LTS version.
+The other OS specific scripts will be modified in the new future and have not tested them yet.
+Big Thanks to Excalith for providing me with a solid framework supporting tofile management for the Operating Systems i am actively using.
 
 ## License
 
