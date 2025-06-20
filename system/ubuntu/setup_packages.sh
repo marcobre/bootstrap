@@ -12,8 +12,6 @@
 #==================================
 print_section "Installing Packages"
 
-
-
 #==================================
 # Install prerequirements
 #==================================
@@ -62,7 +60,7 @@ apt_add_repo "Alacritty" "ppa:aslatter/ppa"
 #==================================
 print_title "Update & Upgrade APT"
 
-apt_update"
+apt_update
 apt_upgrade
 
 #==================================
