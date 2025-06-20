@@ -30,6 +30,7 @@ sudo mkdir -p /etc/apt/keyrings
 execute "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" "Mono (Add Key)"
 
 # Charm
+apt_install "ca-certificates" "ca-certificates"
 curl -fsSL --silent https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg &>/dev/null
 echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list &>/dev/null
 
@@ -81,7 +82,6 @@ apt_install "heif-gdk-pixbuf" "heif-gdk-pixbuf"
 apt_install "heif-thumbnailer" "heif-thumbnailer"
 
 apt_install "gnupg" "gnupg"
-apt_install "ca-certificates" "ca-certificates"
 apt_install "dirmngr" "dirmngr"
 apt_install "curl" "curl"
 apt_install "wget" "wget"
