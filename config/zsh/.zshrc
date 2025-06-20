@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG=de_DE.UTF-8
+export LANGUAGE=de_DE.UTF-8
+export LC_ALL=de_DE.UTF-8
 
 # Dotfiles Path
 export DOTFILES_PATH="$HOME/.dotfiles"	
@@ -25,7 +25,7 @@ export GPG_TTY=$(tty)
 export "MICRO_TRUECOLOR=1"
 
 # Set default editor
-export EDITOR="lvim"
+export EDITOR="nvim"
 
 # Enable mouse scroll for less
 export LESS=-R

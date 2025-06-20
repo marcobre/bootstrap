@@ -1,40 +1,43 @@
 #!/bin/bash
-# shellcheck disable=SC1091
-
-#==================================
-# Source utilities
-#==================================
-. "$HOME/.dotfiles/scripts/utils/utils.sh"
-. "$HOME/.dotfiles/scripts/utils/utils_ubuntu.sh"
-
-
-#==================================
-# Print Section Title
-#==================================
-print_section "Installing Fonts"
 
 declare -a fonts=(
-    FiraCode
-    FiraMono
+  #  BitstreamVeraSansMono
+  CascadiaCode
+  # CodeNewRoman
+  # DroidSansMono
+  FiraCode
+  FiraMono
+  # Go-Mono
+  # Hack
+  # Hermit
+  JetBrainsMono
+  Meslo
+  # Noto
+  # Overpass
+  # ProggyClean
+  # RobotoMono
+  SourceCodePro
+  # SpaceMono
+  # Ubuntu
+  # UbuntuMono
 )
 
-version='2.1.0'
+version=$(curl -s 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest' | jq -r '.name')
 fonts_dir="${HOME}/.local/share/fonts"
 
 if [[ ! -d "$fonts_dir" ]]; then
-    mkdir -p "$fonts_dir" >/dev/null 2>&1
+  mkdir -p "$fonts_dir"
 fi
 
-for (( i=0; i<=${#fonts[@]} - 1; i++ )); do 
-    font=${fonts[$i]}
-    zip_file="${font}.zip"
-    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v${version}/${zip_file}"
-
-    execute "wget --quiet $download_url" "${font}"
-    unzip -o "$zip_file" -d "$fonts_dir"  &> /dev/null
-    rm "$zip_file"  &> /dev/null
+for font in "${fonts[@]}"; do
+  zip_file="${font}.zip"
+  download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
+  echo "Downloading $download_url"
+  wget "$download_url"
+  unzip "$zip_file" -d "$fonts_dir"
+  rm "$zip_file"
 done
 
-find "$fonts_dir" -name '*Windows Compatible*' -delete  &> /dev/null
+find "$fonts_dir" -name 'Windows Compatible' -delete
 
-execute "fc-cache -fv" "Updating font cache"
+fc-cache -fv
