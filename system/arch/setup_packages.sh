@@ -12,13 +12,11 @@
 #==================================
 print_section "Installing Packages"
 
-
 #==================================
 # Update APT packages
 #==================================
 print_title "Update Packages"
 pacman_update
-
 
 #==================================
 # Install essential packages
@@ -26,7 +24,6 @@ pacman_update
 print_title "Install Essential Packages"
 pacman_install "git" "git"
 pacman_install "base-devel" "base-devel"
-
 
 #==================================
 # Install AUR helper
@@ -38,14 +35,12 @@ execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning
 cd ~/tmp/yay
 execute "makepkg -sfci --noconfirm --needed" "Building yay"
 
-
 #==================================
 # Install package managers
 #==================================
 print_title "Install Package Managers"
 pacman_install "flatpak" "flatpak"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
-
 
 #==================================
 # Install Pacman packages
@@ -91,37 +86,34 @@ pacman_install "ffmpeg" "ffmpeg"
 
 pacman_install "Alacritty" "alacritty"
 
-
 #==================================
 # Install Snap packages
 #==================================
-print_title "Install Snap Packages"
-systemctl enable --now snapd.apparmor
-snap_install "spt" "spt"
-snap_install "VS Code" "code"
-snap_install "1Password" "1password"
-
+#print_title "Install Snap Packages"
+#systemctl enable --now snapd.apparmor
+#snap_install "spt" "spt"
+#snap_install "VS Code" "code"
+#snap_install "1Password" "1password"
 
 #==================================
 # Install Flatpak Packages
 #==================================
 print_title "Install Flatpak Packages"
 flatpak_install "Firefox" "org.mozilla.firefox"
-flatpak_install "GitKraken" "com.axosoft.GitKraken"
+#flatpak_install "GitKraken" "com.axosoft.GitKraken"
 flatpak_install "Insomnia" "rest.insomnia.Insomnia"
-flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
+#flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
 flatpak_install "Image Optimizer" "com.github.gijsgoudzwaard.image-optimizer"
-flatpak_install "Mailspring" "com.getmailspring.Mailspring"
+#flatpak_install "Mailspring" "com.getmailspring.Mailspring"
 flatpak_install "Telegram" "org.telegram.desktop"
 flatpak_install "Discord" "com.discordapp.Discord"
 flatpak_install "Zoom" "us.zoom.Zoom"
-flatpak_install "Dropbox" "com.dropbox.Client"
-flatpak_install "Transmission" "com.transmissionbt.Transmission"
+#flatpak_install "Dropbox" "com.dropbox.Client"
+#flatpak_install "Transmission" "com.transmissionbt.Transmission"
 flatpak_install "Spotify" "com.spotify.Client"
 flatpak_install "VLC" "org.videolan.VLC"
-flatpak_install "Steam" "com.valvesoftware.Steam"
-flatpak_install "OBS Studio" "com.obsproject.Studio"
-
+#flatpak_install "Steam" "com.valvesoftware.Steam"
+#flatpak_install "OBS Studio" "com.obsproject.Studio"
 
 #==================================
 # Install From Source
@@ -132,30 +124,27 @@ print_title "Install Packages From Source"
 rm -rf ~/.tmux/plugins/tpm
 execute "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm" "TMUX Plugin Manager (TPM)"
 
-
 # LazyGit
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
 curl -Lo lazygit.tar.gz --silent --output /dev/null "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 rm -rf lazygit.tar.gz
 print_success "lazygit"
 
-
 # Reversal Icons
 wget -qO ~/reversal.tar.gz https://github.com/yeyushengfan258/Reversal-icon-theme/archive/master.tar.gz
 mkdir -p ~/reversal-icons
 tar --extract \
-	--gzip \
-	--file ~/reversal.tar.gz \
-	--strip-components 1 \
-	--directory ~/reversal-icons
+  --gzip \
+  --file ~/reversal.tar.gz \
+  --strip-components 1 \
+  --directory ~/reversal-icons
 
-cd ~/reversal-icons && . install.sh -a &> /dev/null
+cd ~/reversal-icons && . install.sh -a &>/dev/null
 print_success "Reversal Icons"
 
 rm -rf ~/reversal-icons
 rm -rf ~/master.tar.gz
-
 
 #==================================
 # Install Extensions

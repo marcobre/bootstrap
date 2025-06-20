@@ -158,7 +158,7 @@ main() {
     download_utils || exit 1
   fi
 
-  print_section "Excalith Dotfiles Setup"
+  print_section "Marcom Dotfiles Setup"
 
   # Ask user for sudo
   print_title "Sudo Access"

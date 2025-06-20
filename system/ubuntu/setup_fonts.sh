@@ -34,7 +34,7 @@ for font in "${fonts[@]}"; do
   download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
   echo "Downloading $download_url"
   wget "$download_url"
-  unzip "$zip_file" -d "$fonts_dir"
+  unzip "$zip_file" -d -o "$fonts_dir"
   rm "$zip_file"
 done
 

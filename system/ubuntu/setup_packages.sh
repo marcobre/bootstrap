@@ -13,8 +13,9 @@
 print_section "Installing Packages"
 
 #==================================
-# Install prerequirements
+# Install Essential Packages
 #==================================
+print_title "Install Essential Packages"
 apt_install "curl" "curl"
 apt_install "ca-certificates" "ca-certificates"
 apt_install "gpg" "gpg"
