@@ -226,7 +226,7 @@ debug:
 # Shell
 # Start fish with tmux session
 shell:
-  program: /usr/local/bin/tmux
+  program: /opt/homebrew/bin/tmux
   args:
     - new-session
     - -A
