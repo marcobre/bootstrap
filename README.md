@@ -24,7 +24,7 @@
 
 Depending on your OS, copy and paste the code to start installation. This code will download my dotfiles and start setup depending on your OS.
 
-### MacOS 12.0 Monterey (and above) WIP
+### MacOS 12.0 Monterey and above  (WIP)
 
 ```bash
 bash -c "$(curl -LsS https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
