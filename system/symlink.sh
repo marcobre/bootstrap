@@ -81,7 +81,7 @@ symlink ~/.dotfiles/config/mc/skins/Arasaka.ini ~/.local/share/mc/skins/Arasaka.
 # alacritty config
 print_title "Alacritty configuration"
 if [ "$os_name" == "macos" ]; then
-	symlink ~/.dotfiles/config/alacritty/alacrittyMacos.yml ~/.config/alacritty/alacritty.yml
+	symlink ~/.dotfiles/config/alacritty/alacrittyMacos.toml ~/.config/alacritty/alacritty.toml
 elif [ "$os_name" == "ubuntu" ]; then
 	symlink ~/.dotfiles/config/alacritty/alacrittyLinux.yml ~/.config/alacritty/alacritty.yml
 fi
