@@ -6,10 +6,10 @@ alias colors="bash ~/.dotfiles/bin/colors/colors.sh"
 alias fzf='fzf --preview "bat --style numbers,changes --color=always {} | head -500"'
 alias exa='command eza --group-directories-first -laho --no-user --icons --git --git-repos --time-style relative'
 alias eza='command eza --group-directories-first -laho --no-user --icons --git --git-repos --time-style relative'
-alias ls='command eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'
-alias la='command eza -laho --time-style=long-iso --git --color-scale'
-alias l='command eza --all'
-alias ll='command eza -l -a --icons --group-directories-first'
+alias ll='command eza -lbhHigUmuSa --time-style=long-iso --icons --git --color-scale'
+alias la='command eza -laho --time-style=long-iso --icons --git --color-scale'
+alias l='command eza --all --icons'
+alias ls='command eza -l -a --icons --group-directories-first'
 alias cat=bat
 alias man=batman
 alias lg=lazygit
