@@ -39,6 +39,8 @@ brew_tap 'homebrew/cask-versions'
 brew_tap 'homebrew/cask-fonts'
 brew_tap 'eth-p/software'
 brew_tap 'teamookla/speedtest'
+brew tap 'd12frosted/emacs-plus'
+
 
 
 #==================================
@@ -75,7 +77,7 @@ brew_install "bat-extras" "eth-p/software/bat-extras"
 brew_install "viu" "viu"
 brew_install "htop" "htop"
 brew_install "pidof" "pidof"
-brew_install "httpie" "httpie"
+#brew_install "httpie" "httpie"
 brew_install "neofetch" "neofetch"
 brew_install "neovim" "neovim"
 brew_install "micro" "micro"
@@ -93,6 +95,7 @@ brew_install "skhd" "koekeishiya/formulae/skhd"
 brew_install "cmatrix" "cmatrix"
 brew_install "nudoku" "nudoku"
 brew_install "Obsidian" "Obsidian"
+brew install "emacs-plus" "emacs-plus"
 
 #==================================
 # Brew Cask
