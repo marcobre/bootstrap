@@ -36,7 +36,7 @@ export COLUMNS=80
 export BAT_PAGER="less -RF"
 
 # Setup FASD
-eval "$(fasd --init auto)"
+#eval "$(fasd --init auto)"
 
 # Setup Antigen
 source "$HOME/.config/antigen.zsh"
