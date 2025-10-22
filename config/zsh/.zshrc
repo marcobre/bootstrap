@@ -7,7 +7,7 @@ export LC_ALL=de_DE.UTF-8
 export DOTFILES_PATH="$HOME/.dotfiles"	
 
 # export PATH
-export PATH=$HOME/.local/bin:$HOME/local/sbin:$HOME/bin:$PATH:~/.cargo/bin
+export PATH=$HOME/.local/bin:$HOME/local/sbin:$HOME/bin:$PATH:~/.cargo/bin:~/.config/emacs/bin
 
 # forgit
 export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"

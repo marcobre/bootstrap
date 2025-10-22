@@ -40,7 +40,7 @@ brew_tap 'homebrew/cask-fonts'
 brew_tap 'eth-p/software'
 brew_tap 'teamookla/speedtest'
 brew tap 'd12frosted/emacs-plus'
-
+brew tap 'nikitabobko/tap/aerospace'
 
 
 #==================================
@@ -132,7 +132,7 @@ brew_install "WhatsApp" "whatsapp" "--cask"
 #brew_install "Cleanmymac" "cleanmymac" "--cask"
 #brew_install "Dropbox" "dropbox" "--cask"
 brew_install "FiraCode Nerd Font" "font-fira-code-nerd-font" "--cask"
-
+brew_install "aerospace" "aerospace" "--cask"
 
 #==================================
 # Brew MAS
