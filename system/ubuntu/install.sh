@@ -11,11 +11,12 @@
 # Check for Interactive Mode
 #==================================
 check_interactive_mode() {
-    # Check if we're in an interactive terminal (gum can be installed if needed)
-    if [[ -t 0 && -t 1 ]] && [[ "$TERM" != "dumb" ]]; then
-        return 0
-    else
+    # Check if we're in an interactive environment
+    # Be more permissive - only exclude clearly non-interactive cases
+    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]]; then
         return 1
+    else
+        return 0
     fi
 }
 
