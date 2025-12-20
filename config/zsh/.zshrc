@@ -7,7 +7,7 @@ export LC_ALL=de_DE.UTF-8
 export DOTFILES_PATH="$HOME/.dotfiles"	
 
 # export PATH
-export PATH=$HOME/.local/bin:$HOME/local/sbin:$HOME/bin:$PATH:~/.cargo/bin
+export PATH=$HOME/.local/bin:$HOME/local/sbin:$HOME/bin:$PATH:~/.cargo/bin:~/.config/emacs/bin
 
 # forgit
 export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
@@ -36,13 +36,13 @@ export COLUMNS=80
 export BAT_PAGER="less -RF"
 
 # Setup FASD
-eval "$(fasd --init auto)"
+#eval "$(fasd --init auto)"
 
 # Setup Antigen
 source "$HOME/.config/antigen.zsh"
 
 # Setup Plugins
-antigen bundle wfxr/forgit
+#antigen bundle wfxr/forgit
 antigen bundle unixorn/fzf-zsh-plugin@main
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -55,7 +55,7 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # Setup FZF
-# [ -f ~/.fzf/.fzf.zsh ] && source ~/.fzf/.fzf.zsh
+[ -f ~/.fzf/.fzf.zsh ] && source ~/.fzf/.fzf.zsh
 
 # export FZF_TMUX=1
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
