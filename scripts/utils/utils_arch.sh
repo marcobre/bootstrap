@@ -23,7 +23,7 @@ pacman_install() {
 
 pacman_update() {
     execute \
-        "sudo pacman -Syyu" \
+        "yes | sudo pacman -Syu" \
         "Pacman Update"
 }
 
