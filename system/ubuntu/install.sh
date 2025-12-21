@@ -12,7 +12,8 @@
 #==================================
 check_interactive_mode() {
     # Check if we're in an interactive environment
-    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]] || [[ ! -t 0 ]] || [[ ! -t 1 ]]; then
+    # Only disable interactive mode in clearly non-interactive contexts
+    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]]; then
         return 1
     else
         return 0
