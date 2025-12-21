@@ -21,29 +21,62 @@ check_interactive_mode() {
 }
 
 ask_installation_mode() {
-    # Alpine focuses on minimal systems, so text-based fallback is primary
-    print_section "Alpine Linux Dotfiles Setup"
-    print_title "Choose Installation Mode"
-    
-    print_option "1" "Interactive Installation (Simplified - Essential components with text menus)"
-    print_option "2" "Complete Automatic Installation (Install everything)"
-    print_option "3" "Traditional Mode (Original behavior)"
-    
-    printf "\n"
-    print_question "Which installation mode would you prefer? (1/2/3) "
-    read -r choice
-    
-    case $choice in
-        1)
-            echo "interactive"
-            ;;
-        2)
-            echo "automatic"
-            ;;
-        3|*)
-            echo "traditional"
-            ;;
-    esac
+    if command -v gum &> /dev/null; then
+        gum style \
+            --foreground 212 --border-foreground 212 --border rounded \
+            --align center --width 60 --margin "1 2" --padding "1 2" \
+            'Alpine Linux Dotfiles Setup' \
+            'Choose Installation Mode'
+
+        gum style \
+            --foreground 241 --align center --width 60 --margin "0 2" \
+            'Select your preferred installation method'
+
+        local choice
+        choice=$(gum choose --cursor="→ " --height=5 --header="Installation modes:" \
+            "Interactive Installation" \
+            "Complete Automatic Installation" \
+            "Traditional Mode")
+        
+        case "$choice" in
+            "Interactive Installation")
+                echo "interactive"
+                ;;
+            "Complete Automatic Installation")
+                echo "automatic"
+                ;;
+            "Traditional Mode")
+                echo "traditional"
+                ;;
+            *)
+                echo "traditional"
+                ;;
+        esac
+    else
+        # Fallback to text menu if gum is not available (Alpine might not have gum)
+        print_section "Alpine Linux Dotfiles Setup"
+        print_title "Choose Installation Mode"
+        
+        print_option "1" "Interactive Installation (Simplified - Essential components with text menus)"
+        print_option "2" "Complete Automatic Installation (Install everything)"
+        print_option "3" "Traditional Mode (Original behavior)"
+        
+        printf "\n"
+        print_question "Which installation mode would you prefer? (1/2/3) "
+        read -r choice
+        
+        case $choice in
+            1)
+                echo "interactive"
+                ;;
+            2)
+                echo "automatic"
+                ;;
+            3|*)
+                echo "traditional"
+                ;;
+        esac
+    fi
 }
 
 run_interactive_installation() {
@@ -97,17 +130,23 @@ run_traditional_installation() {
 
 # Check if we should run in interactive mode
 if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
-    # Ask user for installation mode preference
+    # Ask user for installation mode preference (gum may be installed by setup.sh)
     mode=$(ask_installation_mode)
     
+    # Clean up the mode string to remove any extra characters
+    mode=$(echo "$mode" | tr -d "'" | tr -d '#' | xargs)
+    
     case $mode in
-        "interactive")
+        *"interactive"*)
             run_interactive_installation
             ;;
-        "automatic")
+        *"automatic"*)
             run_automatic_installation
             ;;
-        "traditional"|*)
+        *"traditional"*)
+            run_traditional_installation
+            ;;
+        *)
             run_traditional_installation
             ;;
     esac
