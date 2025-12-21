@@ -36,18 +36,18 @@ ask_installation_mode() {
 
     local choice
     choice=$(gum choose --cursor="→ " --height=5 --header="Installation modes:" \
-        "1. Interactive Installation" \
-        "2. Complete Automatic Installation" \
-        "3. Traditional Mode")
+        "Interactive Installation" \
+        "Complete Automatic Installation" \
+        "Traditional Mode")
     
     case "$choice" in
-        "1. Interactive Installation")
+        "Interactive Installation")
             echo "interactive"
             ;;
-        "2. Complete Automatic Installation")
+        "Complete Automatic Installation")
             echo "automatic"
             ;;
-        "3. Traditional Mode")
+        "Traditional Mode")
             echo "traditional"
             ;;
         *)
@@ -122,17 +122,24 @@ if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
     # Ask user for installation mode preference (gum is already installed by setup.sh)
     mode=$(ask_installation_mode)
     
+    # Debug: show what mode was selected
+    print_title "Selected mode: '$mode'"
+    
     case $mode in
         "interactive")
+            print_success "Running interactive installation"
             run_interactive_installation
             ;;
         "automatic")
+            print_success "Running automatic installation"
             run_automatic_installation
             ;;
         "traditional")
+            print_success "Running traditional installation"
             run_traditional_installation
             ;;
         *)
+            print_warning "Unknown mode '$mode', defaulting to traditional installation"
             run_traditional_installation
             ;;
     esac
