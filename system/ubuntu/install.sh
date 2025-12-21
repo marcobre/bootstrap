@@ -123,24 +123,17 @@ if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
     # Clean up the mode string to remove any extra characters
     mode=$(echo "$mode" | tr -d "'" | tr -d '#' | xargs)
     
-    # Debug: show what mode was selected
-    print_title "Selected mode: '$mode'"
-    
     case $mode in
         *"interactive"*)
-            print_success "Running interactive installation"
             run_interactive_installation
             ;;
         *"automatic"*)
-            print_success "Running automatic installation"
             run_automatic_installation
             ;;
         *"traditional"*)
-            print_success "Running traditional installation"
             run_traditional_installation
             ;;
         *)
-            print_warning "Unknown mode '$mode', defaulting to traditional installation"
             run_traditional_installation
             ;;
     esac
