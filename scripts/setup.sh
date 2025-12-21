@@ -194,7 +194,12 @@ main() {
   fi
 
   # Start installation
-  . "$HOME/.dotfiles/system/$(get_os)/install.sh"
+  if [[ "${1:-}" == "--from-remote" ]]; then
+    # Pass the flag to the OS install script to indicate non-interactive execution
+    bash "$HOME/.dotfiles/system/$(get_os)/install.sh" --from-remote
+  else
+    . "$HOME/.dotfiles/system/$(get_os)/install.sh"
+  fi
 
   # Ask for git credentials
   . "$HOME/.dotfiles/scripts/utils/generate_git_creds.sh"
