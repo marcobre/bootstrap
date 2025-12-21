@@ -186,20 +186,8 @@ main() {
   printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &>/dev/null ||
     download_dotfiles
 
-  # If we were running remotely and have now downloaded the dotfiles,
-  # re-execute the local script with proper terminal access
-  if is_remote_execution && [[ -f "$HOME/.dotfiles/scripts/setup.sh" ]]; then
-    print_title "Re-executing with proper terminal access"
-    exec bash "$HOME/.dotfiles/scripts/setup.sh" --from-remote
-  fi
-
   # Start installation
-  if [[ "${1:-}" == "--from-remote" ]]; then
-    # Pass the flag to the OS install script to indicate non-interactive execution
-    bash "$HOME/.dotfiles/system/$(get_os)/install.sh" --from-remote
-  else
-    . "$HOME/.dotfiles/system/$(get_os)/install.sh"
-  fi
+  . "$HOME/.dotfiles/system/$(get_os)/install.sh"
 
   # Ask for git credentials
   . "$HOME/.dotfiles/scripts/utils/generate_git_creds.sh"

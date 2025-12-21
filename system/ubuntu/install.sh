@@ -12,11 +12,7 @@
 #==================================
 check_interactive_mode() {
     # Check if we're in an interactive environment
-    # Be more permissive - only exclude clearly non-interactive cases
-    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]]; then
-        return 1
-    # Check if we're running from a remote execution (piped from wget/curl)
-    elif [[ "${1:-}" == "--from-remote" ]] || [[ ! -t 0 && ! -t 1 ]]; then
+    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]] || [[ ! -t 0 ]] || [[ ! -t 1 ]]; then
         return 1
     else
         return 0
