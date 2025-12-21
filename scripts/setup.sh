@@ -151,7 +151,9 @@ install_gum_if_needed() {
     
     case "$os_name" in
       "ubuntu"|"wsl_ubuntu")
-        # Ubuntu/WSL Ubuntu - use apt
+        # Ubuntu/WSL Ubuntu - install curl first, then use apt
+        sudo apt update >/dev/null 2>&1
+        sudo apt install -y curl >/dev/null 2>&1
         sudo mkdir -p /etc/apt/keyrings
         curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
         echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
@@ -165,7 +167,10 @@ install_gum_if_needed() {
         fi
         ;;
       "macos")
-        # macOS - use brew
+        # macOS - install curl first, then use brew
+        if ! command -v curl &> /dev/null; then
+          xcode-select --install >/dev/null 2>&1 || true
+        fi
         if ! command -v brew &> /dev/null; then
           printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
@@ -178,7 +183,8 @@ install_gum_if_needed() {
         fi
         ;;
       "arch")
-        # Arch Linux - use pacman
+        # Arch Linux - install curl first, then use pacman
+        sudo pacman -S --noconfirm curl >/dev/null 2>&1
         if sudo pacman -S --noconfirm gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0
@@ -188,7 +194,8 @@ install_gum_if_needed() {
         fi
         ;;
       "alpine")
-        # Alpine Linux - try apk, but don't fail if unavailable
+        # Alpine Linux - install curl first, then try apk
+        sudo apk add --no-cache curl >/dev/null 2>&1
         if sudo apk add --no-cache gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0
