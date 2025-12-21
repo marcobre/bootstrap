@@ -23,7 +23,7 @@ pacman_install() {
 
 pacman_update() {
     execute \
-        "yes | sudo pacman -Syu" \
+        "sudo pacman -Syu --noconfirm" \
         "Pacman Update"
 }
 
