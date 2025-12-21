@@ -12,7 +12,6 @@
 #==================================
 
 show_welcome() {
-    clear
     gum style \
         --foreground 212 --border-foreground 212 --border rounded \
         --align center --width 60 --margin "1 2" --padding "1 2" \
@@ -417,7 +416,6 @@ main_interactive() {
         
         echo
         gum confirm "Return to main menu?" || break
-        clear
         show_welcome
     done
     
@@ -433,14 +431,5 @@ main_interactive() {
 #==================================
 print_section "Interactive Ubuntu Dotfiles Setup"
 
-# Check if gum is available, install if needed
-if ! command -v gum &> /dev/null; then
-    print_title "Installing gum for interactive menus"
-    # Add charm repository if not already added
-    curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
-    echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
-    sudo apt update >/dev/null 2>&1
-    apt_install "gum" "gum"
-fi
-
+# gum is already installed by setup.sh, so start the interactive flow directly
 main_interactive
