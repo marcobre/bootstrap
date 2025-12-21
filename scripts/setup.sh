@@ -151,11 +151,10 @@ install_gum_if_needed() {
     
     case "$os_name" in
       "ubuntu"|"wsl_ubuntu")
-        # Ubuntu/WSL Ubuntu - install curl first, then use apt
+        # Ubuntu/WSL Ubuntu - use wget for GPG key download
         sudo apt update >/dev/null 2>&1
-        sudo apt install -y curl >/dev/null 2>&1
         sudo mkdir -p /etc/apt/keyrings
-        curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
+        wget -qO- https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
         echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
         sudo apt update >/dev/null 2>&1
         if sudo apt install -y gum >/dev/null 2>&1; then
@@ -167,12 +166,14 @@ install_gum_if_needed() {
         fi
         ;;
       "macos")
-        # macOS - install curl first, then use brew
-        if ! command -v curl &> /dev/null; then
-          xcode-select --install >/dev/null 2>&1 || true
-        fi
+        # macOS - use wget if available, otherwise install homebrew which includes curl
         if ! command -v brew &> /dev/null; then
-          printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          if command -v wget &> /dev/null; then
+            printf "\n" | /bin/bash -c "$(wget -qO- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          else
+            # Fallback to curl if wget not available on macOS
+            printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          fi
         fi
         if brew install gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
@@ -183,8 +184,7 @@ install_gum_if_needed() {
         fi
         ;;
       "arch")
-        # Arch Linux - install curl first, then use pacman
-        sudo pacman -S --noconfirm curl >/dev/null 2>&1
+        # Arch Linux - use pacman directly
         if sudo pacman -S --noconfirm gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0
@@ -194,8 +194,7 @@ install_gum_if_needed() {
         fi
         ;;
       "alpine")
-        # Alpine Linux - install curl first, then try apk
-        sudo apk add --no-cache curl >/dev/null 2>&1
+        # Alpine Linux - try apk directly
         if sudo apk add --no-cache gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0
