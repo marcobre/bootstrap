@@ -143,6 +143,69 @@ verify_os() {
   return 1
 }
 
+install_gum_if_needed() {
+  if ! command -v gum &> /dev/null; then
+    print_title "Installing gum for interactive menus"
+    
+    local os_name="$(get_os)"
+    
+    case "$os_name" in
+      "ubuntu"|"wsl_ubuntu")
+        # Ubuntu/WSL Ubuntu - use apt
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
+        echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
+        sudo apt update >/dev/null 2>&1
+        if sudo apt install -y gum >/dev/null 2>&1; then
+          print_success "gum installed successfully"
+          return 0
+        else
+          print_error "Failed to install gum via apt"
+          return 1
+        fi
+        ;;
+      "macos")
+        # macOS - use brew
+        if ! command -v brew &> /dev/null; then
+          printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+        if brew install gum >/dev/null 2>&1; then
+          print_success "gum installed successfully"
+          return 0
+        else
+          print_error "Failed to install gum via brew"
+          return 1
+        fi
+        ;;
+      "arch")
+        # Arch Linux - use pacman
+        if sudo pacman -S --noconfirm gum >/dev/null 2>&1; then
+          print_success "gum installed successfully"
+          return 0
+        else
+          print_error "Failed to install gum via pacman"
+          return 1
+        fi
+        ;;
+      "alpine")
+        # Alpine Linux - try apk, but don't fail if unavailable
+        if sudo apk add --no-cache gum >/dev/null 2>&1; then
+          print_success "gum installed successfully"
+          return 0
+        else
+          print_warning "gum not available via apk, interactive menus will be text-based"
+          return 1
+        fi
+        ;;
+      *)
+        print_warning "Unknown OS for gum installation, interactive menus may not work"
+        return 1
+        ;;
+    esac
+  fi
+  return 0
+}
+
 #==================================
 # Check if running remotely
 #==================================
@@ -185,6 +248,9 @@ main() {
   # yet set up, and they will need to be downloaded.
   printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &>/dev/null ||
     download_dotfiles
+
+  # Install gum for interactive menus before starting OS-specific installation
+  install_gum_if_needed
 
   # Start installation
   . "$HOME/.dotfiles/system/$(get_os)/install.sh"

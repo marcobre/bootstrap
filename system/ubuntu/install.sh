@@ -20,26 +20,6 @@ check_interactive_mode() {
     fi
 }
 
-install_gum_if_needed() {
-    if ! command -v gum &> /dev/null; then
-        print_title "Installing gum for interactive menus"
-        
-        # Add charm repository if not already added
-        sudo mkdir -p /etc/apt/keyrings
-        curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg --yes 2>/dev/null
-        echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
-        
-        sudo apt update >/dev/null 2>&1
-        if sudo apt install -y gum >/dev/null 2>&1; then
-            print_success "gum installed successfully"
-            return 0
-        else
-            print_error "Failed to install gum"
-            return 1
-        fi
-    fi
-    return 0
-}
 
 ask_installation_mode() {
     clear
@@ -77,17 +57,11 @@ ask_installation_mode() {
 }
 
 run_interactive_installation() {
-    # First try to install gum if needed
-    if install_gum_if_needed; then
-        if [[ -f "$HOME/.dotfiles/system/ubuntu/install_interactive.sh" ]]; then
-            . "$HOME/.dotfiles/system/ubuntu/install_interactive.sh"
-        else
-            print_error "Interactive installation script not found!"
-            print_warning "Falling back to traditional installation..."
-            run_traditional_installation
-        fi
+    if [[ -f "$HOME/.dotfiles/system/ubuntu/install_interactive.sh" ]]; then
+        . "$HOME/.dotfiles/system/ubuntu/install_interactive.sh"
     else
-        print_warning "Could not install gum. Falling back to traditional installation..."
+        print_error "Interactive installation script not found!"
+        print_warning "Falling back to traditional installation..."
         run_traditional_installation
     fi
 }
@@ -145,29 +119,23 @@ run_traditional_installation() {
 
 # Check if we should run in interactive mode
 if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
-    # Ensure gum is installed before showing the menu
-    if install_gum_if_needed; then
-        # Ask user for installation mode preference
-        mode=$(ask_installation_mode)
-        
-        case $mode in
-            "interactive")
-                run_interactive_installation
-                ;;
-            "automatic")
-                run_automatic_installation
-                ;;
-            "traditional")
-                run_traditional_installation
-                ;;
-            *)
-                run_traditional_installation
-                ;;
-        esac
-    else
-        print_error "Could not install gum for interactive menus. Running traditional installation..."
-        run_traditional_installation
-    fi
+    # Ask user for installation mode preference (gum is already installed by setup.sh)
+    mode=$(ask_installation_mode)
+    
+    case $mode in
+        "interactive")
+            run_interactive_installation
+            ;;
+        "automatic")
+            run_automatic_installation
+            ;;
+        "traditional")
+            run_traditional_installation
+            ;;
+        *)
+            run_traditional_installation
+            ;;
+    esac
 else
     # Run traditional installation if no interactive mode or explicitly disabled
     run_traditional_installation
