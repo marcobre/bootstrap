@@ -11,11 +11,12 @@
 # Check for Interactive Mode
 #==================================
 check_interactive_mode() {
-    # Check if we're in an interactive terminal (gum can be installed if needed)
-    if [[ -t 0 && -t 1 ]] && [[ "$TERM" != "dumb" ]]; then
-        return 0
-    else
+    # Check if we're in an interactive environment
+    # Be more permissive - only exclude clearly non-interactive cases
+    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]]; then
         return 1
+    else
+        return 0
     fi
 }
 
@@ -37,28 +38,67 @@ install_gum_if_needed() {
 }
 
 ask_installation_mode() {
-    print_section "macOS Dotfiles Setup"
-    print_title "Choose Installation Mode"
+    clear
     
-    print_option "1" "Interactive Installation (Recommended - Select components with beautiful menus)"
-    print_option "2" "Complete Automatic Installation (Install everything)"
-    print_option "3" "Traditional Mode (Original behavior)"
-    
-    printf "\n"
-    print_question "Which installation mode would you prefer? (1/2/3) "
-    read -r choice
-    
-    case $choice in
-        1)
-            echo "interactive"
-            ;;
-        2)
-            echo "automatic"
-            ;;
-        3|*)
-            echo "traditional"
-            ;;
-    esac
+    # Try to install gum first for beautiful menus
+    install_gum_if_needed >/dev/null 2>&1
+
+    local choice
+    if command -v gum &> /dev/null; then
+        gum style \
+            --foreground 212 --border-foreground 212 --border rounded \
+            --align center --width 60 --margin "1 2" --padding "1 2" \
+            'macOS Dotfiles Setup' \
+            'Choose Installation Mode'
+
+        gum style \
+            --foreground 241 --align center --width 60 --margin "0 2" \
+            'Select your preferred installation method'
+
+        choice=$(gum choose --cursor="→ " --height=5 --header="Installation modes:" \
+            "1. Interactive Installation" \
+            "2. Complete Automatic Installation" \
+            "3. Traditional Mode")
+        
+        case "$choice" in
+            "1. Interactive Installation")
+                echo "interactive"
+                ;;
+            "2. Complete Automatic Installation")
+                echo "automatic"
+                ;;
+            "3. Traditional Mode")
+                echo "traditional"
+                ;;
+            *)
+                echo "traditional"
+                ;;
+        esac
+    else
+        # Fallback to text menu if gum is not available
+        print_section "macOS Dotfiles Setup"
+        print_title "Choose Installation Mode"
+        
+        print_option "1" "Interactive Installation (Recommended - Homebrew, Casks, Mac App Store)"
+        print_option "2" "Complete Automatic Installation (Install everything)"
+        print_option "3" "Traditional Mode (Original behavior)"
+        
+        printf "\n"
+        print_question "Which installation mode would you prefer? (1/2/3) "
+        read -r text_choice
+        
+        case $text_choice in
+            1)
+                echo "interactive"
+                ;;
+            2)
+                echo "automatic"
+                ;;
+            3|*)
+                echo "traditional"
+                ;;
+        esac
+    fi
 }
 
 run_interactive_installation() {

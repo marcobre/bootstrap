@@ -5,28 +5,49 @@
 # Check for Interactive Mode
 #==================================
 function Test-InteractiveMode {
-    # Check if we're in an interactive session
-    return [Environment]::UserInteractive -and -not ([Environment]::GetCommandLineArgs() -contains '-NonInteractive')
+    # Check if we're in an interactive environment
+    # Be more permissive - only exclude clearly non-interactive cases
+    if ($env:CI -or $env:AUTOMATION -or ([Environment]::GetCommandLineArgs() -contains '-NonInteractive')) {
+        return $false
+    } else {
+        return $true
+    }
 }
 
 function Get-InstallationMode {
-    Write-Section "Windows Dotfiles Setup"
+    Clear-Host
+    
+    # Beautiful header with Windows styling
     Write-Host ""
-    Write-Host "Choose Installation Mode:" -ForegroundColor Yellow
+    Write-Host "╭─────────────────────────────────────────────────────────╮" -ForegroundColor Magenta
+    Write-Host "│               Windows Dotfiles Setup                   │" -ForegroundColor Magenta  
+    Write-Host "│               Choose Installation Mode                  │" -ForegroundColor Magenta
+    Write-Host "╰─────────────────────────────────────────────────────────╯" -ForegroundColor Magenta
     Write-Host ""
-    Write-Host "  1) Interactive Installation (Recommended - Select components with menus)" -ForegroundColor White
-    Write-Host "  2) Complete Automatic Installation (Install everything)" -ForegroundColor White  
-    Write-Host "  3) Traditional Mode (Original behavior)" -ForegroundColor White
+    Write-Host "Select your preferred installation method" -ForegroundColor Gray
+    Write-Host ""
+    
+    # Beautiful menu options with PowerShell styling
+    Write-Host "Installation modes:" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  → " -NoNewline -ForegroundColor Cyan
+    Write-Host "1) Interactive Installation (Recommended - PowerShell menus, WSL2)" -ForegroundColor White
+    Write-Host "  → " -NoNewline -ForegroundColor Cyan
+    Write-Host "2) Complete Automatic Installation (Install everything)" -ForegroundColor White
+    Write-Host "  → " -NoNewline -ForegroundColor Cyan
+    Write-Host "3) Traditional Mode (Original behavior)" -ForegroundColor White
     Write-Host ""
     
     do {
-        $choice = Read-Host "Which installation mode would you prefer? (1/2/3)"
+        Write-Host "Which installation mode would you prefer? " -NoNewline -ForegroundColor Green
+        $choice = Read-Host "(1/2/3)"
         switch ($choice) {
             "1" { return "interactive" }
             "2" { return "automatic" }
             "3" { return "traditional" }
             default { 
                 Write-Host "Invalid choice. Please select 1, 2, or 3." -ForegroundColor Red
+                Write-Host ""
             }
         }
     } while ($true)

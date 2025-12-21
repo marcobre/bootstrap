@@ -42,28 +42,67 @@ install_gum_if_needed() {
 }
 
 ask_installation_mode() {
-    print_section "Ubuntu Dotfiles Setup"
-    print_title "Choose Installation Mode"
+    clear
     
-    print_option "1" "Interactive Installation (Recommended - Select components with beautiful menus)"
-    print_option "2" "Complete Automatic Installation (Install everything)"
-    print_option "3" "Traditional Mode (Original behavior)"
+    # Try to install gum first for beautiful menus
+    install_gum_if_needed >/dev/null 2>&1
     
-    printf "\n"
-    print_question "Which installation mode would you prefer? (1/2/3) "
-    read -r choice
-    
-    case $choice in
-        1)
-            echo "interactive"
-            ;;
-        2)
-            echo "automatic"
-            ;;
-        3|*)
-            echo "traditional"
-            ;;
-    esac
+    local choice
+    if command -v gum &> /dev/null; then
+        gum style \
+            --foreground 212 --border-foreground 212 --border rounded \
+            --align center --width 60 --margin "1 2" --padding "1 2" \
+            'Ubuntu Dotfiles Setup' \
+            'Choose Installation Mode'
+
+        gum style \
+            --foreground 241 --align center --width 60 --margin "0 2" \
+            'Select your preferred installation method'
+
+        choice=$(gum choose --cursor="→ " --height=5 --header="Installation modes:" \
+            "1. Interactive Installation" \
+            "2. Complete Automatic Installation" \
+            "3. Traditional Mode")
+        
+        case "$choice" in
+            "1. Interactive Installation")
+                echo "interactive"
+                ;;
+            "2. Complete Automatic Installation")
+                echo "automatic"
+                ;;
+            "3. Traditional Mode")
+                echo "traditional"
+                ;;
+            *)
+                echo "traditional"
+                ;;
+        esac
+    else
+        # Fallback to text menu if gum is not available
+        print_section "Ubuntu Dotfiles Setup"
+        print_title "Choose Installation Mode"
+        
+        print_option "1" "Interactive Installation (Recommended - Select components with beautiful menus)"
+        print_option "2" "Complete Automatic Installation (Install everything)"
+        print_option "3" "Traditional Mode (Original behavior)"
+        
+        printf "\n"
+        print_question "Which installation mode would you prefer? (1/2/3) "
+        read -r text_choice
+        
+        case $text_choice in
+            1)
+                echo "interactive"
+                ;;
+            2)
+                echo "automatic"
+                ;;
+            3|*)
+                echo "traditional"
+                ;;
+        esac
+    fi
 }
 
 run_interactive_installation() {
@@ -145,7 +184,10 @@ if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
         "automatic")
             run_automatic_installation
             ;;
-        "traditional"|*)
+        "traditional")
+            run_traditional_installation
+            ;;
+        *)
             run_traditional_installation
             ;;
     esac

@@ -144,6 +144,18 @@ verify_os() {
 }
 
 #==================================
+# Check if running remotely
+#==================================
+is_remote_execution() {
+  # Check if we're running from a remote context (piped from wget/curl)
+  # This happens when stdin is not a terminal AND we're running from a temp location
+  if [[ ! -t 0 ]] && [[ "${BASH_SOURCE[0]}" =~ ^/tmp/ || "${BASH_SOURCE[0]}" =~ ^/dev/fd/ || "${BASH_SOURCE[0]}" =~ ^/proc/self/fd/ ]]; then
+    return 0
+  fi
+  return 1
+}
+
+#==================================
 # Main Install Starter
 #==================================
 main() {
@@ -174,6 +186,13 @@ main() {
   printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &>/dev/null ||
     download_dotfiles
 
+  # If we were running remotely and have now downloaded the dotfiles,
+  # re-execute the local script with proper terminal access
+  if is_remote_execution && [[ -f "$HOME/.dotfiles/scripts/setup.sh" ]]; then
+    print_title "Re-executing with proper terminal access"
+    exec bash "$HOME/.dotfiles/scripts/setup.sh" --from-remote
+  fi
+
   # Start installation
   . "$HOME/.dotfiles/system/$(get_os)/install.sh"
 
@@ -186,7 +205,7 @@ main() {
   # Ask for GPG (Disabled since I started using another method)
   #. "$HOME/.dotfiles/scripts/utils/generate_gpg.sh"
 
-  # Link to original repository and update contents of dotfiles
+  # Link to original repository and update contents of dotfiles
   #    if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
   #        . "$HOME/.dotfiles/scripts/utils/init_dotfile_repo.sh '$DOTFILES_ORIGIN'"
   #    fi

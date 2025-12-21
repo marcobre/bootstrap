@@ -11,16 +11,18 @@
 # Check for Interactive Mode
 #==================================
 check_interactive_mode() {
-    # Check if we're in an interactive terminal
-    if [[ -t 0 && -t 1 ]] && [[ "$TERM" != "dumb" ]]; then
-        return 0
-    else
+    # Check if we're in an interactive environment
+    # Be more permissive - only exclude clearly non-interactive cases
+    if [[ "$TERM" == "dumb" ]] || [[ -n "$CI" ]] || [[ -n "$AUTOMATION" ]]; then
         return 1
+    else
+        return 0
     fi
 }
 
 ask_installation_mode() {
-    print_section "Alpine Dotfiles Setup"
+    # Alpine focuses on minimal systems, so text-based fallback is primary
+    print_section "Alpine Linux Dotfiles Setup"
     print_title "Choose Installation Mode"
     
     print_option "1" "Interactive Installation (Simplified - Essential components with text menus)"

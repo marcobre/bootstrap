@@ -23,12 +23,24 @@ This guide covers the new interactive installation system for all supported plat
 ### 1. Interactive Mode (Recommended)
 The new default mode that provides beautiful menus to select components:
 
+**Local Installation:**
 ```bash
-# Linux/macOS: Run the setup script normally
+# Clone and run locally (recommended for interactive mode)
+git clone https://github.com/marcobre/bootstrap.git ~/.dotfiles
+cd ~/.dotfiles
 ./scripts/setup.sh
 
 # Windows: Run PowerShell script
 ./scripts/setup.ps1
+```
+
+**Remote Installation:**
+```bash
+# Remote one-liner (will auto re-execute locally for interactive mode)
+bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
+
+# Alternative with curl
+bash -c "$(curl -fsSL https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
 On all platforms, you'll be presented with installation mode options. Select **Interactive Installation** for the full menu experience.
