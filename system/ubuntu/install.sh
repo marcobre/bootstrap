@@ -22,8 +22,6 @@ check_interactive_mode() {
 
 
 ask_installation_mode() {
-    clear
-    
     gum style \
         --foreground 212 --border-foreground 212 --border rounded \
         --align center --width 60 --margin "1 2" --padding "1 2" \
@@ -122,19 +120,22 @@ if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
     # Ask user for installation mode preference (gum is already installed by setup.sh)
     mode=$(ask_installation_mode)
     
+    # Clean up the mode string to remove any extra characters
+    mode=$(echo "$mode" | tr -d "'" | tr -d '#' | xargs)
+    
     # Debug: show what mode was selected
     print_title "Selected mode: '$mode'"
     
     case $mode in
-        "interactive")
+        *"interactive"*)
             print_success "Running interactive installation"
             run_interactive_installation
             ;;
-        "automatic")
+        *"automatic"*)
             print_success "Running automatic installation"
             run_automatic_installation
             ;;
-        "traditional")
+        *"traditional"*)
             print_success "Running traditional installation"
             run_traditional_installation
             ;;
