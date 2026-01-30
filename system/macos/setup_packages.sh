@@ -40,7 +40,7 @@ brew_tap 'homebrew/cask-fonts'
 brew_tap 'eth-p/software'
 brew_tap 'teamookla/speedtest'
 brew tap 'd12frosted/emacs-plus'
-brew tap 'nikitabobko/tap/aerospace'
+brew tap 'nikitabobko/aerospace'
 
 
 #==================================

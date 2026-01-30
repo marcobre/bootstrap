@@ -72,6 +72,7 @@ alias .....="cd ../../../.."
 source "$HOME/.zsh.local"
 source "$HOME/.config/bash/aliases.bash"
 source "$HOME/.config/bash/functions.bash"
+source "$HOME/.config/aliases"
 
 # Source starship
 export STARSHIP_CONFIG=~/.config/starship.toml
@@ -102,3 +103,6 @@ function supdate() {
 
     tmux display-message "ZSH Shell Update Complete"
 }
+
+export PATH=$HOME/.toolbox/bin:$PATH
+#source ~/.$(basename "$SHELL")rc

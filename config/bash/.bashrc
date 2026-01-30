@@ -53,6 +53,7 @@ export -f sreload
 source "$HOME/.bash.local"
 source "$HOME/.config/bash/aliases.bash"
 source "$HOME/.config/bash/functions.bash"
+source "$HOME/.config/aliases
 
 # forgit
 export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
@@ -66,3 +67,7 @@ starship_precmd_user_func="set_win_title"
 
 # Source starship
 eval "$(starship init bash)"
+
+export PATH=$HOME/.toolbox/bin:$PATH
+source /Users/bretzke/.brazil_completion/bash_completion
+. "$HOME/.cargo/env"
