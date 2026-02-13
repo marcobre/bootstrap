@@ -106,3 +106,9 @@ function supdate() {
 
 export PATH=$HOME/.toolbox/bin:$PATH
 #source ~/.$(basename "$SHELL")rc
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Source MLU config
+source ~/.config/mlu/burner_config
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

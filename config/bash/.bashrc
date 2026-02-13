@@ -71,3 +71,6 @@ eval "$(starship init bash)"
 export PATH=$HOME/.toolbox/bin:$PATH
 source /Users/bretzke/.brazil_completion/bash_completion
 . "$HOME/.cargo/env"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
