@@ -8,6 +8,16 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && . "utils.sh"
 #==================================
 # BREW
 #==================================
+ensure_brew_in_path() {
+    if ! cmd_exists "brew"; then
+        if [[ $(uname -m) == "arm64" ]] && [[ -x "/opt/homebrew/bin/brew" ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [[ -x "/usr/local/bin/brew" ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        fi
+    fi
+}
+
 brew_install() {
     declare -r ARGUMENTS="$3"
     declare -r FORMULA="$2"

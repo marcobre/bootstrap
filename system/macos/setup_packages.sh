@@ -24,6 +24,9 @@ if ! cmd_exists "brew"; then
 fi
 print_result $? "Homebrew"
 
+# Ensure brew is in PATH for the rest of the script
+ensure_brew_in_path
+
 brew_update
 brew_upgrade
 
