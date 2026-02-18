@@ -7,20 +7,18 @@
 . "$HOME/.dotfiles/scripts/utils/utils.sh"
 . "$HOME/.dotfiles/scripts/utils/utils_macos.sh"
 
-
 #==================================
 # Print Section Title
 #==================================
 print_section "Installing Packages"
-
 
 #==================================
 # Install Brew
 #==================================
 print_title "Installing Brew"
 if ! cmd_exists "brew"; then
-	printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	#  └─ simulate the ENTER keypress
+  printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  #  └─ simulate the ENTER keypress
 fi
 print_result $? "Homebrew"
 
@@ -29,7 +27,6 @@ ensure_brew_in_path
 
 brew_update
 brew_upgrade
-
 
 #==================================
 # Brew Tap
@@ -44,7 +41,6 @@ brew_tap 'eth-p/software'
 brew_tap 'teamookla/speedtest'
 brew tap 'd12frosted/emacs-plus'
 brew tap 'nikitabobko/aerospace'
-
 
 #==================================
 # Brew Install
@@ -91,12 +87,12 @@ brew_install "midnight" "midnight-commander"
 brew_install "ffmpeg" "ffmpeg"
 brew_install "speedtest" "speedtest"
 brew_install "tldr" "tldr"
-brew_install "spotify-tui" "spotify-tui"
+#brew_install "spotify-tui" "spotify-tui"
 brew_install "no-more-secrets" "no-more-secrets"
-brew_install "yabai" "koekeishiya/formulae/yabai"
-brew_install "skhd" "koekeishiya/formulae/skhd"
+#brew_install "yabai" "koekeishiya/formulae/yabai"
+#brew_install "skhd" "koekeishiya/formulae/skhd"
 brew_install "cmatrix" "cmatrix"
-brew_install "nudoku" "nudoku"
+#brew_install "nudoku" "nudoku"
 brew_install "Obsidian" "Obsidian"
 brew install "emacs-plus" "emacs-plus"
 
@@ -112,7 +108,7 @@ brew_install "Alacritty" "alacritty" "--cask"
 brew_install "Karabiner-Elements" "karabiner-elements" "--cask"
 brew_install "VS Code" "visual-studio-code" "--cask"
 #brew_install "Unity3D" "unity-hub" "--cask"
-brew_install "gpg" "gpg" "--cask"
+#brew_install "gpg" "gpg" "--cask"
 brew_install "gpg suite" "gpg-suite" "--cask"
 brew_install "keybase" "keybase" "--cask"
 brew_install "Fork" "fork" "--cask"
@@ -138,44 +134,27 @@ brew_install "FiraCode Nerd Font" "font-fira-code-nerd-font" "--cask"
 brew_install "aerospace" "aerospace" "--cask"
 
 #==================================
-# Brew MAS
+# Brew MAS (AppStore Installations)
 #==================================
 print_title "Installing Brew MAS"
-brew_mas_install "XCode", "497799835"
-#brew_mas_install "1Password", "1333542190"
-#brew_mas_install "Affinity Photo", "824183456"
-#brew_mas_install "Affinity Designer", "824171161"
-#brew_mas_install "Affinity Publisher", "881418622"
-#brew_mas_install "Spark", "1176895641"
-brew_mas_install "Telegram", "747648890"
-brew_mas_install "Reeder 5", "1529448980"
+#brew_mas_install "XCode", "497799835"
+#brew_mas_install "Telegram", "747648890"
+#brew_mas_install "Reeder 5", "1529448980"
 #brew_mas_install "Fantastical", "975937182"
-#brew_mas_install "Lungo", "1263070803"
-#brew_mas_install "SnippetsLab", "1006087419"
-brew_mas_install "CARROT Weather", "993487541"
-brew_mas_install "Moom", "419330170"
-brew_mas_install "Displaperture", "1543920362"
-brew_mas_install "Gifski", "1351639930"
-#brew_mas_install "Elmedia Player", "937759555"
-#brew_mas_install "Friendly Streaming Browser", "553245401"
-brew_mas_install "iPreview", "1519213509"
 #brew_mas_install "Craft", "1487937127"
-
 
 #==================================
 # Brew Services
 #==================================
-print_title "Starting Brew Services"
-brew_start_service "yabai" "yabai"
-brew_start_service "skhd" "skhd"
-
+#print_title "Starting Brew Services"
+#brew_start_service "yabai" "yabai"
+#brew_start_service "skhd" "skhd"
 
 #==================================
 # Yarn
 #==================================
 print_title "Installing Yarn Packages"
 yarn_install "Serve" "serve"
-
 
 #==================================
 # Install From Source

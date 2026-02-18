@@ -7,12 +7,10 @@
 . "$HOME/.dotfiles/scripts/utils/utils.sh"
 . "$HOME/.dotfiles/scripts/utils/utils_macos.sh"
 
-
 #==================================
 # Print Section Title
 #==================================
 print_section "Applying MacOS Defaults"
-
 
 #==================================
 # Pre-Warm
@@ -25,11 +23,10 @@ sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
+  sudo -n true
+  sleep 60
+  kill -0 "$$" || exit
 done 2>/dev/null &
-
 
 #==================================
 # Dock
@@ -40,25 +37,22 @@ ask_for_confirmation "'Would you like to add Dock shortcuts?"
 printf "\n"
 
 if answer_is_yes; then
-    print_success "Adding shortcuts to dock"
-    # defaults delete com.apple.dock persistent-apps &> /dev/null
-    dockutil --add "/Applications/Brave Browser.app" &> /dev/null
-    dockutil --add "/Applications/Spark.app" &> /dev/null
-    dockutil --add "/Applications/WhatsApp.app" &> /dev/null
-    dockutil --add "/Applications/Telegram Desktop.app" &> /dev/null
-    dockutil --add "/Applications/Discord.app" &> /dev/null
-    dockutil --add "/Applications/Slack.app" &> /dev/null
-    dockutil --add "/Applications/Craft.app" &> /dev/null
-    dockutil --add "/Applications/Alacritty.app" &> /dev/null
-    dockutil --add "/Applications/Fork.app" &> /dev/null
-    dockutil --add "/Applications/Visual Studio Code.app" &> /dev/null
-    dockutil --add "/Applications/Spotify.app" &> /dev/null
+  print_success "Adding shortcuts to dock"
+  # defaults delete com.apple.dock persistent-apps &> /dev/null
+  dockutil --add "/Applications/Brave Browser.app" &>/dev/null
+  dockutil --add "/Applications/WhatsApp.app" &>/dev/null
+  dockutil --add "/Applications/Telegram Desktop.app" &>/dev/null
+  dockutil --add "/Applications/Discord.app" &>/dev/null
+  dockutil --add "/Applications/Slack.app" &>/dev/null
+  dockutil --add "/Applications/Alacritty.app" &>/dev/null
+  dockutil --add "/Applications/Fork.app" &>/dev/null
+  dockutil --add "/Applications/Visual Studio Code.app" &>/dev/null
+  dockutil --add "/Applications/Spotify.app" &>/dev/null
 fi
 
 execute "defaults write com.apple.dock orientation left" "Set dock position"
 execute "defaults write com.apple.dock show-recents -bool FALSE" "Hide recents on dock"
 execute "defaults write com.apple.dock minimize-to-application -bool FALSE" "Disable minimize"
-
 
 #==================================
 # General UI / UX
@@ -117,7 +111,6 @@ execute "defaults write com.apple.screencapture location -string '$HOME/Desktop'
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 execute "defaults write com.apple.screencapture type -string 'png'" "Save screenshots as PNG"
 
-
 #==================================
 # Security
 #==================================
@@ -126,23 +119,23 @@ print_title "Security Settings"
 # Enable Firewall
 execute "sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on" "Enable Firewall"
 
-
 #==================================
 # Kill Apps
 #==================================
 for app in "Activity Monitor" \
-    "Address Book" \
-    "Calendar" \
-    "cfprefsd" \
-    "Contacts" \
-    "Dock" \
-    "Finder" \
-    "Mail" \
-    "Messages" \
-    "Photos" \
-    "Safari" \
-    "Spectacle" \
-    "SystemUIServer"; do
-    killall "${app}" &>/dev/null
+  "Address Book" \
+  "Calendar" \
+  "cfprefsd" \
+  "Contacts" \
+  "Dock" \
+  "Finder" \
+  "Mail" \
+  "Messages" \
+  "Photos" \
+  "Safari" \
+  "Spectacle" \
+  "SystemUIServer"; do
+  killall "${app}" &>/dev/null
 done
 print_result $? "Killing Apps"
+
