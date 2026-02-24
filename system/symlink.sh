@@ -5,13 +5,12 @@
 # Source utilities
 #==================================
 . "$HOME/.dotfiles/scripts/utils/utils.sh"
- os_name="$(get_os)"
+os_name="$(get_os)"
 
 #==================================
 # Print Section Title
 #==================================
 print_section "Creating Symlinks"
-
 
 #==================================
 # Symlink
@@ -66,8 +65,8 @@ print_title "Neofetch configuration"
 symlink ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 
 # fastfatch config
-print_title "Fastfatch configuration"
-symlink ~/.dotfiles/config/fastfatch/config.conf ~/.config/fastfatch/config.conf
+print_title "Fastfetch configuration"
+symlink ~/.dotfiles/config/fastfetch/config.conf ~/.config/fastfetch/config.conf
 
 # ranger commander theme
 print_title "Ranger configuration"
@@ -76,20 +75,19 @@ symlink ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
 # midnight commander theme
 print_title "Midnight Commander configuration"
 symlink ~/.dotfiles/config/mc/ini ~/.config/mc/ini
-symlink ~/.dotfiles/config/mc/skins/Arasaka.ini ~/.local/share/mc/skins/Arasaka.ini 
+symlink ~/.dotfiles/config/mc/skins/Arasaka.ini ~/.local/share/mc/skins/Arasaka.ini
 
 # alacritty config
 print_title "Alacritty configuration"
 if [ "$os_name" == "macos" ]; then
-	symlink ~/.dotfiles/config/alacritty/alacrittyMacos.toml ~/.config/alacritty/alacritty.toml
+  symlink ~/.dotfiles/config/alacritty/alacrittyMacos.toml ~/.config/alacritty/alacritty.toml
 elif [ "$os_name" == "ubuntu" ]; then
-	symlink ~/.dotfiles/config/alacritty/alacrittyLinux.yml ~/.config/alacritty/alacritty.yml
+  symlink ~/.dotfiles/config/alacritty/alacrittyLinux.yml ~/.config/alacritty/alacritty.yml
 fi
 
 # micro configuration
 print_title "micro configuration"
 symlink ~/.dotfiles/config/micro/excalith.micro ~/.config/micro/colorschemes/excalith.micro
-
 
 # kitty config
 # print_title "Kitty configuration"
@@ -111,24 +109,29 @@ print_title "LunarVim configuration"
 symlink ~/.dotfiles/config/lvim/config.lua ~/.config/lvim/config.lua
 
 if [ "$os_name" == "macos" ]; then
-	# yabai config
-	print_title "Yabai configuration"
-	symlink ~/.dotfiles/config/yabai/.yabairc ~/.config/yabairc
+  # yabai config
+  print_title "Yabai configuration"
+  symlink ~/.dotfiles/config/yabai/.yabairc ~/.config/yabairc
 
-	# skhd config
-	print_title "SKHD configuration"
-	symlink ~/.dotfiles/config/skhd/.skhdrc ~/.config/skhdrc
+  # aerospace config
+  print_title "Aerospace configuration"
+  symlink ~/.dotfiles/config/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
 
-	# karabiner config
-	print_title "Karabiner configuration"
-	symlink ~/.dotfiles/config/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
-	symlink ~/.dotfiles/config/karabiner/complex_modifications.json ~/.config/karabiner/assets/complex_modifications/complex_modifications.json
+  # skhd config
+  print_title "SKHD configuration"
+  symlink ~/.dotfiles/config/skhd/.skhdrc ~/.config/skhdrc
+
+  # karabiner config
+  print_title "Karabiner configuration"
+  symlink ~/.dotfiles/config/karabiner/karabiner.json ~/.config/karabiner/karabiner.json
+  symlink ~/.dotfiles/config/karabiner/complex_modifications.json ~/.config/karabiner/assets/complex_modifications/complex_modifications.json
 elif [ "$os_name" == "ubuntu" ]; then
-	# bat configuration
-	print_title "bat binary"
-	symlink /usr/bin/batcat ~/.local/bin/bat
+  # bat configuration
+  print_title "bat binary"
+  symlink /usr/bin/batcat ~/.local/bin/bat
 elif [ "$os_name" == "wsl_ubuntu" ]; then
-	# bat configuration
-	print_title "bat binary"
-	symlink /usr/bin/batcat ~/.local/bin/bat
+  # bat configuration
+  print_title "bat binary"
+  symlink /usr/bin/batcat ~/.local/bin/bat
 fi
+
