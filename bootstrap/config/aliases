@@ -1,0 +1,67 @@
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+alias nvim-lazy="NVIM_APPNAME=nvim-lazyvim nvim"
+alias nvim-marcom="NVIM_APPNAME=nvim-marcom nvim"
+alias nvim-fisavim="NVIM_APPNAME=nvim-fisavim nvim"
+
+function nvims() {
+  items=("default" "nvim-marcom" "nvim-kickstart" "nvim-lazyvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config="nvim-lazyvim"
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+function memarcom() {
+  local pkm_dir="$HOME/Sync/Obsidian"
+  local options=("Create Daily Note" "Browse/Create Note")
+  local choice=$(printf "%s\n" "${options[@]}" | fzf --prompt=" PKM Action  " --height=~50% --layout=reverse --border --exit-0)
+  
+  if [[ -z $choice ]]; then
+    echo "Nothing selected"
+    return 0
+  fi
+  
+  if [[ $choice == "Create Daily Note" ]]; then
+    local daily_note="$pkm_dir/05 - Notes/Daily Notes/$(date +%Y)/$(date +%m)/$(date +%Y-%m-%d).md"
+    mkdir -p "$(dirname "$daily_note")"
+    [[ ! -f "$daily_note" ]] && cp "$pkm_dir/templates/tp-daily.md" "$daily_note"
+    nv "$daily_note"
+  else
+    local selected=$(find "$pkm_dir" -type f -name "*.md" -not -path '*/.*' | sed "s|$pkm_dir/||" | sed 's/\.md$//' | fzf --prompt=" PKM Note  " --height=~50% --layout=reverse --border --print-query | tail -1)
+    
+    if [[ -z $selected ]]; then
+      echo "Nothing selected"
+      return 0
+    fi
+    
+    local file_path="$pkm_dir/${selected}.md"
+    mkdir -p "$(dirname "$file_path")"
+    nv "$file_path"
+  fi
+}
+
+# the following line applies the last created wallust colors from its cache
+#cat ~/.cache/wallust/sequences
+
+alias ls='lsd -lA --group-directories-first'
+#alias ls='lsd'
+#alias sb="cd ~/Nextcloud/Obsidian/ && ls -a"
+
+alias sb="cd ~/Syncthing/ && ls -a"
+
+alias nv="nvim-lazy"
+# set variable and alias for calcurse pass usage
+#CALCURSE_CALDAV_PASSWORD=$(pass show area030.org)
+#alias calsync="CALCURSE_CALDAV_PASSWORD=$(pass show area030.org) calcurse-caldav"
+
+# Screenshare portal
+
+alias screenshare="~/.config/hypr/scripts/PortalHyprland.sh"
+# Webcam aliases
+
+alias dellcam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video4 --profile=low-latency --untimed --vf=hflip"
+alias cam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --vf=hflip"
