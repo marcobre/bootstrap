@@ -5,10 +5,10 @@ set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 set -gx DOTFILES_PATH "$HOME/.dotfiles"	
 
 # Language Default
-set -gx LANG en_US.UTF-8
-set -gx LANGUAGE en_US.UTF-8
-set -gx LC_ALL en_US.UTF-8
-set -gx LC_CTYPE en_US.UTF-8
+set -gx LANG de_DE.UTF-8
+set -gx LANGUAGE de_DE.UTF-8
+set -gx LC_ALL de_DE.UTF-8
+set -gx LC_CTYPE de_DE.UTF-8
 
 # Set default terminal
 #set -gx TERM alacritty

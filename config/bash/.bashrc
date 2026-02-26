@@ -46,6 +46,7 @@ function sreload() {
   source "$HOME/.bash.local"
   source "$HOME/.config/bash/aliases.bash"
   source "$HOME/.config/bash/functions.bash"
+  source "$HOME/.config/aliases"
 }
 export -f sreload
 

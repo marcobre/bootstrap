@@ -64,7 +64,7 @@ touch ~/.config/git/.gitconfig.local
 print_title "Neofetch configuration"
 symlink ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 
-# fastfatch config
+# fastfetch config
 print_title "Fastfetch configuration"
 symlink ~/.dotfiles/config/fastfetch/config.conf ~/.config/fastfetch/config.conf
 
@@ -82,7 +82,7 @@ print_title "Alacritty configuration"
 if [ "$os_name" == "macos" ]; then
   symlink ~/.dotfiles/config/alacritty/alacrittyMacos.toml ~/.config/alacritty/alacritty.toml
 elif [ "$os_name" == "ubuntu" ]; then
-  symlink ~/.dotfiles/config/alacritty/alacrittyLinux.yml ~/.config/alacritty/alacritty.yml
+  symlink ~/.dotfiles/config/alacritty/alacrittyLinux.toml ~/.config/alacritty/alacritty.toml
 fi
 
 # micro configuration
@@ -134,4 +134,3 @@ elif [ "$os_name" == "wsl_ubuntu" ]; then
   print_title "bat binary"
   symlink /usr/bin/batcat ~/.local/bin/bat
 fi
-
