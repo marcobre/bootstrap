@@ -90,23 +90,31 @@ print_title "micro configuration"
 symlink ~/.dotfiles/config/micro/excalith.micro ~/.config/micro/colorschemes/excalith.micro
 
 # kitty config
-# print_title "Kitty configuration"
-# symlink ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
-# if [ "$os_name" == "macos" ]; then
-# 	symlink ~/.dotfiles/config/kitty/keymapMacos.conf ~/.config/kitty/keymap.conf
-# elif [ "$os_name" == "ubuntu" ]; then
-# 	symlink ~/.dotfiles/config/kitty/keymapLinux.conf ~/.config/kitty/keymap.conf
-# fi
-# symlink ~/.dotfiles/config/kitty/openactions.conf ~/.config/kitty/openactions.conf
-# symlink ~/.dotfiles/config/kitty/theme.conf ~/.config/kitty/theme.conf
+print_title "Kitty configuration"
+symlink ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+if [ "$os_name" == "macos" ]; then
+  symlink ~/.dotfiles/config/kitty/keymapMacos.conf ~/.config/kitty/keymap.conf
+elif [ "$os_name" == "ubuntu" ]; then
+  symlink ~/.dotfiles/config/kitty/keymapLinux.conf ~/.config/kitty/keymap.conf
+fi
+symlink ~/.dotfiles/config/kitty/openactions.conf ~/.config/kitty/openactions.conf
+symlink ~/.dotfiles/config/kitty/theme.conf ~/.config/kitty/theme.conf
 
-# tmux config
+# tmux config e
 print_title "tmux configuration"
 symlink ~/.dotfiles/config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 
 # lunar vim config
 print_title "LunarVim configuration"
 symlink ~/.dotfiles/config/lvim/config.lua ~/.config/lvim/config.lua
+
+# Lazyvim vim config
+print_title "LazyVim configuration"
+symlink ~/.dotfiles/config/nvim-lazyvim/ ~/.config/nvim-lazyvim
+
+# Marcoms vim config
+print_title "Marcoms Vim configuration"
+symlink ~/.dotfiles/config/nvim-marcom/ ~/.config/nvim-marcom
 
 if [ "$os_name" == "macos" ]; then
   # yabai config
