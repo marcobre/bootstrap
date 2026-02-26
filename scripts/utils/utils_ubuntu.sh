@@ -111,7 +111,7 @@ flatpak_install() {
     declare -r PACKAGE_READABLE_NAME="$1"
 
     if ! flatpak_installed "$PACKAGE"; then
-        execute "flatpak install -y flathub $PACKAGE" "$PACKAGE_READABLE_NAME"
+        execute "sudo flatpak install -y flathub $PACKAGE" "$PACKAGE_READABLE_NAME"
     else
         print_success "$PACKAGE_READABLE_NAME"
     fi

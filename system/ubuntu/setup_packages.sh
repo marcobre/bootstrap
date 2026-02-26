@@ -72,7 +72,7 @@ print_title "Install Package Managers"
 apt_install "nala" "nala"
 apt_install "flatpak" "flatpak"
 apt_install "flatpak gnome plugin" "gnome-software-plugin-flatpak"
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
 
 #==================================
 # Install APT packages
