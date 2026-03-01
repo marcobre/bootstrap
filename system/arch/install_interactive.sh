@@ -151,6 +151,9 @@ install_package_management() {
 
     print_title "Install AUR Helper (yay)"
     if ! command -v yay &> /dev/null; then
+        # Refresh sudo before yay installation (makepkg -i needs sudo for pacman)
+        sudo -v
+        
         rm -rf ~/tmp/yay
         execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
         cd ~/tmp/yay
