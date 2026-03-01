@@ -40,7 +40,7 @@ execute "makepkg -sfci --noconfirm --needed" "Building yay"
 #==================================
 print_title "Install Package Managers"
 pacman_install "flatpak" "flatpak"
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1
 
 #==================================
 # Install Pacman packages

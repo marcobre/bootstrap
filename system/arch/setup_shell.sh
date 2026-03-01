@@ -18,7 +18,7 @@ print_section "Shell Setup"
 # Install ZSH
 #==================================
 print_title "Installing ZSH"
-apt_install "ZSH" "zsh"
+pacman_install "ZSH" "zsh"
 
 curl -L git.io/antigen > "$HOME/.config/antigen.zsh"
 print_progress "Installing Antigen"
@@ -27,7 +27,7 @@ print_progress "Installing Antigen"
 # Install Fish
 #==================================
 print_title "Installing Fish"
-apt_install "Fish" "fish"
+pacman_install "Fish" "fish"
 
 
 #==================================
