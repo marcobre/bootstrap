@@ -125,9 +125,9 @@ verify_os() {
     print_success "Windows WSL on Ubuntu is supported"
     return 0
 
-  # Check if the OS is `Arch` and supported
+  # Check if the OS is `Arch` or `CachyOS` and supported
   elif [ "$os_name" == "arch" ]; then
-    print_success "$os_name is supported"
+    print_success "$os_name is supported (includes CachyOS)"
     return 0
 
   # Check if the OS is `Alpine` and supported
@@ -137,7 +137,7 @@ verify_os() {
 
   # Exit if not supported OS
   else
-    print_error "$os_name is not supported. This dotfiles are intended for MacOS, Ubuntu and Arch"
+    print_error "$os_name is not supported. This dotfiles are intended for MacOS, Ubuntu, Arch and CachyOS"
   fi
 
   return 1

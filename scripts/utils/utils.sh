@@ -21,6 +21,8 @@ get_os() {
             fi
         elif [ "$os" == "alpine" ] && [ -e "/etc/alpine-release" ]; then
             os="alpine"
+        elif [ "$os" == "cachyos" ]; then
+            os="arch"  # CachyOS uses Arch system folder
         fi
     else
         os="$kernelName"
