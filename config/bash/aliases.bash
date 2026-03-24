@@ -24,6 +24,24 @@ alias h="history -15"    # last 10 history commands
 alias hc="history -c"    # clear history
 alias hg="history | rg " # +command
 
+# move to Second Brain
+alias sb="cd ~/Syncthing/Obsidian/ && ls -a"
+
+# Neovim config aliases
+alias nv="nvim-lazy"
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+alias nvim-lazy="NVIM_APPNAME=nvim-lazyvim nvim"
+alias nvim-marcom="NVIM_APPNAME=nvim-marcom nvim"
+alias nvim-fisavim="NVIM_APPNAME=nvim-fisavim nvim"
+
+# Webcam aliases
+alias dellcam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video4 --profile=low-latency --untimed --vf=hflip"
+alias cam="mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --vf=hflip"
+
+# set variable and alias for calcurse pass usage
+#CALCURSE_CALDAV_PASSWORD=$(pass show area030.org)
+#alias calsync="CALCURSE_CALDAV_PASSWORD=$(pass show area030.org) calcurse-caldav"
+
 # SSH Public Keys
 alias sshpubkey="pbcopy < ~/.ssh/id_ed25519.pub | echo 'SSH Public Key copied to pasteboard.'"
 
@@ -36,3 +54,6 @@ alias nupdate="nvim -c \"NvChadUpdate\""
 
 # Update LunarVim
 alias lvupdate="lvim +LvimUpdate +q"
+
+# Screenshare portal
+#alias screenshare="~/.config/hypr/scripts/PortalHyprland.sh"

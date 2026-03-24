@@ -24,8 +24,8 @@ export GPG_TTY=$(tty)
 # Micro True Color
 export "MICRO_TRUECOLOR=1"
 
-# Set default editor
-export EDITOR="nvim"
+# Set default editor as defined in alias.bash
+export EDITOR="nv"
 
 # Enable mouse scroll for less
 export LESS=-R
