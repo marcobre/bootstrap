@@ -21,7 +21,7 @@ print_title "Installing ZSH"
 pacman_install "ZSH" "zsh"
 
 curl -L git.io/antigen > "$HOME/.config/antigen.zsh"
-print_progress "Installing Antigen"
+print_title "Installing Antigen"
 
 #==================================
 # Install Fish
