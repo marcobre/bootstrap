@@ -152,11 +152,11 @@ rm -rf ~/master.tar.gz
 #==================================
 # Install Extensions
 #==================================
-print_title "Install Gnome Extensions"
-extension_install "Dash To Dock (COSMIC)" "https://extensions.gnome.org/extension/5004/dash-to-dock-for-cosmic/"
-extension_install "User Themes" "https://extensions.gnome.org/extension/19/user-themes/"
-extension_install "Blur My Shell" "https://extensions.gnome.org/extension/3193/blur-my-shell/"
-extension_install "Rounded Corners" "https://extensions.gnome.org/extension/1514/rounded-corners/"
-extension_install "Places Status Indicator" "https://extensions.gnome.org/extension/8/places-status-indicator/"
-extension_install "Removable Drive Menu" "https://extensions.gnome.org/extension/7/removable-drive-menu/"
-extension_install "Caffeine" "https://extensions.gnome.org/extension/517/caffeine/"
+#print_title "Install Gnome Extensions"
+#extension_install "Dash To Dock (COSMIC)" "https://extensions.gnome.org/extension/5004/dash-to-dock-for-cosmic/"
+#extension_install "User Themes" "https://extensions.gnome.org/extension/19/user-themes/"
+#extension_install "Blur My Shell" "https://extensions.gnome.org/extension/3193/blur-my-shell/"
+#extension_install "Rounded Corners" "https://extensions.gnome.org/extension/1514/rounded-corners/"
+#extension_install "Places Status Indicator" "https://extensions.gnome.org/extension/8/places-status-indicator/"
+#extension_install "Removable Drive Menu" "https://extensions.gnome.org/extension/7/removable-drive-menu/"
+#extension_install "Caffeine" "https://extensions.gnome.org/extension/517/caffeine/"
