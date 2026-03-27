@@ -18,6 +18,9 @@ case "$WM" in
     mangowc)
         print_title "Install MangoWC"
         yay_install "MangoWC" "mangowc-git"
+        print_title "MangoWC configuration"
+        symlink ~/.dotfiles/config/mango/config.conf ~/.config/mango/config.conf
+        symlink ~/.dotfiles/config/mango/autostart.sh ~/.config/mango/autostart.sh
         ;;
     hyprland)
         print_title "Install Hyprland"
