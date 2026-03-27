@@ -30,13 +30,17 @@ pacman_install "base-devel" "base-devel"
 #==================================
 print_title "Install AUR Helper"
 
-# Refresh sudo before yay installation (makepkg -i needs sudo for pacman)
+# Refresh sudo before yay installation
 sudo -v
 
 rm -rf ~/tmp/yay
 execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
 cd ~/tmp/yay
-execute "makepkg -sfci --noconfirm --needed" "Building yay"
+# Run makepkg in foreground so it inherits the sudo keep-alive session
+# (execute() runs in background subshell which loses sudo credentials)
+makepkg -sfci --noconfirm --needed &>/dev/null
+print_result $? "Building and installing yay"
+cd - &>/dev/null
 
 #==================================
 # Install package managers

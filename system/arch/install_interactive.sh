@@ -151,14 +151,16 @@ install_package_management() {
 
     print_title "Install AUR Helper (yay)"
     if ! command -v yay &> /dev/null; then
-        # Refresh sudo before yay installation (makepkg -i needs sudo for pacman)
+        # Refresh sudo before yay installation
         sudo -v
         
         rm -rf ~/tmp/yay
         execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
         cd ~/tmp/yay
-        execute "makepkg -sfci --noconfirm --needed" "Building yay"
-        cd ~
+        # Run makepkg in foreground so it inherits the sudo keep-alive session
+        makepkg -sfci --noconfirm --needed &>/dev/null
+        print_result $? "Building and installing yay"
+        cd - &>/dev/null
     fi
 
     print_title "Install Package Managers"
