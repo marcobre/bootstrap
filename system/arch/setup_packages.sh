@@ -94,7 +94,7 @@ pacman_install "neovim" "neovim"
 pacman_install "ffmpeg" "ffmpeg"
 
 pacman_install "Alacritty" "alacritty"
-
+pacman_install "Kitty" "kitty"
 #==================================
 # Install Snap packages
 #==================================
