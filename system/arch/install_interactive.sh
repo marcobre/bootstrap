@@ -162,11 +162,12 @@ install_package_management() {
         # Refresh sudo before yay installation
         sudo -v
         
+        pacman_install "Go (yay build dependency)" "go"
         rm -rf ~/tmp/yay
         execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
         cd ~/tmp/yay
-        # Build only, then install with our sudo (makepkg -i spawns its own sudo)
-        makepkg -sfc --noconfirm --needed &>/dev/null
+        # Build without -s (deps installed above), then install with our sudo
+        makepkg -fc --noconfirm --needed &>/dev/null
         print_result $? "Building yay"
         sudo pacman -U --noconfirm yay-*.pkg.tar.zst &>/dev/null
         print_result $? "Installing yay"
