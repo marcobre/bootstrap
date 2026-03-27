@@ -8,7 +8,7 @@ This guide covers the new interactive installation system for all supported plat
 🎨 **Beautiful TUI Menus** - Powered by Charm's `gum` for an elegant experience  
 📦 **Modular Installation** - Install components individually or in groups
 🔤 **Font Selection Menu** - Pick from 20+ available Nerd Fonts
-⚡ **Multiple Installation Modes** - Interactive, Automatic, or Traditional
+⚡ **Two Installation Modes** - Interactive or Automatic
 
 ## Supported Platforms
 
@@ -50,19 +50,7 @@ Installs everything without prompts:
 
 ```bash
 # Linux/macOS: Choose option 2 when prompted, or force it directly:
-cd ~/.dotfiles/system/[platform] && ./install.sh --automatic
-
-# Windows: Choose option 2 when prompted
-```
-
-### 3. Traditional Mode
-Original behavior - installs all components sequentially:
-
-```bash
-# Linux/macOS: Choose option 3 when prompted, or force it:
 cd ~/.dotfiles/system/[platform] && ./install.sh --no-interactive
-
-# Windows: Choose option 3 when prompted
 ```
 
 ## Interactive Menu Structure
@@ -161,7 +149,7 @@ cd $env:USERPROFILE\.dotfiles\system\windows
 
 ### Skip Interactive Mode
 ```bash
-# Force traditional installation
+# Force automatic installation
 ./scripts/setup.sh --no-interactive
 ```
 
@@ -226,7 +214,7 @@ The installer downloads packages and fonts from the internet. Ensure you have a 
 - 🖥️ **Platform-Adapted Menus** - macOS (Homebrew), Arch (pacman/AUR), Alpine (apk), Windows (PowerShell)
 - 📦 **Granular Component Selection** - Choose exactly what you need on any platform
 - 🔤 **Interactive Font Selection** - 20+ Nerd Fonts available across platforms
-- ⚡ **Three Installation Modes** - Interactive/Automatic/Traditional on all systems
+- ⚡ **Two Installation Modes** - Interactive/Automatic on all systems
 - 🛡️ **Graceful Platform Detection** - Automatic fallbacks and compatibility checks
 - 📋 **Unified Experience** - Same elegant workflow regardless of your OS
 

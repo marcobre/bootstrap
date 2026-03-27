@@ -32,23 +32,16 @@ ask_installation_mode() {
         'Select your preferred installation method'
 
     local choice
-    choice=$(gum choose --cursor="→ " --height=5 --header="Installation modes:" \
+    choice=$(gum choose --cursor="→ " --height=4 --header="Installation modes:" \
         "Interactive Installation" \
-        "Complete Automatic Installation" \
-        "Traditional Mode")
+        "Complete Automatic Installation")
     
     case "$choice" in
         "Interactive Installation")
             echo "interactive"
             ;;
-        "Complete Automatic Installation")
-            echo "automatic"
-            ;;
-        "Traditional Mode")
-            echo "traditional"
-            ;;
         *)
-            echo "traditional"
+            echo "automatic"
             ;;
     esac
 }
@@ -58,38 +51,13 @@ run_interactive_installation() {
         . "$HOME/.dotfiles/system/macos/install_interactive.sh"
     else
         print_error "Interactive installation script not found!"
-        print_warning "Falling back to traditional installation..."
-        run_traditional_installation
+        print_warning "Falling back to automatic installation..."
+        run_automatic_installation
     fi
 }
 
 run_automatic_installation() {
     print_section "Running Complete macOS Installation"
-    print_warning "This will install ALL available packages, tools, and configurations."
-    
-    ask_for_confirmation "Continue with complete installation?"
-    if answer_is_yes; then
-        # setup symlinks
-        . "$HOME/.dotfiles/system/symlink.sh"
-        
-        # setup packages
-        . "$HOME/.dotfiles/system/macos/setup_packages.sh"
-        
-        # setup defaults
-        . "$HOME/.dotfiles/system/macos/setup_defaults.sh"
-        
-        # setup shell
-        . "$HOME/.dotfiles/system/macos/setup_shell.sh"
-        
-        print_success "Complete installation finished!"
-    else
-        print_warning "Installation cancelled by user"
-        exit 0
-    fi
-}
-
-run_traditional_installation() {
-    print_section "Running MacOS Dotfiles Setup"
 
     # setup symlinks
     . "$HOME/.dotfiles/system/symlink.sh"
@@ -102,6 +70,8 @@ run_traditional_installation() {
 
     # setup shell
     . "$HOME/.dotfiles/system/macos/setup_shell.sh"
+
+    print_success "Complete installation finished!"
 }
 
 #==================================
@@ -120,17 +90,11 @@ if check_interactive_mode && [[ "${1:-}" != "--no-interactive" ]]; then
         *"interactive"*)
             run_interactive_installation
             ;;
-        *"automatic"*)
-            run_automatic_installation
-            ;;
-        *"traditional"*)
-            run_traditional_installation
-            ;;
         *)
-            run_traditional_installation
+            run_automatic_installation
             ;;
     esac
 else
-    # Run traditional installation if no interactive mode or explicitly disabled
-    run_traditional_installation
+    # Run automatic installation if no interactive mode or explicitly disabled
+    run_automatic_installation
 fi

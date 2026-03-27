@@ -1,5 +1,5 @@
 <p align="center">
- <h1 align="center">Excalith Dotfiles Clone</h1>
+ <h1 align="center">Marcom Dotfiles</h1>
 </p>
 
 ![Screenshot of alacritty terminal using fish shell with spaceship prompt and tmux, displaying neofetch, nvim and custom scripts](assets/screenshots/dotfiles.png)
@@ -36,13 +36,13 @@ bash -c "$(curl -LsS https://raw.github.com/marcobre/bootstrap/main/scripts/setu
 bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
-### Arch Linux WIP
+### Arch Linux & CachyOS
 
 ```bash
 bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
-### Lite Version WIP
+### Lite Version (WIP)
 
 This is a minimal installation for Termux app on Android.
 
@@ -68,7 +68,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
 Download the dotfiles and start setup
 
 ```ps
-Invoke-Expression (Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/excalith/.dotfiles/main/scripts/setup.ps1').Content
+Invoke-Expression (Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/marcobre/bootstrap/main/scripts/setup.ps1').Content
 ```
 
 Reset Execution Policy
@@ -82,7 +82,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
 To install packages for WSL Ubuntu, run the following command on WSL terminal.
 
 ```bash
-bash -c "$(wget --no-cache -qO - https://raw.github.com/excalith/.dotfiles/main/scripts/setup.sh)"
+bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/.dotfiles/main/scripts/setup.sh)"
 ```
 
 ## Post-Installation
@@ -94,7 +94,7 @@ Optionally, if you want to set upstream with this repository, you can run the fo
 git init
 
 # Add this repository as remote
-git remote add origin git@github.com:excalith/.dotfiles.git
+git remote add origin git@github.com:marcobre/.dotfiles.git
 
 # Fetch the main branch
 git fetch origin main
@@ -124,9 +124,9 @@ If you want to create your own dotfiles based on my configuration, you should
 
 This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/.dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
 
-I have modified this dotfiles with my own taste of config files and updated the Ubuntu related scripts and tested them on the current Ubuntu 24.04 LTS version.
-The other OS specific scripts will be modified in the new future and have not tested them yet.
-Big Thanks to Excalith for providing me with a solid framework supporting tofile management for the Operating Systems i am actively using.
+I have modified this dotfiles with my own taste of config files, extended the scripts and tested them on the current Ubuntu 24.04 LTS version, CachyOS and CachyOS.
+The other OS specific scripts will be modified in the new future and have not been tested yet.
+Big Thanks to Excalith for providing me with a solid framework supporting the Operating Systems i am actively using.
 
 ## License
 
