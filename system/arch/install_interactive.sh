@@ -306,19 +306,53 @@ install_flatpak_applications() {
 install_selected_fonts() {
     local selected_fonts="$1"
     print_section "Installing Selected Fonts"
-    
-    # Use the existing Arch font installation script
-    if [[ -f "$HOME/.dotfiles/system/arch/setup_fonts.sh" ]]; then
-        if echo "$selected_fonts" | grep -q "All Fonts"; then
-            # Install all fonts
-            . "$HOME/.dotfiles/system/arch/setup_fonts.sh"
-        else
-            # Install only selected fonts
-            # For now, we'll use the existing script and modify it later for selection
-            . "$HOME/.dotfiles/system/arch/setup_fonts.sh"
-        fi
+
+    local version fonts_dir
+    version=$(curl -s 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest' | jq -r '.name')
+    fonts_dir="${HOME}/.local/share/fonts"
+
+    if [[ ! -d "${fonts_dir}" ]]; then
+        mkdir -p "${fonts_dir}"
+    fi
+
+    if echo "$selected_fonts" | grep -q "All Fonts"; then
+        declare -a all_fonts=(
+            CascadiaCode FiraCode FiraMono JetBrainsMono Meslo SourceCodePro
+            BitstreamVeraSansMono CodeNewRoman DroidSansMono Go-Mono Hack
+            Hermit Noto Overpass ProggyClean RobotoMono SpaceMono Ubuntu UbuntuMono
+        )
+        for font in "${all_fonts[@]}"; do
+            install_single_font "$font" "$version" "$fonts_dir"
+        done
     else
-        print_warning "Font installation script not found. Skipping font installation."
+        while IFS= read -r font; do
+            if [[ -n "$font" ]]; then
+                install_single_font "$font" "$version" "$fonts_dir"
+            fi
+        done <<< "$selected_fonts"
+    fi
+
+    find "${fonts_dir}" -name 'Windows Compatible' -delete
+    fc-cache -fv
+}
+
+install_single_font() {
+    local font="$1"
+    local version="$2"
+    local fonts_dir="$3"
+    local zip_file download_url
+
+    zip_file="${font}.zip"
+    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
+
+    print_title "Installing Font: $font"
+    wget -q "$download_url" -O "$zip_file" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        unzip -qq -o "$zip_file" -d "${fonts_dir}"
+        rm "$zip_file"
+        print_success "$font"
+    else
+        print_error "Failed to download $font"
     fi
 }
 
