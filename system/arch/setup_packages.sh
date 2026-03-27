@@ -30,17 +30,13 @@ pacman_install "base-devel" "base-devel"
 #==================================
 print_title "Install AUR Helper"
 
-# Refresh sudo before yay installation
+# Refresh sudo right before makepkg so its internal sudo calls succeed
 sudo -v
 
-pacman_install "Go (yay build dependency)" "go"
 rm -rf ~/tmp/yay
 execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
 cd ~/tmp/yay
-# Build without -s (deps installed above), then install with our sudo
-makepkg -fc --noconfirm --needed &>/dev/null
-print_result $? "Building yay"
-sudo pacman -U --noconfirm yay-*.pkg.tar.zst &>/dev/null
+makepkg -sfci --noconfirm --needed
 print_result $? "Installing yay"
 cd - &>/dev/null
 
