@@ -27,13 +27,14 @@ show_welcome() {
 
 main_menu() {
     local choice
-    choice=$(gum choose --cursor="→ " --height=12 --header="Select installation components:" \
+    choice=$(gum choose --cursor="→ " --height=13 --header="Select installation components:" \
         "Essential Setup (Symlinks + Defaults)" \
         "Package Management Setup" \
         "Development Tools" \
         "CLI Utilities" \
         "GUI Applications" \
         "AUR Packages" \
+        "Window Manager" \
         "Fonts Installation" \
         "GNOME Extensions" \
         "Shell Configuration" \
@@ -111,6 +112,13 @@ fonts_menu() {
     gum choose --no-limit --cursor="→ " --height=15 --header="Select fonts to install:" \
         "${fonts_list[@]}" \
         "All Fonts"
+}
+
+wm_menu() {
+    gum choose --cursor="→ " --height=5 --header="Select a Window Manager to install:" \
+        "MangoWC" \
+        "Hyprland" \
+        "Niri"
 }
 
 gnome_extensions_menu() {
@@ -356,6 +364,15 @@ install_single_font() {
     fi
 }
 
+install_window_manager() {
+    local selected_wm="$1"
+    case "$selected_wm" in
+        "MangoWC")  . "$HOME/.dotfiles/system/arch/setup_wm.sh" mangowc ;;
+        "Hyprland") . "$HOME/.dotfiles/system/arch/setup_wm.sh" hyprland ;;
+        "Niri")     . "$HOME/.dotfiles/system/arch/setup_wm.sh" niri ;;
+    esac
+}
+
 install_gnome_extensions() {
     local selected_extensions="$1"
     print_section "Installing GNOME Extensions"
@@ -452,6 +469,13 @@ main_interactive() {
                     gum style --foreground 212 "✨ Flatpak applications installation completed!"
                 fi
                 ;;
+            "Window Manager")
+                selected_wm=$(wm_menu)
+                if [[ -n "$selected_wm" ]]; then
+                    install_window_manager "$selected_wm"
+                    gum style --foreground 212 "✨ Window Manager installation completed!"
+                fi
+                ;;
             "Fonts Installation")
                 selected_fonts=$(fonts_menu)
                 if [[ -n "$selected_fonts" ]]; then
@@ -477,6 +501,7 @@ main_interactive() {
                     install_development_tools "Git & Git Tools Build Tools Programming Languages Code Editors Development Utilities LazyGit"
                     install_cli_utilities "File Operations Search & Navigation System Monitoring Network Tools Terminal Enhancements System Info File Managers Media Tools"
                     install_gui_applications "GNOME Tools Terminal Security Network Tools Flatpak Applications"
+                    # install_window_manager "MangoWC"
                     install_selected_fonts "All Fonts"
                     install_gnome_extensions "All GNOME Extensions"
                     install_shell_config
