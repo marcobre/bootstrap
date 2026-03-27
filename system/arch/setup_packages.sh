@@ -36,10 +36,12 @@ sudo -v
 rm -rf ~/tmp/yay
 execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
 cd ~/tmp/yay
-# Run makepkg in foreground so it inherits the sudo keep-alive session
-# (execute() runs in background subshell which loses sudo credentials)
-makepkg -sfci --noconfirm --needed &>/dev/null
-print_result $? "Building and installing yay"
+# Build only (no sudo needed), then install separately with sudo
+# makepkg -i internally spawns its own sudo which bypasses keep-alive
+makepkg -sfc --noconfirm --needed &>/dev/null
+print_result $? "Building yay"
+sudo pacman -U --noconfirm yay-*.pkg.tar.zst &>/dev/null
+print_result $? "Installing yay"
 cd - &>/dev/null
 
 #==================================
