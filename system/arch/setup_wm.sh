@@ -18,6 +18,8 @@ case "$WM" in
     mangowc)
         print_title "Install MangoWC"
         yay_install "MangoWC" "mangowc-git"
+        pacman_install "Waybar" "waybar"
+        pacman_install "Swaybg" "swaybg"
         print_title "MangoWC configuration"
         symlink ~/.dotfiles/config/mango/config.conf ~/.config/mango/config.conf
         symlink ~/.dotfiles/config/mango/autostart.sh ~/.config/mango/autostart.sh
