@@ -50,6 +50,7 @@ apt_add_repo "Multiverse" "multiverse"
 apt_add_repo "Fish" "ppa:fish-shell/release-3"
 apt_add_repo "OBS Studio" "ppa:obsproject/obs-studio"
 apt_add_repo "Alacritty" "ppa:aslatter/ppa"
+apt_add_repo "Ghostty" "ppa:mkasberg/ghostty-ubuntu"
 
 #==================================
 # Add sources to APT
@@ -118,6 +119,7 @@ apt_install "mtr" "mtr"
 
 apt_install "tldr" "tldr"
 apt_install "neofetch" "neofetch"
+apt_install "fastfetch" "fastfetch"
 
 apt_install "ranger" "ranger"
 apt_install "midnight-commander" "mc"
@@ -131,6 +133,8 @@ apt_install "ffmpeg" "ffmpeg"
 apt_install "nudoku" "nudoku"
 
 apt_install "Alacritty" "alacritty"
+apt_install "Ghostty" "ghostty"
+
 apt_install "Caffeine" "caffeine"
 #apt_install "Notion" "notion"
 #apt_install "OBS Studio" "obs-studio"
@@ -157,7 +161,7 @@ apt_install "Caffeine" "caffeine"
 #==================================
 print_title "Install Flatpak Packages"
 
-flatpak_install "Firefox" "org.mozilla.firefox"
+#flatpak_install "Firefox" "org.mozilla.firefox"
 #flatpak_install "GitKraken" "com.axosoft.GitKraken"
 #flatpak_install "Insomnia" "rest.insomnia.Insomnia"
 #flatpak_install "Beekeeper Studio" "io.beekeeperstudio.Studio"
