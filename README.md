@@ -124,7 +124,7 @@ If you want to create your own dotfiles based on my configuration, you should
 
 This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/.dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out!
 
-I have modified this dotfiles with my own taste of config files, extended the scripts and tested them on the current Ubuntu 24.04 LTS version, CachyOS and CachyOS.
+I have modified this dotfiles with my own taste of config files, extended the scripts and tested them on the current Ubuntu 24.04 LTS version, Arch, CachyOS and OSX.
 The other OS specific scripts will be modified in the new future and have not been tested yet.
 Big Thanks to Excalith for providing me with a solid framework supporting the Operating Systems i am actively using.
 
