@@ -59,15 +59,15 @@ print_result $? "Starship" "true"
 #==================================
 # Change Default Shell
 #==================================
-print_title "Changing Default Shell"
+#print_title "Changing Default Shell"
 
-print_in_green "sed 1"
-sudo sed -i '/auth       required   pam_shells.so/ s//auth       sufficient   pam_shells.so/g' /etc/pam.d/chsh >/dev/null 2>&1
-print_in_green "tee fish -> shells"
-which fish | sudo tee -a /etc/shells >/dev/null 2>&1
-print_in_green "chsh which fish"
-sudo chsh -s "$(which zsh)" >/dev/null 2>&1
-print_in_green "sed 2"
-sudo sed -i '/auth       sufficient   pam_shells.so/ s//auth       required   pam_shells.so/g' /etc/pam.d/chsh >/dev/null 2>&1
+#print_in_green "sed 1"
+#sudo sed -i '/auth       required   pam_shells.so/ s//auth       sufficient   pam_shells.so/g' /etc/pam.d/chsh >/dev/null 2>&1
+#print_in_green "tee fish -> shells"
+#which fish | sudo tee -a /etc/shells >/dev/null 2>&1
+#print_in_green "chsh which fish"
+#sudo chsh -s "$(which zsh)" >/dev/null 2>&1
+#print_in_green "sed 2"
+#sudo sed -i '/auth       sufficient   pam_shells.so/ s//auth       required   pam_shells.so/g' /etc/pam.d/chsh >/dev/null 2>&1
 
-print_result $? "Change fish/zsh as default shell" "true"
+#print_result $? "Change fish/zsh as default shell" "true"
