@@ -66,6 +66,9 @@ run_automatic_installation() {
     # setup packages
     . "$HOME/.dotfiles/system/ubuntu/setup_packages.sh"
 
+    # setup window manager
+    . "$HOME/.dotfiles/system/ubuntu/setup_wm.sh"
+
     # setup fonts
     . "$HOME/.dotfiles/system/ubuntu/setup_fonts.sh"
 

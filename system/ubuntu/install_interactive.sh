@@ -26,9 +26,10 @@ show_welcome() {
 
 main_menu() {
     local choice
-    choice=$(gum choose --cursor="→ " --height=10 --header="Select installation components:" \
+    choice=$(gum choose --cursor="→ " --height=11 --header="Select installation components:" \
         "Essential Setup (Symlinks + Defaults)" \
         "Package Management Setup" \
+        "Window Manager Setup (Hyprland)" \
         "Development Tools" \
         "CLI Utilities" \
         "GUI Applications" \
@@ -134,6 +135,11 @@ install_essential_setup() {
     
     print_title "Setting Up Defaults"
     . "$HOME/.dotfiles/system/ubuntu/setup_defaults.sh"
+}
+
+install_wm_setup() {
+    print_section "Window Manager Setup"
+    . "$HOME/.dotfiles/system/ubuntu/setup_wm.sh"
 }
 
 install_package_management() {
@@ -353,6 +359,10 @@ main_interactive() {
                 install_package_management
                 gum style --foreground 212 "✨ Package management setup completed!"
                 ;;
+            "Window Manager Setup"*)
+                install_wm_setup
+                gum style --foreground 212 "✨ Window manager setup completed!"
+                ;;
             "Development Tools")
                 selected_tools=$(development_tools_menu)
                 if [[ -n "$selected_tools" ]]; then
@@ -389,6 +399,7 @@ main_interactive() {
                 gum confirm "This will install ALL components. Continue?" && {
                     install_essential_setup
                     install_package_management
+                    install_wm_setup
                     install_development_tools "Git & Git LFS Build Essential Python3 Cargo (Rust) GCC Compiler Neovim tmux + TPM LazyGit"
                     install_cli_utilities "eza (better ls) bat (better cat) fzf (fuzzy finder) ripgrep (better grep) fd-find (better find) tree & tre-command htop (system monitor) httpie (HTTP client) prettyping & mtr tldr (quick help) neofetch (system info) ranger & mc (file managers) fasd (quick navigation)"
                     install_gui_applications "GNOME Tweaks & Extensions Alacritty Terminal Caffeine Firefox (Flatpak) Spotify (Flatpak) VLC Media Player (Flatpak) Image Optimizer (Flatpak) HEIF Support"
