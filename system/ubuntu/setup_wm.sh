@@ -18,7 +18,7 @@ print_section "Setting Up Window Manager (Hyprland)"
 print_title "Install Hyprland & Wayland Utilities"
 
 # Add Hyprland PPA
-apt_add_repo "Hyprland (cpiber)" "ppa:cpiber/hyprland"
+apt_add_repo "Hyprland (cppiber)" "ppa:cppiber/hyprland"
 
 # Update APT
 apt_update
