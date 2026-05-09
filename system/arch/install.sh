@@ -69,7 +69,7 @@ run_automatic_installation() {
     . "$HOME/.dotfiles/system/arch/setup_fonts.sh"
 
     # setup defaults
-    . "$HOME/.dotfiles/system/arch/setup_defaults.sh"
+    #. "$HOME/.dotfiles/system/arch/setup_defaults.sh"
 
     # setup shell
     . "$HOME/.dotfiles/system/arch/setup_shell.sh"
