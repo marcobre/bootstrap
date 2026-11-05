@@ -1,4 +1,16 @@
 #!/bin/bash
+# shellcheck disable=SC1091
+
+#==================================
+# Source utilities
+#==================================
+. "$HOME/.dotfiles/scripts/utils/utils.sh"
+. "$HOME/.dotfiles/scripts/utils/utils_arch.sh"
+
+#==================================
+# Print Section Title
+#==================================
+print_section "Installing Fonts"
 
 declare -a fonts=(
   #  BitstreamVeraSansMono
@@ -22,42 +34,21 @@ declare -a fonts=(
   # UbuntuMono
 )
 
-version=$(curl -s 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest' | jq -r '.name')
-fonts_dir="${HOME}/.local/share/fonts"
+#==================================
+# Font Dependencies
+#==================================
+# Installed here as well, so this step works no matter what ran before it
+print_title "Font Dependencies"
+pacman_install "curl" "curl"
+pacman_install "unzip" "unzip"
+pacman_install "fontconfig" "fontconfig"
 
-if [[ ! -d "${fonts_dir}" ]]; then
-  mkdir -p "${fonts_dir}"
-fi
-
+#==================================
+# Nerd Fonts (latest release)
+#==================================
+print_title "Nerd Fonts"
 for font in "${fonts[@]}"; do
-  zip_file="${font}.zip"
-  download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
-  echo "Downloading $download_url"
-  wget "$download_url"
-  unzip -o "$zip_file" -d "${fonts_dir}"
-  rm "$zip_file"
+  install_nerd_font "$font"
 done
 
-find "${fonts_dir}" -name 'Windows Compatible' -delete
-
-fc-cache -fv
-
-
-
-
-#!/bin/bash
-# shellcheck disable=SC1091
-
-#==================================
-# Source utilities
-#==================================
-#. "$HOME/.dotfiles/scripts/utils/utils.sh"
-#. "$HOME/.dotfiles/scripts/utils/utils_arch.sh"
-
-
-#==================================
-# Print Section Title
-#==================================
-#print_section "Installing Fonts"
-
-#execute "yay -S otf-firamono-nerd" "Fira Mono Nerd Font"
+update_font_cache

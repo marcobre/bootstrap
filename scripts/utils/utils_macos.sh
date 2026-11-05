@@ -8,14 +8,37 @@ cd "$(dirname "${BASH_SOURCE[0]}")" && . "utils.sh"
 #==================================
 # BREW
 #==================================
+# Put Homebrew on PATH for the *current* shell. Idempotent.
+# The setup runs in a single bash session, so this must be called directly,
+# never through `execute` (which runs in a background subshell).
 ensure_brew_in_path() {
-    if ! cmd_exists "brew"; then
-        if [[ $(uname -m) == "arm64" ]] && [[ -x "/opt/homebrew/bin/brew" ]]; then
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        elif [[ -x "/usr/local/bin/brew" ]]; then
-            eval "$(/usr/local/bin/brew shellenv)"
+    local brew_bin
+    for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        if [[ -x "$brew_bin" ]]; then
+            # Always eval: /etc/paths.d/homebrew puts brew *after* /usr/bin,
+            # shellenv moves it to the front (and prints nothing if already there).
+            eval "$("$brew_bin" shellenv bash)"
+            hash -r
+            return 0
         fi
+    done
+    return 1
+}
+
+# Install Homebrew unattended (if missing) and make it usable in this session.
+install_homebrew() {
+    if ensure_brew_in_path; then
+        print_success "Homebrew (already installed)"
+        return 0
     fi
+
+    # Refresh the sudo timestamp: in NONINTERACTIVE mode the installer uses `sudo -n`
+    sudo -v
+    NONINTERACTIVE=1 /bin/bash -c \
+        "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    ensure_brew_in_path
+    print_result $? "Homebrew"
 }
 
 brew_install() {
@@ -84,8 +107,31 @@ brew_prefix() {
     fi
 }
 
+# Non-official taps used by the macOS setup. Since Homebrew 6.0, non-official taps
+# must be trusted before brew loads them (https://docs.brew.sh/Tap-Trust).
+# Official taps (homebrew/core, cask, bundle, cask-versions, cask-fonts) are not
+# needed anymore: core/cask load from the API, bundle is built in, and
+# cask-versions/cask-fonts were merged into homebrew/cask.
+BREW_TRUSTED_TAPS=(
+    "d12frosted/emacs-plus"   # emacs-plus
+    "teamookla/speedtest"     # speedtest
+    "nikitabobko/tap"         # aerospace
+    "asmvik/formulae"         # yabai, skhd (formerly koekeishiya/formulae)
+)
+
+# Trust and tap a non-official tap. Trust comes first: `brew tap` evaluates every
+# formula/cask of the tap before accepting it, which fails for untrusted taps.
 brew_tap() {
-    brew tap "$1" &> /dev/null
+    brew trust "$1" &> /dev/null && brew tap "$1" &> /dev/null
+}
+
+# Trust and tap everything in BREW_TRUSTED_TAPS
+brew_setup_taps() {
+    local tap
+    for tap in "${BREW_TRUSTED_TAPS[@]}"; do
+        brew_tap "$tap"
+        print_result $? "Trust & tap $tap"
+    done
 }
 
 brew_update() {

@@ -13,6 +13,9 @@ set -gx LC_CTYPE de_DE.UTF-8
 # Set default terminal
 #set -gx TERM alacritty
 
+# Homebrew (macOS Apple Silicon); no-op where brew isn't installed
+test -x /opt/homebrew/bin/brew; and /opt/homebrew/bin/brew shellenv fish | source
+
 set -gx PATH "/usr/local/sbin:~/.local/bin:$PATH:~/.cargo/bin"
 
 # Add Path

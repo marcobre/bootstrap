@@ -34,8 +34,8 @@ print_result $? "Starship" "true"
 print_title "Installing ZSH"
 apt_install "ZSH" "zsh"
 
-curl -L git.io/antigen > "$HOME/.config/antigen.zsh" >/dev/null 2>&1
-print_progress "Installing Antigen"
+print_title "Installing Antigen"
+install_antigen
 
 #==================================
 # Install Fish
@@ -47,10 +47,8 @@ apt_install "Fish" "fish"
 #==================================
 # Install Fisher
 #==================================
-fish <<'END_FISH'
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher >/dev/null 2>&1
-END_FISH
-print_result $? "Fisher" "true"
+print_title "Installing Fisher"
+install_fisher
 
 
 #==================================

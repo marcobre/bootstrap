@@ -224,11 +224,12 @@ install_development_tools() {
     
     if echo "$selected_tools" | grep -q "LazyGit"; then
         print_title "Install LazyGit"
-        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
-        curl -Lo lazygit.tar.gz --silent "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-        sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-        rm -rf lazygit.tar.gz
-        print_success "lazygit"
+        # apt package on Ubuntu 25.10+, otherwise the latest release binary
+        if apt-cache show lazygit &>/dev/null; then
+            apt_install "LazyGit" "lazygit"
+        else
+            install_lazygit_release
+        fi
     fi
 }
 
@@ -282,58 +283,34 @@ install_gui_applications() {
 
 install_selected_fonts() {
     local selected_fonts="$1"
+    local font
     print_section "Installing Selected Fonts"
-    
-    local version fonts_dir
-    version=$(curl -s 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest' | jq -r '.name')
-    fonts_dir="${HOME}/.local/share/fonts"
 
-    if [[ ! -d "${fonts_dir}" ]]; then
-        mkdir -p "${fonts_dir}"
-    fi
+    # This menu can run before any package step, so it installs its own dependencies
+    print_title "Font Dependencies"
+    apt_install "curl" "curl"
+    apt_install "unzip" "unzip"
+    apt_install "fontconfig" "fontconfig"
 
+    print_title "Nerd Fonts"
     if echo "$selected_fonts" | grep -q "All Fonts"; then
-        # Install all fonts if "All Fonts" was selected
-        declare -a all_fonts=(
+        local all_fonts=(
             CascadiaCode FiraCode FiraMono JetBrainsMono Meslo SourceCodePro
             BitstreamVeraSansMono CodeNewRoman DroidSansMono Go-Mono Hack
             Hermit Noto Overpass ProggyClean RobotoMono SpaceMono Ubuntu UbuntuMono
         )
-        
         for font in "${all_fonts[@]}"; do
-            install_single_font "$font" "$version" "$fonts_dir"
+            install_nerd_font "$font"
         done
     else
-        # Install only selected fonts
         while IFS= read -r font; do
             if [[ -n "$font" ]]; then
-                install_single_font "$font" "$version" "$fonts_dir"
+                install_nerd_font "$font"
             fi
         done <<< "$selected_fonts"
     fi
 
-    find "${fonts_dir}" -name 'Windows Compatible' -delete
-    fc-cache -fv
-}
-
-install_single_font() {
-    local font="$1"
-    local version="$2" 
-    local fonts_dir="$3"
-    local zip_file download_url
-    
-    zip_file="${font}.zip"
-    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
-    
-    print_title "Installing Font: $font"
-    wget -q "$download_url" -O "$zip_file" 2>/dev/null
-    if [ $? -eq 0 ]; then
-        unzip -qq -o "$zip_file" -d "${fonts_dir}"
-        rm "$zip_file"
-        print_success "$font"
-    else
-        print_error "Failed to download $font"
-    fi
+    update_font_cache
 }
 
 install_shell_config() {

@@ -15,7 +15,7 @@ apk_install() {
     declare -r PACKAGE_READABLE_NAME="$1"
 
     if ! apk_installed "$PACKAGE"; then
-        execute "apk add --quiet --no-progress $EXTRA_ARGUMENTS $PACKAGE" "$PACKAGE_READABLE_NAME"
+        execute "sudo apk add --quiet --no-progress $EXTRA_ARGUMENTS $PACKAGE" "$PACKAGE_READABLE_NAME"
     else
         print_success "$PACKAGE_READABLE_NAME"
     fi
@@ -23,18 +23,20 @@ apk_install() {
 
 apk_update() {
     execute \
-        "sudo apk update --quiet —no-progress" \
+        "sudo apk update --quiet --no-progress" \
         "APK Update"
 }
 
 apk_upgrade() {
     execute \
         "sudo apk upgrade" \
-        "APK Update"
+        "APK Upgrade"
 }
 
+# `apk info -e` checks installed status (exit 0 only if installed);
+# plain `apk info` also succeeds for packages that are merely in the repo index
 apk_installed() {
-    apk info "$1" &> /dev/null
+    apk info -e "$1" &> /dev/null
 }
 
 

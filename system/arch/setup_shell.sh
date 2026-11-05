@@ -20,8 +20,8 @@ print_section "Shell Setup"
 print_title "Installing ZSH"
 pacman_install "ZSH" "zsh"
 
-curl -L git.io/antigen > "$HOME/.config/antigen.zsh"
 print_title "Installing Antigen"
+install_antigen
 
 #==================================
 # Install Fish
@@ -33,10 +33,8 @@ pacman_install "Fish" "fish"
 #==================================
 # Install Fisher
 #==================================
-fish <<'END_FISH'
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher >/dev/null 2>&1
-END_FISH
-print_result $? "Fisher" "true"
+print_title "Installing Fisher"
+install_fisher
 
 
 #==================================
@@ -73,7 +71,8 @@ sudo sed -i '/auth       required   pam_shells.so/ s//auth       sufficient   pa
 print_in_green "tee fish -> shells"
 which fish | sudo tee -a /etc/shells >/dev/null 2>&1
 print_in_green "chsh which fish"
-sudo chsh -s "$(which fish)" >/dev/null 2>&1
+# Pass the user explicitly: `sudo chsh` without a username changes root's shell
+sudo chsh -s "$(which fish)" "$USER" >/dev/null 2>&1
 print_in_green "sed 2"
 sudo sed -i '/auth       sufficient   pam_shells.so/ s//auth       required   pam_shells.so/g' /etc/pam.d/chsh >/dev/null 2>&1
 

@@ -1,2 +1,30 @@
 content.md
 ai-history.md
+
+# macOS Finder metadata
+.DS_Store
+
+# ==============================
+# AI agent configs (local only)
+# ==============================
+# Kiro
+.kiro/
+AGENTS.md
+AGENT.md
+# Claude
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+# Amazon Q
+.amazonq/
+# Cursor / Windsurf / Copilot / others
+.cursor/
+.cursorrules
+.windsurf/
+.windsurfrules
+.github/copilot-instructions.md
+.aider*
+.codex/
+.gemini/
+GEMINI.md
+.continue/

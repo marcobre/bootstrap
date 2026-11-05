@@ -166,15 +166,10 @@ install_gum_if_needed() {
         fi
         ;;
       "macos")
-        # macOS - use wget if available, otherwise install homebrew which includes curl
-        if ! command -v brew &> /dev/null; then
-          if command -v wget &> /dev/null; then
-            printf "\n" | /bin/bash -c "$(wget -qO- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          else
-            # Fallback to curl if wget not available on macOS
-            printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          fi
-        fi
+        # macOS - install Homebrew (if missing) and put it on PATH for this session.
+        # ~/.dotfiles is already downloaded at this point, so the macOS utils are available.
+        . "$HOME/.dotfiles/scripts/utils/utils_macos.sh"
+        install_homebrew || return 1
         if brew install gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0

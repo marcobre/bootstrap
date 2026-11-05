@@ -19,6 +19,7 @@ print_title "Install Essential Packages"
 apt_install "curl" "curl"
 apt_install "ca-certificates" "ca-certificates"
 apt_install "gpg" "gpg"
+apt_install "unzip" "unzip"
 
 #==================================
 # Add keys to apt
@@ -191,12 +192,12 @@ cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applicatio
 sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
 sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 
-# LazyGit
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
-curl -Lo lazygit.tar.gz --silent --output /dev/null "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-rm -rf lazygit.tar.gz
-print_success "lazygit"
+# LazyGit: apt package on Ubuntu 25.10+, otherwise the latest release binary
+if apt-cache show lazygit &>/dev/null; then
+  apt_install "LazyGit" "lazygit"
+else
+  install_lazygit_release
+fi
 
 # NvChad
 # rm -rf ~/.config/nvim

@@ -138,24 +138,15 @@ install_homebrew_setup() {
     print_section "Homebrew Setup & Management"
     
     print_title "Installing Homebrew"
-    if ! cmd_exists "brew"; then
-        printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    print_result $? "Homebrew"
+    # Installs Homebrew if missing and puts it on PATH for the rest of the session
+    install_homebrew
 
     brew_update
     brew_upgrade
 
-    print_title "Setting Up Core Taps"
-    brew_tap 'homebrew/core'
-    brew_tap 'homebrew/bundle'  
-    brew_tap 'homebrew/cask' || true
-    brew_tap 'homebrew/cask-versions'
-    brew_tap 'homebrew/cask-fonts'
-    brew_tap 'eth-p/software'
-    brew_tap 'teamookla/speedtest'
-    brew_tap 'd12frosted/emacs-plus'
-    brew_tap 'nikitabobko/tap/aerospace'
+    # Trusts and taps the non-official taps listed in BREW_TRUSTED_TAPS (utils_macos.sh)
+    print_title "Setting Up Taps"
+    brew_setup_taps
 }
 
 install_development_tools() {
@@ -200,7 +191,9 @@ install_development_tools() {
     fi
     
     if echo "$selected_tools" | grep -q "Emacs"; then
-        brew_install "emacs-plus" "emacs-plus"
+        # The `emacs-plus` alias needs the trusted tap; this menu can run before "Homebrew Setup"
+        brew_tap "d12frosted/emacs-plus"
+        brew_install "Emacs Plus" "emacs-plus"
     fi
 }
 
@@ -229,7 +222,7 @@ install_cli_utilities() {
     
     echo "$selected_utils" | grep -q "Network Tools" && {
         brew_install "prettyping" "prettyping"
-        brew_install "speedtest" "speedtest"
+        brew_install "speedtest" "teamookla/speedtest/speedtest"
     }
     
     echo "$selected_utils" | grep -q "File Managers" && {
@@ -300,7 +293,7 @@ install_gui_applications() {
         brew_install "Transmit" "transmit" "--cask"
     }
     echo "$selected_apps" | grep -q "Content Creation" && brew_install "OBS Studio" "obs" "--cask"
-    echo "$selected_apps" | grep -q "Window Management" && brew_install "Aerospace" "aerospace" "--cask"
+    echo "$selected_apps" | grep -q "Window Management" && brew_install "Aerospace" "nikitabobko/tap/aerospace" "--cask"
 }
 
 install_mac_app_store() {
@@ -346,17 +339,17 @@ install_services() {
     print_section "Installing Services & Window Management"
     
     if echo "$selected_services" | grep -q "All Window Management" || echo "$selected_services" | grep -q "Yabai"; then
-        brew_install "yabai" "koekeishiya/formulae/yabai"
+        brew_install "yabai" "asmvik/formulae/yabai"
         brew_start_service "yabai" "yabai"
     fi
     
     if echo "$selected_services" | grep -q "All Window Management" || echo "$selected_services" | grep -q "SKHD"; then
-        brew_install "skhd" "koekeishiya/formulae/skhd"
+        brew_install "skhd" "asmvik/formulae/skhd"
         brew_start_service "skhd" "skhd"
     fi
     
     if echo "$selected_services" | grep -q "Aerospace"; then
-        brew_install "aerospace" "aerospace" "--cask"
+        brew_install "aerospace" "nikitabobko/tap/aerospace" "--cask"
     fi
 }
 

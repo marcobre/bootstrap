@@ -1,40 +1,54 @@
 function Install-Dotfiles {
-    # Get Windows version
-    $osInfo = systeminfo | findstr /B /C:"OS Name" | ForEach-Object { $_.TrimStart("OS Name:").Trim() }
-
-    # Return if not supported
-    if ($osInfo -notlike "*Windows*") {
-        Write-Host "$($osInfo) not supported."
+    # $env:OS is "Windows_NT" on every Windows edition and display language.
+    # (The old `systeminfo | findstr "OS Name"` check failed on localized Windows,
+    # e.g. German Windows labels it "Betriebssystemname".)
+    if ($env:OS -ne "Windows_NT") {
+        Write-Host "This setup only supports Windows."
         return
     }
 
-    # Define 
-    $repoUrl = "https://github.com/marcobre/bootstrap/archive/main.zip"
-    $downloadPath = "$env:TEMP"
+    # Define
+    $repoUrl      = "https://github.com/marcobre/bootstrap/archive/refs/heads/main.zip"
+    $dotfilesPath = Join-Path $env:USERPROFILE ".dotfiles"
+    $zipFile      = Join-Path $env:TEMP "dotfiles.zip"
+    # Staging folder on the same drive as the target, so Move-Item can move the folder
+    $extractPath  = Join-Path $env:USERPROFILE ".dotfiles-download"
 
     # Check if dotfiles folder exists
-    if (Test-Path -Path "$env:USERPROFILE\.dotfiles") {
+    if (Test-Path -Path $dotfilesPath) {
         Write-Host ".dotfiles folder already exists."
         return
     }
 
     try {
         # Download the repository
-        Invoke-WebRequest -Uri $repoUrl -OutFile "$downloadPath\.dotfiles.zip"
+        Invoke-WebRequest -Uri $repoUrl -OutFile $zipFile -UseBasicParsing -ErrorAction Stop
 
-        # Extract it to user folder
-        Expand-Archive -Path "$downloadPath\.dotfiles.zip" -DestinationPath $env:USERPROFILE
+        # Extract it to a clean staging folder
+        if (Test-Path -Path $extractPath) {
+            Remove-Item -Path $extractPath -Recurse -Force -ErrorAction Stop
+        }
+        Expand-Archive -Path $zipFile -DestinationPath $extractPath -Force -ErrorAction Stop
 
-        # Rename the folder name
-        Rename-Item "$env:USERPROFILE\.dotfiles-main" "$env:USERPROFILE\.dotfiles"
+        # GitHub archives contain a single top-level folder named "<repo>-<branch>"
+        # (currently "bootstrap-main"). Detect it instead of hardcoding the name.
+        $rootFolder = Get-ChildItem -Path $extractPath -Directory | Select-Object -First 1
+        if (-not $rootFolder) {
+            throw "The downloaded archive does not contain a folder."
+        }
 
-        # Remove ZIP file
-        Remove-Item -Path "$downloadPath\.dotfiles.zip"
-        
+        # Move it into place as .dotfiles
+        Move-Item -Path $rootFolder.FullName -Destination $dotfilesPath -ErrorAction Stop
+
         Write-Host "Dotfiles installed successfully."
     }
     catch {
         Write-Host "Error: $_"
+    }
+    finally {
+        # Clean up the ZIP file and staging folder, whether or not the install worked
+        Remove-Item -Path $zipFile -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path $extractPath -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 

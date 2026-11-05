@@ -128,6 +128,129 @@ repo_has_remote_url() {
 }
 
 #==================================
+# Release Binaries
+#==================================
+# Install the latest lazygit release binary into /usr/local/bin (Linux).
+# Used where the distro has no lazygit package. Verifies the SHA-256 checksum,
+# works in a temp dir (no `cd` in the shared shell) and cleans up after itself.
+install_lazygit_release() {
+    local arch version base tarball tmp_dir exit_code
+
+    case "$(uname -m)" in
+        x86_64)        arch="x86_64" ;;
+        aarch64|arm64) arch="arm64" ;;
+        armv6l|armv7l) arch="armv6" ;;
+        i?86)          arch="32-bit" ;;
+        *)
+            print_error "lazygit (unsupported architecture: $(uname -m))"
+            return 1
+            ;;
+    esac
+
+    # sed instead of `grep -P`, so this also works with busybox (Alpine)
+    version="$(curl -fsSL "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" \
+        | sed -nE 's/.*"tag_name": *"v([^"]+)".*/\1/p')"
+    if [ -z "$version" ]; then
+        print_error "lazygit (could not determine the latest version)"
+        return 1
+    fi
+
+    base="https://github.com/jesseduffield/lazygit/releases/download/v${version}"
+    tarball="lazygit_${version}_linux_${arch}.tar.gz"
+    tmp_dir="$(mktemp -d)"
+
+    execute \
+        "curl -fsSL -o '$tmp_dir/$tarball' '$base/$tarball' \
+        && curl -fsSL -o '$tmp_dir/checksums.txt' '$base/checksums.txt' \
+        && (cd '$tmp_dir' && grep ' $tarball\$' checksums.txt | sha256sum -c -) \
+        && tar -xzf '$tmp_dir/$tarball' -C '$tmp_dir' lazygit \
+        && sudo install -m 755 '$tmp_dir/lazygit' /usr/local/bin/lazygit" \
+        "lazygit $version"
+    exit_code=$?
+
+    rm -rf "$tmp_dir"
+    return $exit_code
+}
+
+#==================================
+# Nerd Fonts
+#==================================
+# GitHub's `releases/latest/download/<asset>` always serves the latest release,
+# so no version lookup (GitHub API + jq) is needed.
+NERD_FONTS_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download"
+
+# Install one Nerd Font (latest release) into ~/.local/share/fonts (Linux).
+# Requires curl and unzip; callers install them with their package manager.
+install_nerd_font() {
+    local font="$1"
+    local fonts_dir="${2:-$HOME/.local/share/fonts}"
+    local tmp_file exit_code
+
+    mkdir -p "$fonts_dir"
+    tmp_file="$(mktemp)"
+
+    execute \
+        "curl -fsSL -o '$tmp_file' '$NERD_FONTS_URL/$font.zip' \
+        && unzip -qq -o '$tmp_file' -d '$fonts_dir'" \
+        "$font"
+    exit_code=$?
+
+    rm -f "$tmp_file"
+    return $exit_code
+}
+
+# Refresh the font cache after installing fonts. Requires fontconfig (fc-cache).
+update_font_cache() {
+    local fonts_dir="${1:-$HOME/.local/share/fonts}"
+
+    # "Windows Compatible" variants only exist in older Nerd Fonts releases
+    find "$fonts_dir" -name '*Windows Compatible*' -delete 2> /dev/null
+    execute "fc-cache -f '$fonts_dir'" "Update font cache"
+}
+
+#==================================
+# Shell Plugin Managers
+#==================================
+# Canonical sources instead of the deprecated git.io short links
+# (git.io/antigen → antigen master, git.io/fisher → fisher HEAD).
+ANTIGEN_URL="https://github.com/zsh-users/antigen/releases/latest/download/antigen.zsh"
+FISHER_URL="https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+
+# Download Antigen to ~/.config/antigen.zsh (sourced by config/zsh/.zshrc).
+# Downloads to a temp file first, so a failed download never replaces a working
+# copy with an empty file or an HTML error page.
+install_antigen() {
+    local target="$HOME/.config/antigen.zsh"
+    local tmp_file exit_code
+
+    mkdir -p "$HOME/.config"
+    tmp_file="$(mktemp "$target.XXXXXX")"
+
+    execute \
+        "curl -fsSL -o '$tmp_file' '$ANTIGEN_URL' \
+        && [ -s '$tmp_file' ] \
+        && mv -f '$tmp_file' '$target'" \
+        "Antigen"
+    exit_code=$?
+
+    rm -f "$tmp_file"
+    return $exit_code
+}
+
+# Install Fisher into fish, as documented upstream. Re-running is safe:
+# `fisher install` on an installed plugin updates it.
+install_fisher() {
+    if ! cmd_exists "fish"; then
+        print_error "Fisher (fish is not installed)"
+        return 1
+    fi
+
+    execute \
+        "fish -c 'curl -fsSL $FISHER_URL | source && fisher install jorgebucaran/fisher'" \
+        "Fisher"
+}
+
+#==================================
 # Symlink
 #==================================
 symlink() {

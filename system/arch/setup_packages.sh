@@ -59,6 +59,7 @@ pacman_install "gnupg" "gnupg"
 pacman_install "ca-certificates" "ca-certificates"
 pacman_install "curl" "curl"
 pacman_install "wget" "wget"
+pacman_install "unzip" "unzip"
 pacman_install "pyhton3" "python3"
 pacman_install "git" "git"
 pacman_install "git-lfs" "git-lfs"
@@ -130,12 +131,8 @@ print_title "Install Packages From Source"
 rm -rf ~/.tmux/plugins/tpm
 execute "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm" "TMUX Plugin Manager (TPM)"
 
-# LazyGit
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
-curl -Lo lazygit.tar.gz --silent --output /dev/null "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-rm -rf lazygit.tar.gz
-print_success "lazygit"
+# LazyGit: in the official Arch repos (extra)
+pacman_install "LazyGit" "lazygit"
 
 # Reversal Icons
 wget -qO ~/reversal.tar.gz https://github.com/yeyushengfan258/Reversal-icon-theme/archive/master.tar.gz

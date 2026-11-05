@@ -7,6 +7,9 @@ export LC_ALL=de_DE.UTF-8
 # Dotfiles Path
 export DOTFILES_PATH="$HOME/.dotfiles"
 
+# Homebrew (macOS Apple Silicon); no-op where brew isn't installed
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv bash)"
+
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/sbin:~/.local/bin:$PATH:~/.cargo/bin"
 

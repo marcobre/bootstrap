@@ -97,11 +97,8 @@ install_development_tools() {
     
     if echo "$selected_tools" | grep -q "LazyGit"; then
         print_title "Install LazyGit"
-        LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/')
-        curl -Lo lazygit.tar.gz --silent "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-        sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-        rm -rf lazygit.tar.gz
-        print_success "lazygit"
+        # latest release binary (static Go build, runs on musl)
+        install_lazygit_release
     fi
 }
 

@@ -16,14 +16,8 @@ print_section "Installing Packages"
 # Install Brew
 #==================================
 print_title "Installing Brew"
-if ! cmd_exists "brew"; then
-  printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  #  └─ simulate the ENTER keypress
-fi
-print_result $? "Homebrew"
-
-# Ensure brew is in PATH for the rest of the script
-ensure_brew_in_path
+# Installs Homebrew if missing and puts it on PATH for the rest of the session
+install_homebrew
 
 brew_update
 brew_upgrade
@@ -31,16 +25,11 @@ brew_upgrade
 #==================================
 # Brew Tap
 #==================================
+# Trusts and taps the non-official taps listed in BREW_TRUSTED_TAPS (utils_macos.sh).
+# Third-party packages below still use fully qualified names (user/repo/item), so they
+# resolve unambiguously even if a tap step failed.
 print_title "Tapping Brew Packages"
-brew_tap 'homebrew/core'
-brew_tap 'homebrew/bundle'
-brew_tap 'homebrew/cask' || true
-brew_tap 'homebrew/cask-versions'
-brew_tap 'homebrew/cask-fonts'
-brew_tap 'eth-p/software'
-brew_tap 'teamookla/speedtest'
-brew tap 'd12frosted/emacs-plus'
-brew tap 'nikitabobko/aerospace'
+brew_setup_taps
 
 #==================================
 # Brew Install
@@ -72,7 +61,7 @@ brew_install "prettyping" "prettyping"
 brew_install "mtr" "mtr"
 brew_install "eza" "eza"
 brew_install "bat" "bat"
-brew_install "bat-extras" "eth-p/software/bat-extras"
+brew_install "bat-extras" "bat-extras"
 brew_install "viu" "viu"
 brew_install "htop" "htop"
 brew_install "pidof" "pidof"
@@ -86,16 +75,16 @@ brew_install "ripgrep" "ripgrep"
 brew_install "ranger" "ranger"
 brew_install "midnight" "midnight-commander"
 brew_install "ffmpeg" "ffmpeg"
-brew_install "speedtest" "speedtest"
+brew_install "speedtest" "teamookla/speedtest/speedtest"
 brew_install "tldr" "tldr"
 #brew_install "spotify-tui" "spotify-tui"
 brew_install "no-more-secrets" "no-more-secrets"
-#brew_install "yabai" "koekeishiya/formulae/yabai"
-#brew_install "skhd" "koekeishiya/formulae/skhd"
+#brew_install "yabai" "asmvik/formulae/yabai"
+#brew_install "skhd" "asmvik/formulae/skhd"
 brew_install "cmatrix" "cmatrix"
 #brew_install "nudoku" "nudoku"
-brew_install "Obsidian" "Obsidian"
-brew install "emacs-plus" "emacs-plus"
+brew_install "Obsidian" "obsidian" "--cask"
+brew_install "Emacs Plus" "emacs-plus"
 
 #==================================
 # Brew Cask
@@ -132,7 +121,7 @@ brew_install "WhatsApp" "whatsapp" "--cask"
 #brew_install "Cleanmymac" "cleanmymac" "--cask"
 #brew_install "Dropbox" "dropbox" "--cask"
 brew_install "FiraCode Nerd Font" "font-fira-code-nerd-font" "--cask"
-brew_install "aerospace" "aerospace" "--cask"
+brew_install "aerospace" "nikitabobko/tap/aerospace" "--cask"
 
 #==================================
 # Brew MAS (AppStore Installations)
