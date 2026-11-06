@@ -65,12 +65,27 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
 
 ## P2 — Wrong or partial results
 
+### macOS (found in the first fresh-Mac test run)
+- [x] **Homebrew looked like it was installed twice.** `setup.sh` installed it for gum, then
+  `setup_packages.sh` (and the interactive "Homebrew Setup") ran the install step again plus
+  `brew update`/`upgrade` right after the installer had already updated. An old leftover block at
+  the end of `install_interactive.sh` could also run the installer a second way.
+  *Fixed: Homebrew is installed once at the start of `setup.sh` (independent of gum); later steps
+  call `brew_prepare`, which skips the update right after a fresh install.*
+
+- [x] **`tldr` formula disabled by Homebrew.** *Fixed: `tlrc` (official client, same `tldr` command).*
+- [x] **Alacritty cask disabled by Homebrew** (2026-09-01, fails Gatekeeper check).
+  *Fixed: cask commented out in `setup_packages.sh` and the interactive "Terminals" menu; Ghostty
+  added instead (package list, interactive menu, Dock). Alacritty configs stay for Linux.*
+- [ ] **`HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"` in `.zshrc` / `.bashrc` is dead.**
+  Homebrew removed `--no-quarantine`, so the line does nothing anymore. Remove it.
+
 ### Shared (`system/symlink.sh`, `scripts/utils/*`)
-- [ ] **Re-runs nest symlinks inside the repo.** `symlink` uses `ln -sf`, so linking the
+- [x] **Re-runs nest symlinks inside the repo.** *Fixed: `symlink()` uses `ln -sfn`.* `symlink` uses `ln -sf`, so linking the
   directories `nvim-lazyvim/` and `nvim-marcom/` again creates
   `config/nvim-lazyvim/nvim-lazyvim` (and the same for marcom). Use `ln -sfn` in
   `utils.sh` → `symlink()`.
-- [ ] **`symlink()` doesn't quote its paths.** It runs `execute "ln -sf $1 $2"`, which
+- [x] **`symlink()` doesn't quote its paths.** *Fixed together with `ln -sfn`.* It runs `execute "ln -sf $1 $2"`, which
   breaks on paths with spaces.
 - [ ] **`symlink.sh` links a fish function that doesn't exist:** `config/fish/functions/gi.fish`.
   Remove the line or add the file.
@@ -116,7 +131,8 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
     `bash install.sh -a` in a subshell instead.
   - The cleanup deletes `~/master.tar.gz`, but the file was downloaded as `~/reversal.tar.gz`
     (automatic scripts).
-- [ ] **Ubuntu: kitty links into `~/.local/bin` without creating it.**
+- [x] **Ubuntu: kitty links into `~/.local/bin` without creating it.** *Fixed: `mkdir -p` +
+  `ln -sfn` to an explicit target (also safe on re-runs now).*
   `system/ubuntu/setup_packages.sh` needs `mkdir -p ~/.local/bin ~/.local/share/applications`
   first. `~/.local/bin` is also not on PATH during the run.
 - [ ] **Ubuntu: TPM `git clone` fails on re-run.** It needs `rm -rf ~/.tmux/plugins/tpm`

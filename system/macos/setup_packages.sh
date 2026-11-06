@@ -15,12 +15,10 @@ print_section "Installing Packages"
 #==================================
 # Install Brew
 #==================================
-print_title "Installing Brew"
-# Installs Homebrew if missing and puts it on PATH for the rest of the session
-install_homebrew
-
-brew_update
-brew_upgrade
+print_title "Preparing Homebrew"
+# Homebrew is installed once by scripts/setup.sh; this only updates it
+# (skipped right after a fresh install) and installs it when run on its own
+brew_prepare
 
 #==================================
 # Brew Tap
@@ -42,10 +40,10 @@ brew_install "fd" "fd"
 brew_install "fzf" "fzf"
 brew_install "dockutil" "dockutil"
 brew_install "git" "git"
-brew_install "git" "git-lfs"
-brew_install "git" "git-delta"
+brew_install "git-lfs" "git-lfs"
+brew_install "git-delta" "git-delta"
 brew_install "lazygit" "lazygit"
-brew_install "git" "git-quick-stats"
+brew_install "git-quick-stats" "git-quick-stats"
 brew_install "cloc" "cloc"
 brew_install "navi" "navi"
 brew_install "node" "node"
@@ -66,7 +64,6 @@ brew_install "viu" "viu"
 brew_install "htop" "htop"
 brew_install "pidof" "pidof"
 #brew_install "httpie" "httpie"
-brew_install "neofetch" "neofetch"
 brew_install "neovim" "neovim"
 brew_install "fastfetch" "fastfetch"
 brew_install "micro" "micro"
@@ -76,14 +73,15 @@ brew_install "ranger" "ranger"
 brew_install "midnight" "midnight-commander"
 brew_install "ffmpeg" "ffmpeg"
 brew_install "speedtest" "teamookla/speedtest/speedtest"
-brew_install "tldr" "tldr"
+brew_install "tldr" "tlrc"
 #brew_install "spotify-tui" "spotify-tui"
 brew_install "no-more-secrets" "no-more-secrets"
 #brew_install "yabai" "asmvik/formulae/yabai"
 #brew_install "skhd" "asmvik/formulae/skhd"
+# SketchyBar: installed only, not started (start manually: brew services start sketchybar)
+brew_install "SketchyBar" "felixkratz/formulae/sketchybar"
 brew_install "cmatrix" "cmatrix"
 #brew_install "nudoku" "nudoku"
-brew_install "Obsidian" "obsidian" "--cask"
 brew_install "Emacs Plus" "emacs-plus"
 
 #==================================
@@ -93,7 +91,10 @@ print_title "Installing Brew Casks"
 #brew_install "Firefox" "firefox" "--cask"
 #brew_install "Firefox Developer" "firefox-developer-edition" "--cask"
 brew_install "Brave Browser" "brave-browser" "--cask"
-brew_install "Alacritty" "alacritty" "--cask"
+brew_install "Obsidian" "obsidian" "--cask"
+# Alacritty cask disabled by Homebrew (2026-09-01, fails Gatekeeper check); Ghostty replaces it on macOS
+#brew_install "Alacritty" "alacritty" "--cask"
+brew_install "Ghostty" "ghostty" "--cask"
 # brew_install "Kitty" "kitty" "--cask"
 brew_install "Karabiner-Elements" "karabiner-elements" "--cask"
 brew_install "VS Code" "visual-studio-code" "--cask"
@@ -101,13 +102,12 @@ brew_install "VS Code" "visual-studio-code" "--cask"
 #brew_install "gpg" "gpg" "--cask"
 brew_install "gpg suite" "gpg-suite" "--cask"
 brew_install "keybase" "keybase" "--cask"
-brew_install "Fork" "fork" "--cask"
 brew_install "Keka" "keka" "--cask"
 brew_install "Optimage" "optimage" "--cask"
 brew_install "Spotify" "spotify" "--cask"
 brew_install "Discord" "discord" "--cask"
 brew_install "Slack" "slack" "--cask"
-brew_install "Zoom" "zoom" "--cask"
+#brew_install "Zoom" "zoom" "--cask"
 brew_install "Transmission" "transmission" "--cask"
 brew_install "Transmit" "transmit" "--cask"
 brew_install "OBS Studio" "obs" "--cask"

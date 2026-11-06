@@ -84,7 +84,7 @@ gui_applications_menu() {
     gum choose --no-limit --cursor="→ " --height=20 --header="Select GUI applications (Homebrew Casks):" \
         "Web Browsers (Brave Browser)" \
         "Development Tools (VS Code, Fork)" \
-        "Terminals (Alacritty)" \
+        "Terminals (Ghostty)" \
         "System Tools (Karabiner-Elements)" \
         "Security (GPG Suite, Keybase)" \
         "Media & Graphics (Spotify, Sketch, Sip, Handbrake, Optimage)" \
@@ -137,12 +137,10 @@ install_essential_setup() {
 install_homebrew_setup() {
     print_section "Homebrew Setup & Management"
     
-    print_title "Installing Homebrew"
-    # Installs Homebrew if missing and puts it on PATH for the rest of the session
-    install_homebrew
-
-    brew_update
-    brew_upgrade
+    print_title "Preparing Homebrew"
+    # Homebrew is installed once by scripts/setup.sh; this only updates it
+    # (skipped right after a fresh install) and installs it when run on its own
+    brew_prepare
 
     # Trusts and taps the non-official taps listed in BREW_TRUSTED_TAPS (utils_macos.sh)
     print_title "Setting Up Taps"
@@ -183,7 +181,7 @@ install_development_tools() {
     
     if echo "$selected_tools" | grep -q "Documentation"; then
         brew_install "navi" "navi"
-        brew_install "tldr" "tldr"
+        brew_install "tldr" "tlrc"
     fi
     
     if echo "$selected_tools" | grep -q "Build Tools"; then
@@ -265,7 +263,9 @@ install_gui_applications() {
         brew_install "VS Code" "visual-studio-code" "--cask"
         brew_install "Fork" "fork" "--cask"
     }
-    echo "$selected_apps" | grep -q "Terminals" && brew_install "Alacritty" "alacritty" "--cask"
+    # Alacritty cask disabled by Homebrew (2026-09-01, fails Gatekeeper check); Ghostty replaces it on macOS
+    #echo "$selected_apps" | grep -q "Terminals" && brew_install "Alacritty" "alacritty" "--cask"
+    echo "$selected_apps" | grep -q "Terminals" && brew_install "Ghostty" "ghostty" "--cask"
     echo "$selected_apps" | grep -q "System Tools" && brew_install "Karabiner-Elements" "karabiner-elements" "--cask"
     echo "$selected_apps" | grep -q "Security" && {
         brew_install "GPG Suite" "gpg-suite" "--cask"
@@ -485,10 +485,9 @@ print_section "Interactive macOS Dotfiles Setup"
 # Check if gum is available, install if needed
 if ! command -v gum &> /dev/null; then
     print_title "Installing gum for interactive menus"
-    if ! cmd_exists "brew"; then
-        printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    brew_install "gum" "gum"
+    # Normally never reached: scripts/setup.sh installs Homebrew and gum first.
+    # Uses the same Homebrew install as setup.sh when this script runs on its own.
+    install_homebrew && brew_install "gum" "gum"
 fi
 
 main_interactive

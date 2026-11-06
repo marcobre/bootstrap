@@ -26,6 +26,7 @@ ensure_brew_in_path() {
 }
 
 # Install Homebrew unattended (if missing) and make it usable in this session.
+# scripts/setup.sh calls this once at the start; later steps use brew_prepare.
 install_homebrew() {
     if ensure_brew_in_path; then
         print_success "Homebrew (already installed)"
@@ -38,7 +39,28 @@ install_homebrew() {
         "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     ensure_brew_in_path
-    print_result $? "Homebrew"
+    print_result $? "Homebrew" || return 1
+
+    # The installer already ran `brew update`, so brew_prepare can skip it this run.
+    # (Not named HOMEBREW_*: brew reads those variables itself.)
+    DOTFILES_BREW_FRESH_INSTALL=1
+}
+
+# Make sure Homebrew is ready before installing packages. Normally Homebrew was
+# already installed by scripts/setup.sh, so this only refreshes PATH and updates.
+# It installs Homebrew itself only when a script runs on its own.
+brew_prepare() {
+    if ! ensure_brew_in_path; then
+        install_homebrew || return 1
+    fi
+
+    if [ -n "${DOTFILES_BREW_FRESH_INSTALL:-}" ]; then
+        print_success "Homebrew (installed in this run, already up to date)"
+        return 0
+    fi
+
+    brew_update
+    brew_upgrade
 }
 
 brew_install() {
@@ -117,6 +139,7 @@ BREW_TRUSTED_TAPS=(
     "teamookla/speedtest"     # speedtest
     "nikitabobko/tap"         # aerospace
     "asmvik/formulae"         # yabai, skhd (formerly koekeishiya/formulae)
+    "felixkratz/formulae"     # sketchybar
 )
 
 # Trust and tap a non-official tap. Trust comes first: `brew tap` evaluates every

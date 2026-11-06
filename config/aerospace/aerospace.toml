@@ -1,6 +1,6 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
-
+config-version = 2
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
@@ -33,6 +33,16 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = ['move-mouse window-lazy-center'] 
 
+# On workspace change:
+#  1. Pull scratchpad windows out of the hidden .scratchpad workspace if something focused them
+#  2. Notify Sketchybar about the workspace change and update icons
+# ';' keeps the steps independent so a Sketchybar failure doesn't block the scratchpad hook.
+# Must stay above the first [table] so TOML keeps it as a top-level key.
+exec-on-workspace-change = ['/bin/bash', '-c', '''
+aerospace-scratchpad hook pull-window "$AEROSPACE_PREV_WORKSPACE" "$AEROSPACE_FOCUSED_WORKSPACE";
+sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE="$AEROSPACE_FOCUSED_WORKSPACE" PREV_WORKSPACE="$AEROSPACE_PREV_WORKSPACE" && ~/.config/sketchybar/plugins/update_workspace_icons.sh
+''']
+
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
@@ -59,7 +69,15 @@ automatically-unhide-macos-hidden-apps = true
     outer.top =        10
     outer.right =      10
 
-# 'main' binding mode declaration
+# aerospace-scratchpad
+[exec.env-vars]
+  # Replace 'aerospace-scratchpad/install/path' with the actual path from the command above
+  # Must be absolute. Overriding this replaces AeroSpace's default
+  # '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}' fallback.
+  PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
+  AEROSPACE_SCRATCHPAD_LOGS_LEVEL = "DEBUG"
+
+#'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
@@ -93,12 +111,30 @@ automatically-unhide-macos-hidden-apps = true
     # '''
 
     # Open terminal
-    cmd-enter = 'exec-and-forget open -a Alacritty'
-    ctrl-enter = 'exec-and-forget /opt/X11/bin/xterm -e alacritty'
-    # Window actions
+    cmd-enter = 'exec-and-forget open -a Ghostty'
+    #ctrl-enter = 'exec-and-forget /opt/X11/bin/xterm -e alacritty'
+#crtl-enter = 'exec-and-forget open -a Ghostty'
+#crtl-enter = 'exec-and-forget aerospace-scratchpad --app-id com.mitchellh.ghostty --layout floating'
+    # Terminal scratchpad a la Guake
+    # Toggle the Ghostty window titled 'terminal-scratchpad'; if it doesn't exist yet,
+    # spawn a new Ghostty instance with that fixed title (--title also stops the shell
+    # from renaming the window, so the filter keeps matching).
+    # (string body must stay flush-left: AeroSpace doesn't trim leading whitespace)
+    ctrl-cmd-t = """
+exec-and-forget aerospace-scratchpad show Ghostty -F 'window-title=^terminal-scratchpad$' \
+             || open -na Ghostty --args --title=terminal-scratchpad
+"""
+
+# Toggle show/hide the window marked as 'sp-1' as scratchpad window
+# If window is not marked does nothing
+#cmd-crtl-1 = "exec-and-forget aerospace-scratchpad show Alacritty"
+
+
+
+# Window actions
     cmd-q = 'close'
     alt-f = 'fullscreen'
-    # alt-s = 'exec-and-forget screencapture -s -c'
+#  alt-s = 'exec-and-forget screencapture -s -c'
 
     # App shortcuts
     alt-b = 'exec-and-forget open -a /Applications/Brave\ Browser.app'
@@ -106,8 +142,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-i = 'exec-and-forget open -a /Applications/Ghostty.app'
     alt-s = 'exec-and-forget open -a /Applications/Slack.app'
     alt-d = 'exec-and-forget open -a /Applications/Discord.app'
-    alt-o = 'exec-and-forget open -a /Applications/OBS.app/'
-    alt-w = 'exec-and-forget open -a /Applications/Obsidian.app'
+    alt-w = 'exec-and-forget open -a /Applications/OBS.app/'
+    alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
     alt-a = 'exec-and-forget open -a /Applications/ChatGPT.app'
     alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 
@@ -216,18 +252,34 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
     if.app-id = 'com.brave.Browser'
-    run = ['layout tiling', 'move-node-to-workspace 1'] # move Slack to workspace 1
+    run = ['layout tiling', 'move-node-to-workspace 1'] # move Brave to workspace 1
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.Outlook'
+    run = ['layout tiling', 'move-node-to-workspace 2'] # move Outlook to workspace 1
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace 2' # move Slack to workspace 2
+    run = ['layout tiling', 'move-node-to-workspace 2']  # move Slack to workspace 2
+
+# Ghostty scratchpad window: float it and keep it on the current workspace.
+# Must come BEFORE the generic Ghostty rule below (first match wins).
+[[on-window-detected]]
+    if = 'test %{app-bundle-id} = com.mitchellh.ghostty && test %{window-title} = terminal-scratchpad'
+    run = 'layout floating'
+
 [[on-window-detected]]
     if.app-id ='com.mitchellh.ghostty'
-    run = ['move-node-to-workspace 2']
+    run = ['layout tiling', 'move-node-to-workspace 3']
+[[on-window-detected]]
+    if.app-id ='com.alacritty'
+    run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
     if.app-id ='md.obsidian'
-    run = ['move-node-to-workspace 3']
+    run = ['layout tiling', 'move-node-to-workspace 3'] 
 
-# Notify Sketchybar about workspace change and update icons
-#exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE && ~/.config/sketchybar/plugins/update_workspace_icons.sh']
+[[on-window-detected]]
+    if.app-id ='dev.kiro.desktop'
+    run = ['layout tiling', 'move-node-to-workspace 3']
+

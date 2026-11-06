@@ -253,9 +253,12 @@ install_fisher() {
 #==================================
 # Symlink
 #==================================
+# Link $1 to $2. `-n` treats an existing link at $2 as a file and replaces it;
+# without it, re-linking a folder (e.g. config/sketchybar) would follow the old
+# link and create a stray link *inside* the repo folder.
 symlink() {
-    mkdir -p $(dirname "$2")
-    execute "ln -sf $1 $2" "$(basename $1)    →    $2"
+    mkdir -p "$(dirname "$2")"
+    execute "ln -sfn '$1' '$2'" "$(basename "$1")    →    $2"
 }
 
 open_dir() {

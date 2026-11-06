@@ -60,10 +60,6 @@ symlink ~/.dotfiles/config/git/config ~/.config/git/config
 symlink ~/.dotfiles/config/git/ignore_global ~/.config/git/.gitignore_global
 touch ~/.config/git/.gitconfig.local
 
-# neofetch config
-print_title "Neofetch configuration"
-symlink ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
-
 # fastfetch config
 print_title "Fastfetch configuration"
 symlink ~/.dotfiles/config/fastfetch/config.conf ~/.config/fastfetch/config.conf
@@ -83,6 +79,12 @@ if [ "$os_name" == "macos" ]; then
   symlink ~/.dotfiles/config/alacritty/alacrittyMacos.toml ~/.config/alacritty/alacritty.toml
 elif [ "$os_name" == "ubuntu" ]; then
   symlink ~/.dotfiles/config/alacritty/alacrittyLinux.toml ~/.config/alacritty/alacritty.toml
+fi
+
+# sketchybar config (macOS only, skipped on all other systems)
+if [ "$os_name" == "macos" ]; then
+  print_title "SketchyBar configuration"
+  symlink ~/.dotfiles/config/sketchybar ~/.config/sketchybar
 fi
 
 # micro configuration

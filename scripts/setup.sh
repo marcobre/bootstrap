@@ -166,10 +166,7 @@ install_gum_if_needed() {
         fi
         ;;
       "macos")
-        # macOS - install Homebrew (if missing) and put it on PATH for this session.
-        # ~/.dotfiles is already downloaded at this point, so the macOS utils are available.
-        . "$HOME/.dotfiles/scripts/utils/utils_macos.sh"
-        install_homebrew || return 1
+        # macOS - Homebrew was already installed by the "Homebrew" step in main()
         if brew install gum >/dev/null 2>&1; then
           print_success "gum installed successfully"
           return 0
@@ -249,6 +246,14 @@ main() {
   # yet set up, and they will need to be downloaded.
   printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &>/dev/null ||
     download_dotfiles
+
+  # macOS: install Homebrew exactly once, here, and put it on PATH for the whole run.
+  # Everything later (gum, setup_packages.sh, the interactive menus) relies on it.
+  if [ "$(get_os)" == "macos" ]; then
+    . "$HOME/.dotfiles/scripts/utils/utils_macos.sh"
+    print_title "Homebrew"
+    install_homebrew || exit 1
+  fi
 
   # Install gum for interactive menus before starting OS-specific installation
   install_gum_if_needed
