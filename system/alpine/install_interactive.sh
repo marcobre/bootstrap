@@ -53,7 +53,7 @@ development_tools_menu() {
 cli_utilities_menu() {
     gum choose --no-limit --cursor="→ " --height=12 --header="Select CLI utilities:" \
         "File Operations (exa, bat, less)" \
-        "Search & Navigation (fzf, ripgrep, fasd)" \
+        "Search & Navigation (fzf, zoxide, ripgrep, fasd)" \
         "System Monitoring (htop)" \
         "System Information (neofetch, tldr)" \
         "All Essential CLI Tools"
@@ -114,6 +114,7 @@ install_cli_utilities() {
     
     if echo "$selected_utils" | grep -q "All Essential" || echo "$selected_utils" | grep -q "Search"; then
         apk_install "fzf" "fzf"
+        apk_install "zoxide" "zoxide"
         apk_install "ripgrep" "ripgrep"
         apk_install "fasd" "fasd"
     fi

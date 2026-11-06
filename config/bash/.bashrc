@@ -70,3 +70,6 @@ starship_precmd_user_func="set_win_title"
 
 # Source starship
 eval "$(starship init bash)"
+
+# Setup zoxide (keep at the end): replaces `cd` with zoxide, plus `cdi` for fzf selection
+command -v zoxide &>/dev/null && eval "$(zoxide init --cmd cd bash)"

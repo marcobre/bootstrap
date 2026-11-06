@@ -73,6 +73,7 @@ apt_install "tre-command" "tre-command"
 apt_install "fasd" "fasd"
 apt_install "fd-find" "fd-find"
 apt_install "fzf" "fzf"
+apt_install "zoxide" "zoxide"
 apt_install "delta" "delta"
 apt_install "ripgrep" "ripgrep"
 

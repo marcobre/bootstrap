@@ -80,6 +80,9 @@ source "$HOME/.config/bash/functions.bash"
 export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init zsh)"
 
+# Setup zoxide (keep near the end): replaces `cd` with zoxide, plus `cdi` for fzf selection
+command -v zoxide &>/dev/null && eval "$(zoxide init --cmd cd zsh)"
+
 # Reload zsh sessions
 function sreload() {
     source "$HOME/.zshrc"

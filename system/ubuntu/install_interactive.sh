@@ -99,6 +99,7 @@ cli_utilities_menu() {
         "eza (better ls)" \
         "bat (better cat)" \
         "fzf (fuzzy finder)" \
+        "zoxide (smarter cd)" \
         "ripgrep (better grep)" \
         "fd-find (better find)" \
         "tree & tre-command" \
@@ -240,6 +241,7 @@ install_cli_utilities() {
     echo "$selected_utils" | grep -q "eza" && apt_install "eza" "eza"
     echo "$selected_utils" | grep -q "bat" && apt_install "bat" "bat"
     echo "$selected_utils" | grep -q "fzf" && apt_install "fzf" "fzf"
+    echo "$selected_utils" | grep -q "zoxide" && apt_install "zoxide" "zoxide"
     echo "$selected_utils" | grep -q "ripgrep" && apt_install "ripgrep" "ripgrep"
     echo "$selected_utils" | grep -q "fd-find" && apt_install "fd-find" "fd-find"
     echo "$selected_utils" | grep -q "tree" && { apt_install "tree" "tree"; apt_install "tre-command" "tre-command"; }
@@ -378,7 +380,7 @@ main_interactive() {
                     install_package_management
                     install_wm_setup
                     install_development_tools "Git & Git LFS Build Essential Python3 Cargo (Rust) GCC Compiler Neovim tmux + TPM LazyGit"
-                    install_cli_utilities "eza (better ls) bat (better cat) fzf (fuzzy finder) ripgrep (better grep) fd-find (better find) tree & tre-command htop (system monitor) httpie (HTTP client) prettyping & mtr tldr (quick help) neofetch (system info) ranger & mc (file managers) fasd (quick navigation)"
+                    install_cli_utilities "eza (better ls) bat (better cat) fzf (fuzzy finder) zoxide (smarter cd) ripgrep (better grep) fd-find (better find) tree & tre-command htop (system monitor) httpie (HTTP client) prettyping & mtr tldr (quick help) neofetch (system info) ranger & mc (file managers) fasd (quick navigation)"
                     install_gui_applications "GNOME Tweaks & Extensions Alacritty Terminal Caffeine Firefox (Flatpak) Spotify (Flatpak) VLC Media Player (Flatpak) Image Optimizer (Flatpak) HEIF Support"
                     install_selected_fonts "All Fonts"
                     install_shell_config

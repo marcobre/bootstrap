@@ -34,3 +34,8 @@ end
 
 # Source starship
 starship init fish | source
+
+# Setup zoxide (keep at the end): replaces `cd` with zoxide, plus `cdi` for fzf selection
+if type -q zoxide
+    zoxide init --cmd cd fish | source
+end

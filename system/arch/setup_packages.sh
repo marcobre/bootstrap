@@ -71,6 +71,7 @@ pacman_install "eza" "eza"
 pacman_install "bat" "bat"
 pacman_install "fasd" "fasd"
 pacman_install "fzf" "fzf"
+pacman_install "zoxide" "zoxide"
 pacman_install "ripgrep" "ripgrep"
 
 pacman_install "gum" "gum"

@@ -69,7 +69,7 @@ development_tools_menu() {
 cli_utilities_menu() {
     gum choose --no-limit --cursor="→ " --height=18 --header="Select CLI utilities:" \
         "File Operations (eza, bat, tree, tre)" \
-        "Search & Navigation (fd, fzf, ripgrep)" \
+        "Search & Navigation (fd, fzf, zoxide, ripgrep)" \
         "System Monitoring (htop, pidof, mtr)" \
         "Network Tools (prettyping, speedtest)" \
         "File Managers (ranger, midnight-commander)" \
@@ -209,6 +209,7 @@ install_cli_utilities() {
     echo "$selected_utils" | grep -q "Search" && {
         brew_install "fd" "fd"
         brew_install "fzf" "fzf"
+        brew_install "zoxide" "zoxide"
         brew_install "ripgrep" "ripgrep"
     }
     

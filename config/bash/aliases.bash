@@ -59,7 +59,7 @@ alias hc="history -c"    # clear history
 alias hg="history | rg " # +command
 
 # move to Second Brain
-alias sb="cd ~/Syncthing/Obsidian/ && ls -a"
+alias sb="cd ~/Sync/Obsidian/ && ls -a"
 
 # Neovim config aliases
 alias nv="nvim-lazy"

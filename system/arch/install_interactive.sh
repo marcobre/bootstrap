@@ -57,7 +57,7 @@ development_tools_menu() {
 cli_utilities_menu() {
     gum choose --no-limit --cursor="→ " --height=15 --header="Select CLI utilities:" \
         "File Operations (eza, bat)" \
-        "Search & Navigation (fzf, ripgrep, fasd)" \
+        "Search & Navigation (fzf, zoxide, ripgrep, fasd)" \
         "System Monitoring (htop)" \
         "Network Tools (httpie, prettyping, mtr)" \
         "Terminal Enhancements (tmux, less, gum)" \
@@ -223,6 +223,7 @@ install_cli_utilities() {
     
     echo "$selected_utils" | grep -q "Search" && {
         pacman_install "fzf" "fzf"
+        pacman_install "zoxide" "zoxide"
         pacman_install "ripgrep" "ripgrep"
         pacman_install "fasd" "fasd"
     }

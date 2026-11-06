@@ -37,6 +37,7 @@ apk_install "exa" "exa"
 apk_install "bat" "bat"
 apk_install "fasd" "fasd"
 apk_install "fzf" "fzf"
+apk_install "zoxide" "zoxide"
 apk_install "ripgrep" "ripgrep"
 
 apk_install "htop" "htop"
