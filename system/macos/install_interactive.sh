@@ -83,7 +83,7 @@ cli_utilities_menu() {
 gui_applications_menu() {
     gum choose --no-limit --cursor="→ " --height=20 --header="Select GUI applications (Homebrew Casks):" \
         "Web Browsers (Brave Browser)" \
-        "Development Tools (VS Code, Fork)" \
+        "Development Tools (VS Code)" \
         "Terminals (Ghostty)" \
         "System Tools (Karabiner-Elements)" \
         "Security (GPG Suite, Keybase)" \
@@ -259,10 +259,7 @@ install_gui_applications() {
     print_section "Installing GUI Applications (Casks)"
     
     echo "$selected_apps" | grep -q "Web Browsers" && brew_install "Brave Browser" "brave-browser" "--cask"
-    echo "$selected_apps" | grep -q "Development Tools" && {
-        brew_install "VS Code" "visual-studio-code" "--cask"
-        brew_install "Fork" "fork" "--cask"
-    }
+    echo "$selected_apps" | grep -q "Development Tools" && brew_install "VS Code" "visual-studio-code" "--cask"
     # Alacritty cask disabled by Homebrew (2026-09-01, fails Gatekeeper check); Ghostty replaces it on macOS
     #echo "$selected_apps" | grep -q "Terminals" && brew_install "Alacritty" "alacritty" "--cask"
     echo "$selected_apps" | grep -q "Terminals" && brew_install "Ghostty" "ghostty" "--cask"
