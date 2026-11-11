@@ -38,7 +38,7 @@ printf "\n"
 
 if answer_is_yes; then
   print_success "Adding shortcuts to dock"
-  defaults delete com.apple.dock persistent-apps &> /dev/null
+#  defaults delete com.apple.dock persistent-apps &> /dev/null
   dockutil --add "/Applications/Brave Browser.app" &>/dev/null
   dockutil --add "/Applications/WhatsApp.app" &>/dev/null
   dockutil --add "/Applications/Telegram Desktop.app" &>/dev/null
