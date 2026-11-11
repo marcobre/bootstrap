@@ -274,6 +274,14 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   - uses the undefined `$SEL_` variable
 - [ ] **`config/windows-terminal/settings.json` isn't deployed** by any script.
 
+### Colors / themes
+- [ ] **Make the repo configs use one color scheme.** kitty, Alacritty, tmux and the fish theme use
+  Horizon Dark; nvim-lazyvim falls back to LazyVim's default tokyonight. kitty tabs, cursor text and
+  the tmux status bar also mix in Catppuccin Mocha accents (`#CBA6F7`, `#1E1E2E`, `#11111B`), and the
+  macOS Alacritty background (`#1e212b`) differs from the others (`#1c1e26`).
+- [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
+  Neovim, bat, fzf, …) to one selected scheme at once.
+
 ### Unlinked configs (decide: wire up or delete)
 - [ ] **These configs exist but no script links them:** `config/sketchybar`,
   `config/alacritty/alacritty.toml`, `config/warpdev`, `config/startpage`, `config/sonar`,
