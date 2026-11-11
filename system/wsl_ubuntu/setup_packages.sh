@@ -39,6 +39,8 @@ print_title "Adding Repositories"
 apt_add_repo "Universe" "universe"
 apt_add_repo "Multiverse" "multiverse"
 apt_add_repo "Fish" "ppa:fish-shell/release-3"
+# fastfetch is only in the Ubuntu archive from 25.04; the PPA covers 22.04+ (fastfetch README)
+apt_add_repo "Fastfetch" "ppa:zhangsongcui3371/fastfetch"
 
 
 #==================================
@@ -83,7 +85,7 @@ apt_install "httpie" "httpie"
 apt_install "prettyping" "prettyping"
 
 apt_install "tldr" "tldr"
-apt_install "neofetch" "neofetch"
+apt_install "fastfetch" "fastfetch"
 
 apt_install "midnight-commander" "mc"
 apt_install "node" "nodejs"

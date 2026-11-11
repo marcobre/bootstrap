@@ -64,13 +64,9 @@ symlink ~/.dotfiles/config/git/config ~/.config/git/config
 symlink ~/.dotfiles/config/git/ignore_global ~/.config/git/ignore_global
 touch ~/.config/git/config.local
 
-# neofetch config
-print_title "Neofetch configuration"
-symlink ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
-
-# fastfatch config
-print_title "Fastfatch configuration"
-symlink ~/.dotfiles/config/fastfatch/config.conf ~/.config/fastfatch/config.conf
+# fastfetch config
+print_title "Fastfetch configuration"
+symlink ~/.dotfiles/config/fastfetch/config.conf ~/.config/fastfetch/config.conf
 
 # midnight commander theme
 print_title "Midnight Commander configuration"

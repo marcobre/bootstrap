@@ -12,8 +12,10 @@ declare DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSITORY
 # Settings
 #==================================
 declare DOTFILES_DIR="$HOME/.dotfiles"
-declare MINIMUM_MACOS_VERSION="12.0"
-declare MINIMUM_UBUNTU_VERSION="20.04"
+# macOS: Homebrew's installer supports macOS 15+ (and Apple Silicon only)
+# Ubuntu: the Ghostty PPA only builds for 24.04+
+declare MINIMUM_MACOS_VERSION="15.0"
+declare MINIMUM_UBUNTU_VERSION="24.04"
 
 #==================================
 # Helper Functions

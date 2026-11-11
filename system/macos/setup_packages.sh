@@ -33,6 +33,8 @@ brew_setup_taps
 # Brew Install
 #==================================
 print_title "Installing Brew Packages"
+
+brew_install "taproom" "taproom"
 brew_install "wget" "wget"
 brew_install "mas" "mas"
 brew_install "fd" "fd"
@@ -122,6 +124,9 @@ brew_install "WhatsApp" "whatsapp" "--cask"
 #brew_install "Cleanmymac" "cleanmymac" "--cask"
 #brew_install "Dropbox" "dropbox" "--cask"
 brew_install "FiraCode Nerd Font" "font-fira-code-nerd-font" "--cask"
+brew_install "Hack Nerd Font" "font-hack-nerd-font" "--cask"
+brew_install "LocalSend" "localsend" "--cask"
+brew_install "Bitwarden" "bitwarden" "--cask"
 brew_install "aerospace" "nikitabobko/tap/aerospace" "--cask"
 
 #==================================

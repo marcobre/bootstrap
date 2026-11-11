@@ -61,7 +61,7 @@ cli_utilities_menu() {
         "System Monitoring (htop)" \
         "Network Tools (httpie, prettyping, mtr)" \
         "Terminal Enhancements (tmux, less, gum)" \
-        "System Info (neofetch, tldr)" \
+        "System Info (fastfetch, tldr)" \
         "File Managers (ranger, mc)" \
         "Media Tools (ffmpeg)"
 }
@@ -243,7 +243,7 @@ install_cli_utilities() {
     }
     
     echo "$selected_utils" | grep -q "System Info" && {
-        pacman_install "neofetch" "neofetch"
+        pacman_install "fastfetch" "fastfetch"
         pacman_install "tldr" "tldr"
     }
     

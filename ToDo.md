@@ -120,6 +120,11 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   check looks in `scripts/`, but the file is in `scripts/utils/`.
 
 ### Ubuntu / Arch
+- [ ] **Fish PPA (`ppa:fish-shell/release-3`) has no builds for Ubuntu 25.10 or 26.04.**
+  It's added in `system/ubuntu/setup_packages.sh`, the Ubuntu interactive `setup_repositories` and
+  `system/wsl_ubuntu/setup_packages.sh`. On 25.10+ the missing Release file can make `apt update`
+  fail for the whole run. 24.04 is fine. Check whether a fish 4 PPA exists, or skip the PPA on
+  newer releases (their own `fish` package is recent).
 - [x] **Interactive installers still have their own LazyGit download.**
   `system/{ubuntu,arch,alpine}/install_interactive.sh` hardcode `x86_64` and skip checksum
   verification.
@@ -200,12 +205,26 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
 
 ## P3 — Cosmetic, stale and WIP platforms
 
+### README / docs
+- [x] **README WSL one-liner used `marcobre/.dotfiles`** (404). *Fixed: `marcobre/bootstrap`.*
+- [ ] **README Post-Installation adds the wrong git remote** (`git@github.com:marcobre/.dotfiles.git`,
+  a different, existing repo; `git reset --hard origin/main` would replace the dotfiles with it) and
+  is missing `cd ~/.dotfiles`. Deferred: revisit when this repo becomes the source for all configs
+  (instead of the `config/` folder).
+- [ ] **README feature list says there are post-install scripts for `git`, `ssh` and `gpg`.** ssh and
+  gpg are disabled in `setup.sh` (only reachable via the `dotfiles` menu), and `generate_gpg.sh` is
+  broken (see Shared). Fix the scripts or reword the feature.
+- [ ] **README has no Alpine install section**, although `setup.sh` supports Alpine.
+- [ ] **README screenshot caption says "spaceship prompt"** (the setup uses Starship) and mentions
+  neofetch. Replace together with the new screenshot.
+- [ ] **`INTERACTIVE_INSTALL.md` is stale** (wrong claims, old package names). Draft prepared.
+
 ### Stale URLs / names
-- [ ] **README WSL one-liner and Post-Installation `git remote add` use `marcobre/.dotfiles`.**
 - [ ] **`scripts/settings.yml` is unused and still points to excalith.** Remove it or implement it.
 - [ ] **`config/fish/lite.config.fish` points to excalith.**
 - [ ] **Labels say `pyhton3`:** ubuntu, arch, alpine and wsl `setup_packages.sh`.
-- [ ] **`verify_os` minimum Ubuntu is `20.04`,** but the README says 22.04+.
+- [x] **`verify_os` minimum Ubuntu is `20.04`,** but the README says 22.04+.
+  *Fixed: `setup.sh` and README now both require macOS 15 and Ubuntu 24.04.*
 
 ### Alpine
 - [x] **`system/alpine/setup_shell.sh` calls `apt_install`,** which is undefined on Alpine,

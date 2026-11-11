@@ -120,7 +120,7 @@ automatically-unhide-macos-hidden-apps = true
     # spawn a new Ghostty instance with that fixed title (--title also stops the shell
     # from renaming the window, so the filter keeps matching).
     # (string body must stay flush-left: AeroSpace doesn't trim leading whitespace)
-    ctrl-cmd-t = """
+    cmd-shift-enter = """
 exec-and-forget aerospace-scratchpad show Ghostty -F 'window-title=^terminal-scratchpad$' \
              || open -na Ghostty --args --title=terminal-scratchpad
 """

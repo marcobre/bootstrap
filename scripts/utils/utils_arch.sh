@@ -122,7 +122,8 @@ extension_install()
 
     EXTENSION_ID=$(curl -s --silent $2 | grep -oP 'data-uuid="\K[^"]+')
     VERSION_TAG=$(curl -Lfs --silent "https://extensions.gnome.org/extension-query/?search=$EXTENSION_ID" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
-    wget -qO ${EXTENSION_ID}.zip "https://extensions.gnome.org/download-extension/${EXTENSION_ID}.shell-extension.zip?version_tag=$VERSION_TAG"
+    # curl, not wget: curl is always on Arch/CachyOS (pacman depends on it), wget may not be yet
+    curl -fsSL -o "${EXTENSION_ID}.zip" "https://extensions.gnome.org/download-extension/${EXTENSION_ID}.shell-extension.zip?version_tag=$VERSION_TAG"
     gnome-extensions install --force ${EXTENSION_ID}.zip  &> /dev/null
     if ! gnome-extensions list | grep --quiet ${EXTENSION_ID}; then
         busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${EXTENSION_ID}

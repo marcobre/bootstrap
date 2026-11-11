@@ -7,7 +7,7 @@
 ## Features
 
 - Fully customizable installation depending on OS
-- The [installer](scripts/) is seperated from configs and install scripts
+- The [installer](scripts/) is separated from configs and install scripts
 - A [dotfiles manager](bin/dotfiles/main.sh) for post-install maintenance
 - Has post-install scripts for configuring `git`, `ssh` and `gpg`
 - Requires git commands for syncing without fancy dotfile managers
@@ -24,22 +24,22 @@
 
 Depending on your OS, copy and paste the code to start installation. This code will download my dotfiles and start setup depending on your OS.
 
-### MacOS 12.0 Monterey and above  (WIP)
+### macOS 15 Sequoia and above, Apple Silicon
 
 ```bash
-bash -c "$(curl -LsS https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
+bash -c "$(curl -LsS https://raw.githubusercontent.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
-### Ubuntu 22.04 Jammy Jellyfish (and above)
+### Ubuntu 24.04 Noble Numbat (and above)
 
 ```bash
-bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
+bash -c "$(wget --no-cache -qO - https://raw.githubusercontent.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
 ### Arch Linux & CachyOS
 
 ```bash
-bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/scripts/setup.sh)"
+bash -c "$(curl -LsS https://raw.githubusercontent.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
 ### Lite Version (WIP)
@@ -47,10 +47,10 @@ bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/bootstrap/main/
 This is a minimal installation for Termux app on Android.
 
 ```bash
-bash -c "$(curl -LsS https://raw.github.com/marcobre/bootstrap/main/system/lite/install.sh)"
+bash -c "$(curl -LsS https://raw.githubusercontent.com/marcobre/bootstrap/main/system/lite/install.sh)"
 ```
 
-### Windows (10 and above) WIP
+### Windows 10 (version 1809) and above (WIP)
 
 #### Windows
 
@@ -82,7 +82,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
 To install packages for WSL Ubuntu, run the following command on WSL terminal.
 
 ```bash
-bash -c "$(wget --no-cache -qO - https://raw.github.com/marcobre/.dotfiles/main/scripts/setup.sh)"
+bash -c "$(wget --no-cache -qO - https://raw.githubusercontent.com/marcobre/bootstrap/main/scripts/setup.sh)"
 ```
 
 ## Post-Installation
@@ -125,7 +125,7 @@ If you want to create your own dotfiles based on my configuration, you should
 This dotfiles repository is a modified copy of the great [Excalith dotfiles](https://github.com/excalith/.dotfiles) which is heavily ~~knocked-off~~ inspired version of beautiful [Cătălin’s dotfiles](https://github.com/alrra/dotfiles). You should probably check it out !
 
 I have modified this dotfiles with my own taste of config files, extended the scripts and tested them on the current Ubuntu 24.04 LTS version, Arch, CachyOS and OSX.
-The other OS specific scripts will be modified in the new future and have not been tested yet.
+The other OS specific scripts will be modified in the near future and have not been tested yet.
 Big Thanks to Excalith for providing me with a solid framework supporting the Operating Systems i am actively using.
 
 ## License

@@ -75,7 +75,7 @@ cli_utilities_menu() {
         "File Managers (ranger, midnight-commander)" \
         "Terminal Enhancements (tmux, less, gum)" \
         "Media Tools (ffmpeg, viu)" \
-        "System Info (neofetch)" \
+        "System Info (fastfetch)" \
         "Entertainment (spotify-tui, cmatrix, nudoku)" \
         "Security (no-more-secrets)"
 }
@@ -240,7 +240,7 @@ install_cli_utilities() {
         brew_install "viu" "viu"
     }
     
-    echo "$selected_utils" | grep -q "System Info" && brew_install "neofetch" "neofetch"
+    echo "$selected_utils" | grep -q "System Info" && brew_install "fastfetch" "fastfetch"
     
     echo "$selected_utils" | grep -q "Entertainment" && {
         brew_install "spotify-tui" "spotify-tui"

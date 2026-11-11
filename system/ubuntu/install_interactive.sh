@@ -107,7 +107,7 @@ cli_utilities_menu() {
         "httpie (HTTP client)" \
         "prettyping & mtr" \
         "tldr (quick help)" \
-        "neofetch (system info)" \
+        "fastfetch (system info)" \
         "ranger & mc (file managers)" \
         "fasd (quick navigation)"
 }
@@ -185,6 +185,8 @@ setup_repositories() {
     apt_add_repo "Multiverse" "multiverse" 
     apt_add_repo "Fish" "ppa:fish-shell/release-3"
     apt_add_repo "Alacritty" "ppa:aslatter/ppa"
+    # fastfetch is only in the Ubuntu archive from 25.04; the PPA covers 22.04+ (fastfetch README)
+    apt_add_repo "Fastfetch" "ppa:zhangsongcui3371/fastfetch"
 }
 
 install_development_tools() {
@@ -249,7 +251,11 @@ install_cli_utilities() {
     echo "$selected_utils" | grep -q "httpie" && apt_install "httpie" "httpie"
     echo "$selected_utils" | grep -q "prettyping" && { apt_install "prettyping" "prettyping"; apt_install "mtr" "mtr"; }
     echo "$selected_utils" | grep -q "tldr" && apt_install "tldr" "tldr"
-    echo "$selected_utils" | grep -q "neofetch" && apt_install "neofetch" "neofetch"
+    # fastfetch needs its PPA on Ubuntu < 25.04; this menu can run before "Package Management Setup"
+    echo "$selected_utils" | grep -q "fastfetch" && {
+        apt_add_repo "Fastfetch" "ppa:zhangsongcui3371/fastfetch" && apt_update
+        apt_install "fastfetch" "fastfetch"
+    }
     echo "$selected_utils" | grep -q "ranger" && { apt_install "ranger" "ranger"; apt_install "midnight-commander" "mc"; }
     echo "$selected_utils" | grep -q "fasd" && apt_install "fasd" "fasd"
     
@@ -380,7 +386,7 @@ main_interactive() {
                     install_package_management
                     install_wm_setup
                     install_development_tools "Git & Git LFS Build Essential Python3 Cargo (Rust) GCC Compiler Neovim tmux + TPM LazyGit"
-                    install_cli_utilities "eza (better ls) bat (better cat) fzf (fuzzy finder) zoxide (smarter cd) ripgrep (better grep) fd-find (better find) tree & tre-command htop (system monitor) httpie (HTTP client) prettyping & mtr tldr (quick help) neofetch (system info) ranger & mc (file managers) fasd (quick navigation)"
+                    install_cli_utilities "eza (better ls) bat (better cat) fzf (fuzzy finder) zoxide (smarter cd) ripgrep (better grep) fd-find (better find) tree & tre-command htop (system monitor) httpie (HTTP client) prettyping & mtr tldr (quick help) fastfetch (system info) ranger & mc (file managers) fasd (quick navigation)"
                     install_gui_applications "GNOME Tweaks & Extensions Alacritty Terminal Caffeine Firefox (Flatpak) Spotify (Flatpak) VLC Media Player (Flatpak) Image Optimizer (Flatpak) HEIF Support"
                     install_selected_fonts "All Fonts"
                     install_shell_config

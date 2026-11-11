@@ -55,7 +55,7 @@ cli_utilities_menu() {
         "File Operations (exa, bat, less)" \
         "Search & Navigation (fzf, zoxide, ripgrep, fasd)" \
         "System Monitoring (htop)" \
-        "System Information (neofetch, tldr)" \
+        "System Information (fastfetch, tldr)" \
         "All Essential CLI Tools"
 }
 
@@ -124,7 +124,7 @@ install_cli_utilities() {
     fi
     
     if echo "$selected_utils" | grep -q "All Essential" || echo "$selected_utils" | grep -q "System Information"; then
-        apk_install "neofetch" "neofetch"
+        apk_install "fastfetch" "fastfetch"
         apk_install "tldr" "tldr"
     fi
 }

@@ -81,7 +81,7 @@ pacman_install "prettyping" "prettyping"
 pacman_install "mtr" "mtr"
 
 pacman_install "tldr" "tldr"
-pacman_install "neofetch" "neofetch"
+pacman_install "fastfetch" "fastfetch"
 
 pacman_install "ranger" "ranger"
 pacman_install "midnight-commander" "mc"

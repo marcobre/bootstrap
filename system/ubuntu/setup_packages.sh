@@ -52,6 +52,8 @@ apt_add_repo "Fish" "ppa:fish-shell/release-3"
 apt_add_repo "OBS Studio" "ppa:obsproject/obs-studio"
 apt_add_repo "Alacritty" "ppa:aslatter/ppa"
 apt_add_repo "Ghostty" "ppa:mkasberg/ghostty-ubuntu"
+# fastfetch is only in the Ubuntu archive from 25.04; the PPA covers 22.04+ (fastfetch README)
+apt_add_repo "Fastfetch" "ppa:zhangsongcui3371/fastfetch"
 
 #==================================
 # Add sources to APT
@@ -120,7 +122,6 @@ apt_install "prettyping" "prettyping"
 apt_install "mtr" "mtr"
 
 apt_install "tldr" "tldr"
-apt_install "neofetch" "neofetch"
 apt_install "fastfetch" "fastfetch"
 
 apt_install "ranger" "ranger"

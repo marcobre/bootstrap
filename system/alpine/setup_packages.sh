@@ -45,7 +45,7 @@ apk_install "httpie" "httpie"
 apk_install "prettyping" "prettyping"
 
 apk_install "tldr" "tldr"
-apk_install "neofetch" "neofetch"
+apk_install "fastfetch" "fastfetch"
 
 apk_install "neovim" "neovim"
 
