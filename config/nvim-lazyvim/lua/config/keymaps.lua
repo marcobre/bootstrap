@@ -19,6 +19,10 @@ wk.add({
     --    { "<leader>ms", group = "[P]spell" },
     { "<leader>msl", group = "[P]language" },
   },
+  {
+    mode = { "n", "x" },
+    { "<leader>A", group = "AI/Sidekick" },
+  },
 })
 
 vim.keymap.set(
@@ -35,20 +39,31 @@ vim.keymap.set(
   default_opts
 )
 
--- Check if Marksman LSP is running, start it if not, otherwise restart lamw26wmal
-vim.keymap.set("n", "<leader>mr", function()
-  local is_running = false
-  for _, client in ipairs(vim.lsp.get_clients()) do
-    if client.name == "marksman" then
-      is_running = true
-      break
+-- Markdown Oxide: daily notes
+vim.keymap.set("n", "<leader>md", function()
+  vim.lsp.buf.execute_command({ command = "jump", arguments = { "today" } })
+end, { desc = "Daily note [d]today" })
+vim.keymap.set("n", "<leader>mD", function()
+  vim.ui.input({ prompt = "Daily note (e.g. tomorrow, next monday, -3): " }, function(input)
+    if input then
+      vim.lsp.buf.execute_command({ command = "jump", arguments = { input } })
     end
-  end
-  if is_running then
-    vim.cmd("LspRestart marksman")
-    vim.notify("Marksman LSP restarted", vim.log.levels.INFO)
+  end)
+end, { desc = "[D]aily note (prompt)" })
+
+-- Markdown Oxide: backlinks / references
+vim.keymap.set("n", "<leader>mb", function()
+  vim.lsp.buf.references()
+end, { desc = "[B]acklinks (references)" })
+
+-- Markdown Oxide: restart LSP
+vim.keymap.set("n", "<leader>mr", function()
+  local clients = vim.lsp.get_clients({ name = "markdown_oxide" })
+  if #clients > 0 then
+    vim.cmd("LspRestart markdown_oxide")
+    vim.notify("markdown_oxide LSP restarted", vim.log.levels.INFO)
   else
-    vim.cmd("LspStart marksman")
-    vim.notify("Marksman LSP started", vim.log.levels.INFO)
+    vim.cmd("LspStart markdown_oxide")
+    vim.notify("markdown_oxide LSP started", vim.log.levels.INFO)
   end
-end, { desc = "[R]estart Marksman LSP" })
+end, { desc = "[R]estart markdown_oxide LSP" })

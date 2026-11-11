@@ -54,6 +54,10 @@ touch ~/.zsh.local
 print_title "Starship configuration"
 symlink ~/.dotfiles/config/starship/starship.toml ~/.config/starship.toml
 
+# starship config
+print_title "Ghostty configuration"
+symlink ~/.dotfiles/config/ghostty ~/.config/ghostty
+
 # git config
 print_title "Git configuration"
 symlink ~/.dotfiles/config/git/config ~/.config/git/config

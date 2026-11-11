@@ -86,6 +86,7 @@ brew_install "SketchyBar" "felixkratz/formulae/sketchybar"
 brew_install "cmatrix" "cmatrix"
 #brew_install "nudoku" "nudoku"
 brew_install "Emacs Plus" "emacs-plus"
+brew_install "Markdown-Oxide" "markdown-oxide"
 
 #==================================
 # Brew Cask
