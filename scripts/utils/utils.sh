@@ -253,11 +253,23 @@ install_fisher() {
 #==================================
 # Symlink
 #==================================
+# Move a real (non-link) file or folder out of the way, so a link can take its place.
+# Keeps the old content as "<name>.bak" (or "<name>.bak.<timestamp>" if that exists).
+backup_existing() {
+    local target="$1" backup
+    [ -e "$target" ] && [ ! -L "$target" ] || return 0
+    backup="$target.bak"
+    [ -e "$backup" ] && backup="$target.bak.$(date +%Y%m%d%H%M%S)"
+    mv "$target" "$backup" && print_warning "Moved existing $(basename "$target") to $backup"
+}
+
 # Link $1 to $2. `-n` treats an existing link at $2 as a file and replaces it;
 # without it, re-linking a folder (e.g. config/sketchybar) would follow the old
 # link and create a stray link *inside* the repo folder.
+# A real file or folder at $2 is moved to a backup first (see backup_existing).
 symlink() {
     mkdir -p "$(dirname "$2")"
+    backup_existing "$2"
     execute "ln -sfn '$1' '$2'" "$(basename "$1")    →    $2"
 }
 

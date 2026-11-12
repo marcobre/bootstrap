@@ -54,9 +54,14 @@ touch ~/.zsh.local
 print_title "Starship configuration"
 symlink ~/.dotfiles/config/starship/starship.toml ~/.config/starship.toml
 
-# starship config
+# ghostty config
 print_title "Ghostty configuration"
 symlink ~/.dotfiles/config/ghostty ~/.config/ghostty
+if [ "$os_name" == "macos" ]; then
+  # macOS loads this file AFTER ~/.config/ghostty/config, so its values would win
+  backup_existing "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+  backup_existing "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+fi
 
 # git config
 print_title "Git configuration"

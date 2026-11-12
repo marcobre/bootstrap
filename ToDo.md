@@ -80,6 +80,12 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
 - [ ] **`HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"` in `.zshrc` / `.bashrc` is dead.**
   Homebrew removed `--no-quarantine`, so the line does nothing anymore. Remove it.
 
+- [x] **Ghostty ignored the repo config on a fresh Mac** (title bar visible, default theme).
+  *Fixed: `symlink()` moves a real file/folder at the target to `.bak` first (before, a real
+  `~/.config/ghostty` folder got the link nested inside it); on macOS, an existing
+  `~/Library/Application Support/com.mitchellh.ghostty/config(.ghostty)` is moved aside too,
+  because macOS loads it after the XDG config and it would override it.*
+
 ### Shared (`system/symlink.sh`, `scripts/utils/*`)
 - [x] **Re-runs nest symlinks inside the repo.** *Fixed: `symlink()` uses `ln -sfn`.* `symlink` uses `ln -sf`, so linking the
   directories `nvim-lazyvim/` and `nvim-marcom/` again creates
