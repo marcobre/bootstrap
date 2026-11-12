@@ -66,6 +66,9 @@ print_title "UI / UX Settings"
 # sudo scutil --set LocalHostName $compname
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $compname
 
+# set the wallpaper
+execute "osascript -e 'tell application \"System Events\" to tell every desktop to set picture to \"$HOME/.dotfiles/assets/wallpaper/greenhouse.png\"'" "Set wallpaper"
+
 # Disable the sound effects on boot
 execute "sudo nvram SystemAudioVolume=' '" "Disable sound on boot"
 
