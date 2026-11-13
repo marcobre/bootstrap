@@ -2,7 +2,7 @@
  <h1 align="center">Marcom Dotfiles</h1>
 </p>
 
-![Screenshot of alacritty terminal using fish shell with spaceship prompt and tmux, displaying neofetch, nvim and custom scripts](assets/screenshots/dotfiles.png)
+![Screenshot of ghostty terminal using zsh shell with spaceship prompt, displaying fastfetch, nvim and custom scripts](assets/screenshots/dotfiles.png)
 
 ## Features
 
