@@ -295,7 +295,9 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   group purple, folder names plain bold).
   *Fixed: `config/eza/theme.yml` mirrors SilkCircuit's official lsd colors, linked to
   `~/.config/eza`; `EZA_CONFIG_DIR` is set in zsh/bash/fish (eza's default location differs on
-  macOS). Remaining by design: one date color (lsd colors by age), eza's `@` xattr marker.*
+  macOS). File names are colored by type for readability (folders `#00d9ff`, executables
+  `#00ff00`, links `#ff00ff`, files white). Remaining by design: one date color (lsd colors by
+  age), eza's `@` xattr marker.*
 - [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
   Neovim, bat, fzf, …) to one selected scheme at once.
 

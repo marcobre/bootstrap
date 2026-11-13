@@ -4,14 +4,14 @@
 # EZA_CONFIG_DIR (set in the zsh, bash and fish configs), because eza's default
 # location differs per OS (macOS: ~/Library/Application Support/eza).
 #
-# File names use the terminal's text color, bold for folders, links and
-# executables (like lsd without LS_COLORS).
+# File names: colored by type with SilkCircuit colors for readability
+# (folders cyan-blue, executables green, links pink, plain files white).
 
 filekinds:
   normal: {foreground: Default}
-  directory: {foreground: Default, is_bold: true}
-  symlink: {foreground: Default, is_bold: true}
-  executable: {foreground: Default, is_bold: true}
+  directory: {foreground: "#00d9ff", is_bold: true}
+  symlink: {foreground: "#ff00ff", is_bold: true}
+  executable: {foreground: "#00ff00", is_bold: true}
   pipe: {foreground: "#ffff00"}
   block_device: {foreground: "#ffff00", is_bold: true}
   char_device: {foreground: "#ffff00", is_bold: true}
