@@ -126,38 +126,44 @@ mouse = "Middle"
 
 [bell]
 animation = "EaseOutExpo"
-color = "0xfab795"
+color = "0xfef08a"
 duration = 4
 
+# Colors: Miami Wind (from the Omarchy theme by hanakin, MIT)
 [colors]
 draw_bold_text_with_bright_colors = false
 
 [colors.bright]
-black = "0x5b5858"
-blue = "0x3fc4de"
-cyan = "0x6be4e6"
-green = "0x3fdaa4"
-magenta = "0xf075b5"
-red = "0xec6a88"
-white = "0xd5d8da"
-yellow = "0xfbc3a7"
+black = "0x585b70"
+blue = "0x2563eb"
+cyan = "0x38bdf8"
+green = "0x4ade80"
+magenta = "0xec4899"
+red = "0xf43f5e"
+white = "0xa6adc8"
+yellow = "0xfde047"
 
 [colors.cursor]
-cursor = "0x29d398"
+cursor = "0xa6adc8"
+text = "0x1e1e2e"
 
 [colors.normal]
-black = "0x16161c"
-blue = "0x26bbd9"
-cyan = "0x59e1e3"
-green = "0x29d398"
-magenta = "0xee64ac"
-red = "0xe95678"
-white = "0xd5d8da"
-yellow = "0xfab795"
+black = "0x1e1e2e"
+blue = "0x818cf8"
+cyan = "0x22d3ee"
+green = "0x34d399"
+magenta = "0xf472b6"
+red = "0xf87171"
+white = "0xcdd6f4"
+yellow = "0xfef08a"
 
 [colors.primary]
-background = "0x1c1e26"
-foreground = "0xe0e0e0"
+background = "0x1e1e2e"
+foreground = "0xcdd6f4"
+
+[colors.selection]
+background = "0xf472b6"
+text = "0x1e1e2e"
 
 [cursor]
 style = "Block"

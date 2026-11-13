@@ -1,18 +1,18 @@
-# Excalith Color Palette
+# Color Palette: Miami Wind (from the Omarchy theme by hanakin, MIT)
 
 # Specials
-set -l foreground d5d8da
-set -l selection 44475a
-set -l comment 6272a4
+set -l foreground cdd6f4
+set -l selection 2c2d3e
+set -l comment 585b70
 
 # Colors
-set -l red E95678
-set -l orange F09483
-set -l yellow FAC29A
-set -l green 29d398
-set -l purple B877DB
-set -l cyan 8be9fd
-set -l pink ff79c6
+set -l red f87171
+set -l orange fdba74
+set -l yellow fef08a
+set -l green 34d399
+set -l purple 818cf8
+set -l cyan 22d3ee
+set -l pink ec4899
 
 # Syntax Highlighting Colors
 set -gx fish_color_normal $foreground

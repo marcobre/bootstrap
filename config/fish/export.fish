@@ -38,8 +38,9 @@ set -gx LESS -R
 set -gx LESS '--mouse --wheel-lines=3'
 set -gx COLUMNS 80
 
-# Setup Bat
+# Setup Bat ("ansi" uses the terminal's colors, i.e. the Miami Wind palette)
 set -gx BAT_PAGER "less -RF"
+set -gx BAT_THEME "ansi"
 
 # Editor
 set -gx EDITOR "lvim"

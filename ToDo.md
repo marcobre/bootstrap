@@ -281,10 +281,14 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
 - [ ] **`config/windows-terminal/settings.json` isn't deployed** by any script.
 
 ### Colors / themes
-- [ ] **Make the repo configs use one color scheme.** kitty, Alacritty, tmux and the fish theme use
+- [x] **Make the repo configs use one color scheme.** kitty, Alacritty, tmux and the fish theme use
   Horizon Dark; nvim-lazyvim falls back to LazyVim's default tokyonight. kitty tabs, cursor text and
   the tmux status bar also mix in Catppuccin Mocha accents (`#CBA6F7`, `#1E1E2E`, `#11111B`), and the
   macOS Alacritty background (`#1e212b`) differs from the others (`#1c1e26`).
+  *Fixed: all shipped configs use **Miami Wind** (Omarchy theme by hanakin, MIT): Ghostty
+  (`themes/miami-wind`), kitty, Alacritty (Linux), tmux, fish, Neovim (catppuccin with Miami accent
+  overrides, lazyvim + marcom), micro, SketchyBar, bat (`BAT_THEME=ansi`). Unlinked legacy configs
+  (macOS/Windows Alacritty, hyper, tabby, warpdev, windows-terminal, termux, lvim) left unchanged.*
 - [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
   Neovim, bat, fzf, …) to one selected scheme at once.
 
