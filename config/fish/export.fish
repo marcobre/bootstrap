@@ -42,6 +42,9 @@ set -gx COLUMNS 80
 set -gx BAT_PAGER "less -RF"
 set -gx BAT_THEME "ansi"
 
+# eza theme (SilkCircuit, config/eza/theme.yml); same path on every OS
+set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
+
 # Editor
 set -gx EDITOR "lvim"
 

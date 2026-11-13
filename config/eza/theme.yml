@@ -1,0 +1,88 @@
+# eza theme: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT)
+# Mirrors SilkCircuit's official lsd colors (extras/lsd/silkcircuit-glow.yaml),
+# so `ls`, `ll`, `la` and `l` look like lsd with SilkCircuit. Found via
+# EZA_CONFIG_DIR (set in the zsh, bash and fish configs), because eza's default
+# location differs per OS (macOS: ~/Library/Application Support/eza).
+#
+# File names use the terminal's text color, bold for folders, links and
+# executables (like lsd without LS_COLORS).
+
+filekinds:
+  normal: {foreground: Default}
+  directory: {foreground: Default, is_bold: true}
+  symlink: {foreground: Default, is_bold: true}
+  executable: {foreground: Default, is_bold: true}
+  pipe: {foreground: "#ffff00"}
+  block_device: {foreground: "#ffff00", is_bold: true}
+  char_device: {foreground: "#ffff00", is_bold: true}
+  socket: {foreground: "#ff00ff", is_bold: true}
+  special: {foreground: "#ffff00"}
+  mount_point: {foreground: "#00d9ff", is_bold: true}
+
+perms:
+  user_read: {foreground: "#d633ff", is_bold: false}
+  user_write: {foreground: "#ff00ff", is_bold: false}
+  user_execute_file: {foreground: "#00ffff", is_bold: false}
+  user_execute_other: {foreground: "#00ffff", is_bold: false}
+  group_read: {foreground: "#d633ff", is_bold: false}
+  group_write: {foreground: "#ff00ff", is_bold: false}
+  group_execute: {foreground: "#00ffff", is_bold: false}
+  other_read: {foreground: "#d633ff", is_bold: false}
+  other_write: {foreground: "#ff00ff", is_bold: false}
+  other_execute: {foreground: "#00ffff", is_bold: false}
+  special_user_file: {foreground: "#00d9ff", is_bold: false}
+  special_other: {foreground: "#00d9ff", is_bold: false}
+  attribute: {foreground: "#00ff00", is_bold: false}
+
+size:
+  major: {foreground: "#818181"}
+  minor: {foreground: "#818181"}
+  number_byte: {foreground: "#00ff00"}
+  number_kilo: {foreground: "#00ff00"}
+  number_mega: {foreground: "#ffff00"}
+  number_giga: {foreground: "#ff66ff"}
+  number_huge: {foreground: "#ff66ff"}
+  unit_byte: {foreground: "#00ff00"}
+  unit_kilo: {foreground: "#00ff00"}
+  unit_mega: {foreground: "#ffff00"}
+  unit_giga: {foreground: "#ff66ff"}
+  unit_huge: {foreground: "#ff66ff"}
+
+users:
+  user_you: {foreground: "#00ffff", is_bold: false}
+  user_root: {foreground: "#00ffff", is_bold: false}
+  user_other: {foreground: "#00ffff", is_bold: false}
+  group_yours: {foreground: "#cc66ff", is_bold: false}
+  group_root: {foreground: "#cc66ff", is_bold: false}
+  group_other: {foreground: "#cc66ff", is_bold: false}
+
+links:
+  normal: {foreground: "#00ffff", is_bold: false}
+  multi_link_file: {foreground: "#00ffff", is_bold: false}
+
+git:
+  new: {foreground: "#00ff00"}
+  modified: {foreground: "#ffff00"}
+  deleted: {foreground: "#ff2244"}
+  renamed: {foreground: "#00ffff"}
+  typechange: {foreground: "#ffff00"}
+  ignored: {foreground: "#5a5a5a"}
+  conflicted: {foreground: "#ff2244"}
+
+git_repo:
+  branch_main: {foreground: "#00ffff"}
+  branch_other: {foreground: "#ff00ff"}
+  git_clean: {foreground: "#00ff00"}
+  git_dirty: {foreground: "#ffff00"}
+
+punctuation: {foreground: "#ff2244", is_bold: false}
+date: {foreground: "#cc66ff"}
+inode: {foreground: "#cc66ff"}
+blocks: {foreground: "#cc66ff"}
+octal: {foreground: "#cc66ff"}
+header: {foreground: Default, is_underline: true}
+flags: {foreground: "#818181"}
+symlink_path: {foreground: Default, is_bold: true}
+control_char: {foreground: "#ff2244"}
+broken_symlink: {foreground: "#ff2244"}
+broken_path_overlay: {is_underline: true}

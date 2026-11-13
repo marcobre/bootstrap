@@ -290,10 +290,12 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   layout), fish, Neovim (official `hyperb1iss/silkcircuit` plugin, `variant = "glow"`, lazyvim +
   marcom incl. marcom's lualine), micro, SketchyBar, bat (`BAT_THEME=ansi`). Unlinked legacy configs
   (macOS/Windows Alacritty, hyper, tabby, warpdev, windows-terminal, termux, lvim) left unchanged.*
-- [ ] **File listings (`ls`/`ll`/`la`/`l`) use eza's default column layout** with the SilkCircuit
+- [x] **File listings (`ls`/`ll`/`la`/`l`) use eza's default column layout** with the SilkCircuit
   terminal palette (owner yellow, folders blue, …), not SilkCircuit's `lsd` mapping (owner cyan,
-  group purple, folder names plain bold). Kept simple on purpose; if needed later: an eza
-  `theme.yml` (needs `EZA_CONFIG_DIR`, because eza's default location differs on macOS) or `lsd`.
+  group purple, folder names plain bold).
+  *Fixed: `config/eza/theme.yml` mirrors SilkCircuit's official lsd colors, linked to
+  `~/.config/eza`; `EZA_CONFIG_DIR` is set in zsh/bash/fish (eza's default location differs on
+  macOS). Remaining by design: one date color (lsd colors by age), eza's `@` xattr marker.*
 - [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
   Neovim, bat, fzf, …) to one selected scheme at once.
 

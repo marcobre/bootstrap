@@ -54,6 +54,10 @@ touch ~/.zsh.local
 print_title "Starship configuration"
 symlink ~/.dotfiles/config/starship/starship.toml ~/.config/starship.toml
 
+# eza theme (used via EZA_CONFIG_DIR, set in the shell configs)
+print_title "eza configuration"
+symlink ~/.dotfiles/config/eza ~/.config/eza
+
 # ghostty config
 print_title "Ghostty configuration"
 symlink ~/.dotfiles/config/ghostty ~/.config/ghostty
