@@ -33,7 +33,7 @@ export LESS=-R
 export LESS='--mouse --wheel-lines=3'
 export COLUMNS=80
 
-# Setup Bat ("ansi" uses the terminal's colors, i.e. the Miami Wind palette)
+# Setup Bat ("ansi" uses the terminal's colors, i.e. the SilkCircuit Glow palette)
 export BAT_PAGER="less -RF"
 export BAT_THEME="ansi"
 

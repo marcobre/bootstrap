@@ -4,7 +4,7 @@ return {
   -- dependencies = { 'nvim-tree/nvim-web-devicons' }
     require('lualine').setup({
       options = {
-      theme = 'dracula'
+      theme = 'silkcircuit' -- shipped with hyperb1iss/silkcircuit
       }
     })
   end

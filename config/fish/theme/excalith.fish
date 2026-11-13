@@ -1,18 +1,18 @@
-# Color Palette: Miami Wind (from the Omarchy theme by hanakin, MIT)
+# Color Palette: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT)
 
 # Specials
-set -l foreground cdd6f4
-set -l selection 2c2d3e
-set -l comment 585b70
+set -l foreground ffffff
+set -l selection 4b0654
+set -l comment cc66ff
 
-# Colors
-set -l red f87171
-set -l orange fdba74
-set -l yellow fef08a
-set -l green 34d399
-set -l purple 818cf8
-set -l cyan 22d3ee
-set -l pink ec4899
+# Colors ("orange": SilkCircuit has none, so its number/constant pink is used)
+set -l red ff2244
+set -l orange ff66ff
+set -l yellow ffff00
+set -l green 00ff00
+set -l purple d633ff
+set -l cyan 00ffff
+set -l pink ff00ff
 
 # Syntax Highlighting Colors
 set -gx fish_color_normal $foreground

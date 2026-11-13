@@ -285,10 +285,15 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   Horizon Dark; nvim-lazyvim falls back to LazyVim's default tokyonight. kitty tabs, cursor text and
   the tmux status bar also mix in Catppuccin Mocha accents (`#CBA6F7`, `#1E1E2E`, `#11111B`), and the
   macOS Alacritty background (`#1e212b`) differs from the others (`#1c1e26`).
-  *Fixed: all shipped configs use **Miami Wind** (Omarchy theme by hanakin, MIT): Ghostty
-  (`themes/miami-wind`), kitty, Alacritty (Linux), tmux, fish, Neovim (catppuccin with Miami accent
-  overrides, lazyvim + marcom), micro, SketchyBar, bat (`BAT_THEME=ansi`). Unlinked legacy configs
+  *Fixed: all shipped configs use **SilkCircuit Glow** (hyperb1iss/silkcircuit, MIT): Ghostty
+  (`themes/silkcircuit-glow`, official file), kitty, Alacritty (Linux), tmux (official roles, own
+  layout), fish, Neovim (official `hyperb1iss/silkcircuit` plugin, `variant = "glow"`, lazyvim +
+  marcom incl. marcom's lualine), micro, SketchyBar, bat (`BAT_THEME=ansi`). Unlinked legacy configs
   (macOS/Windows Alacritty, hyper, tabby, warpdev, windows-terminal, termux, lvim) left unchanged.*
+- [ ] **File listings (`ls`/`ll`/`la`/`l`) use eza's default column layout** with the SilkCircuit
+  terminal palette (owner yellow, folders blue, …), not SilkCircuit's `lsd` mapping (owner cyan,
+  group purple, folder names plain bold). Kept simple on purpose; if needed later: an eza
+  `theme.yml` (needs `EZA_CONFIG_DIR`, because eza's default location differs on macOS) or `lsd`.
 - [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
   Neovim, bat, fzf, …) to one selected scheme at once.
 

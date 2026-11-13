@@ -126,44 +126,44 @@ mouse = "Middle"
 
 [bell]
 animation = "EaseOutExpo"
-color = "0xfef08a"
+color = "0xffff00"
 duration = 4
 
-# Colors: Miami Wind (from the Omarchy theme by hanakin, MIT)
+# Colors: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT)
 [colors]
 draw_bold_text_with_bright_colors = false
 
 [colors.bright]
-black = "0x585b70"
-blue = "0x2563eb"
-cyan = "0x38bdf8"
-green = "0x4ade80"
-magenta = "0xec4899"
-red = "0xf43f5e"
-white = "0xa6adc8"
-yellow = "0xfde047"
+black = "0x818181"
+blue = "0x66ccff"
+cyan = "0x66ffff"
+green = "0x66ff66"
+magenta = "0xff66ff"
+red = "0xff6666"
+white = "0xffffff"
+yellow = "0xffff66"
 
 [colors.cursor]
-cursor = "0xa6adc8"
-text = "0x1e1e2e"
+cursor = "0x00ffff"
+text = "0x0a0816"
 
 [colors.normal]
-black = "0x1e1e2e"
-blue = "0x818cf8"
-cyan = "0x22d3ee"
-green = "0x34d399"
-magenta = "0xf472b6"
-red = "0xf87171"
-white = "0xcdd6f4"
-yellow = "0xfef08a"
+black = "0x000000"
+blue = "0x0099ff"
+cyan = "0x00ffff"
+green = "0x00ff00"
+magenta = "0xff00ff"
+red = "0xff2244"
+white = "0xffffff"
+yellow = "0xffff00"
 
 [colors.primary]
-background = "0x1e1e2e"
-foreground = "0xcdd6f4"
+background = "0x0a0816"
+foreground = "0xffffff"
 
 [colors.selection]
-background = "0xf472b6"
-text = "0x1e1e2e"
+background = "0x4b0654"
+text = "0xffffff"
 
 [cursor]
 style = "Block"
