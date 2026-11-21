@@ -116,7 +116,7 @@ fonts_menu() {
 
 wm_menu() {
     gum choose --cursor="→ " --height=5 --header="Select a Window Manager to install:" \
-        "MangoWC" \
+        "MangoWM" \
         "Hyprland" \
         "Niri"
 }
@@ -158,7 +158,9 @@ install_package_management() {
     pacman_install "base-devel" "base-devel"
 
     print_title "Install AUR Helper (yay)"
-    if ! command -v yay &> /dev/null; then
+    # `yay --version` instead of `command -v`: a yay that no longer starts (e.g. after a
+    # pacman update changed libalpm) is rebuilt too
+    if ! yay --version &> /dev/null; then
         # Install yay build dependency, then build and install without makepkg calling sudo
         pacman_install "Go (yay build dependency)" "go"
         rm -rf ~/tmp/yay
@@ -342,7 +344,7 @@ install_selected_fonts() {
 install_window_manager() {
     local selected_wm="$1"
     case "$selected_wm" in
-        "MangoWC")  . "$HOME/.dotfiles/system/arch/setup_wm.sh" mangowc ;;
+        "MangoWM")  . "$HOME/.dotfiles/system/arch/setup_wm.sh" mangowm ;;
         "Hyprland") . "$HOME/.dotfiles/system/arch/setup_wm.sh" hyprland ;;
         "Niri")     . "$HOME/.dotfiles/system/arch/setup_wm.sh" niri ;;
     esac
@@ -476,7 +478,7 @@ main_interactive() {
                     install_development_tools "Git & Git Tools Build Tools Programming Languages Code Editors Development Utilities LazyGit"
                     install_cli_utilities "File Operations Search & Navigation System Monitoring Network Tools Terminal Enhancements System Info File Managers Media Tools"
                     install_gui_applications "GNOME Tools Terminal Security Network Tools Flatpak Applications"
-                    # install_window_manager "MangoWC"
+                    # install_window_manager "MangoWM"
                     install_selected_fonts "All Fonts"
                     install_gnome_extensions "All GNOME Extensions"
                     install_shell_config

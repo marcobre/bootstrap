@@ -12,15 +12,16 @@
 #==================================
 print_section "Installing Window Manager"
 
-WM="${1:-mangowc}"
+WM="${1:-mangowm}"
 
 case "$WM" in
-mangowc)
-  print_title "Install MangoWC"
-  yay_install "MangoWC" "mangowc"
+mangowm)
+  print_title "Install MangoWM"
+  # MangoWC was renamed to MangoWM; it is in the official repos (extra), no AUR needed
+  pacman_install "MangoWM" "mangowm"
   pacman_install "Waybar" "waybar"
   pacman_install "Swaybg" "swaybg"
-  print_title "MangoWC configuration"
+  print_title "MangoWM configuration"
   symlink ~/.dotfiles/config/mango/config.conf ~/.config/mango/config.conf
   symlink ~/.dotfiles/config/mango/autostart.sh ~/.config/mango/autostart.sh
   ;;

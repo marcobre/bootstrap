@@ -242,7 +242,7 @@ The installer downloads packages and fonts from the internet. Ensure you have a 
 |----------|-----------------|-------------------|--------------|------------------|
 | **Ubuntu** | APT (incl. PPAs), Flatpak | ✅ Full gum menus | ✅ 19 Nerd Fonts | GNOME, Hyprland |
 | **macOS** | Homebrew (formulae, casks, trusted taps) | ✅ Full gum menus | ✅ Homebrew cask fonts | AeroSpace, SketchyBar |
-| **Arch / CachyOS** | pacman, yay (AUR), Flatpak | ✅ Full gum menus | ✅ 19 Nerd Fonts | GNOME extensions, MangoWC |
+| **Arch / CachyOS** | pacman, yay (AUR), Flatpak | ✅ Full gum menus | ✅ 19 Nerd Fonts | GNOME extensions, MangoWM |
 | **Alpine** | apk | ✅ gum menus, text fallback | ❌ Minimal setup | Lightweight focus |
 | **Windows** | winget | 🚧 PowerShell menus | ✅ Nerd Fonts | WSL2 integration |
 | **WSL Ubuntu** | APT (incl. PPAs) | ❌ Automatic only | ❌ (use Windows fonts) | Runs inside WSL |

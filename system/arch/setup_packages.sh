@@ -30,16 +30,23 @@ pacman_install "base-devel" "base-devel"
 #==================================
 print_title "Install AUR Helper"
 
-# Install yay build dependency, then build and install without makepkg calling sudo
-pacman_install "Go (yay build dependency)" "go"
-rm -rf ~/tmp/yay
-execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
-cd ~/tmp/yay
-makepkg -fc --noconfirm --needed
-print_result $? "Building yay"
-sudo pacman -U --noconfirm yay-*.pkg.tar.zst
-print_result $? "Installing yay"
-cd - &>/dev/null
+# Only build yay when it isn't installed yet (re-runs skip the compile).
+# `yay --version` instead of `command -v`: a yay that no longer starts (e.g. after a
+# pacman update changed libalpm) fails here and gets rebuilt.
+if yay --version &> /dev/null; then
+  print_success "yay (already installed)"
+else
+  # Install yay build dependency, then build and install without makepkg calling sudo
+  pacman_install "Go (yay build dependency)" "go"
+  rm -rf ~/tmp/yay
+  execute "git clone --quiet https://aur.archlinux.org/yay.git ~/tmp/yay" "Cloning yay"
+  cd ~/tmp/yay
+  makepkg -fc --noconfirm --needed
+  print_result $? "Building yay"
+  sudo pacman -U --noconfirm yay-*.pkg.tar.zst
+  print_result $? "Installing yay"
+  cd - &>/dev/null
+fi
 
 #==================================
 # Install package managers

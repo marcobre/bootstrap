@@ -131,6 +131,13 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   `system/wsl_ubuntu/setup_packages.sh`. On 25.10+ the missing Release file can make `apt update`
   fail for the whole run. 24.04 is fine. Check whether a fish 4 PPA exists, or skip the PPA on
   newer releases (their own `fish` package is recent).
+- [x] **Arch: installing the window manager failed ("yay can't find package mangowc").** MangoWC was
+  renamed to MangoWM; `mangowc` no longer exists in the AUR. *Fixed: `pacman_install "MangoWM"
+  "mangowm"` (official `extra` repo, no yay needed); menu entry, argument and docs renamed. The
+  config path `~/.config/mango/config.conf` and the binary `mango` are unchanged.*
+- [x] **Arch: yay was cloned, compiled and installed again on every re-run.** `system/arch/setup_packages.sh`
+  had no check (the interactive installer already had one, via `command -v`). *Fixed in both installers:
+  the build is skipped when `yay --version` works, so a yay broken by a libalpm update is rebuilt.*
 - [x] **Interactive installers still have their own LazyGit download.**
   `system/{ubuntu,arch,alpine}/install_interactive.sh` hardcode `x86_64` and skip checksum
   verification.
