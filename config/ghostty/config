@@ -48,7 +48,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = silkcircuit-glow
+theme = hackerman
 
 font-family = FiraCode Nerd Font Mono
 

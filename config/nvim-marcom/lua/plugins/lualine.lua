@@ -4,7 +4,7 @@ return {
   -- dependencies = { 'nvim-tree/nvim-web-devicons' }
     require('lualine').setup({
       options = {
-      theme = 'silkcircuit' -- shipped with hyperb1iss/silkcircuit
+      theme = 'aether' -- shipped with bjarneo/aether.nvim
       }
     })
   end

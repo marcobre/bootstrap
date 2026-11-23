@@ -1,18 +1,18 @@
-# Color Palette: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT)
+# Color Palette: Hackerman (Omarchy, MIT: https://github.com/omacom/omarchy/tree/dev/themes/hackerman)
 
 # Specials
-set -l foreground ffffff
-set -l selection 4b0654
-set -l comment cc66ff
+set -l foreground ddf7ff
+set -l selection 1f253a
+set -l comment 6a6e95
 
-# Colors ("orange": SilkCircuit has none, so its number/constant pink is used)
-set -l red ff2244
-set -l orange ff66ff
-set -l yellow ffff00
-set -l green 00ff00
-set -l purple d633ff
-set -l cyan 00ffff
-set -l pink ff00ff
+# Colors (Hackerman's ANSI "red" is a green, see the terminal palette)
+set -l red 50f872
+set -l orange 50f7a3
+set -l yellow 50f7d4
+set -l green 4fe88f
+set -l purple cddbf4
+set -l cyan 7cf8f7
+set -l pink 829dd4
 
 # Syntax Highlighting Colors
 set -gx fish_color_normal $foreground

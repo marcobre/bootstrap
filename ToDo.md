@@ -292,19 +292,15 @@ Priority: **P1** = breaks a fresh install on an actively used OS (macOS, Ubuntu,
   Horizon Dark; nvim-lazyvim falls back to LazyVim's default tokyonight. kitty tabs, cursor text and
   the tmux status bar also mix in Catppuccin Mocha accents (`#CBA6F7`, `#1E1E2E`, `#11111B`), and the
   macOS Alacritty background (`#1e212b`) differs from the others (`#1c1e26`).
-  *Fixed: all shipped configs use **SilkCircuit Glow** (hyperb1iss/silkcircuit, MIT): Ghostty
-  (`themes/silkcircuit-glow`, official file), kitty, Alacritty (Linux), tmux (official roles, own
-  layout), fish, Neovim (official `hyperb1iss/silkcircuit` plugin, `variant = "glow"`, lazyvim +
-  marcom incl. marcom's lualine), micro, SketchyBar, bat (`BAT_THEME=ansi`). Unlinked legacy configs
-  (macOS/Windows Alacritty, hyper, tabby, warpdev, windows-terminal, termux, lvim) left unchanged.*
-- [x] **File listings (`ls`/`ll`/`la`/`l`) use eza's default column layout** with the SilkCircuit
-  terminal palette (owner yellow, folders blue, …), not SilkCircuit's `lsd` mapping (owner cyan,
-  group purple, folder names plain bold).
-  *Fixed: `config/eza/theme.yml` mirrors SilkCircuit's official lsd colors, linked to
-  `~/.config/eza`; `EZA_CONFIG_DIR` is set in zsh/bash/fish (eza's default location differs on
-  macOS). File names are colored by type for readability (folders `#00d9ff`, executables
-  `#00ff00`, links `#ff00ff`, files white). Remaining by design: one date color (lsd colors by
-  age), eza's `@` xattr marker.*
+  *Fixed: all shipped configs use **Hackerman** (Omarchy theme, MIT): Ghostty (`themes/hackerman`,
+  the only Ghostty theme left), kitty, Alacritty (Linux), tmux (own layout), fish, micro, SketchyBar,
+  Neovim (`bjarneo/hackerman.nvim` + `bjarneo/aether.nvim`, which also provides marcom's lualine
+  theme `aether`), bat (`BAT_THEME=ansi`). Unlinked legacy configs (macOS/Windows Alacritty, hyper,
+  tabby, warpdev, windows-terminal, termux, lvim) left unchanged. Note: Hackerman's ANSI red, green
+  and yellow are all green/teal shades.*
+- [x] **File listings (`ls`/`ll`/`la`/`l`) use eza's default colors.**
+  *Fixed: the custom eza theme (`config/eza/theme.yml`, `EZA_CONFIG_DIR`) was removed; eza uses the
+  terminal's ANSI palette.*
 - [ ] **Create a color scheme switcher** (later): switch all configs (terminal, tmux, shells,
   Neovim, bat, fzf, …) to one selected scheme at once.
 

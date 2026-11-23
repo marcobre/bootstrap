@@ -1,44 +1,34 @@
-# Colors: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT),
-# each role uses the color SilkCircuit's Neovim theme gives it
-color-link default "#ffffff,#0a0816"
-color-link comment "#cc66ff"
-
-color-link identifier "#00ffff"
-color-link identifier.class "#ffff00"
-color-link identifier.var "#ffffff"
-
-color-link constant "#ff66ff"
-color-link constant.number "#ff66ff"
-color-link constant.string "#ff99ff"
-
-color-link symbol "#cc66ff"
-color-link symbol.brackets "#ffffff"
-color-link symbol.tag "#ff00ff"
-
-color-link type "#ffff00"
-color-link type.keyword "#d633ff"
-
-color-link special "#ff66ff"
-color-link statement "#d633ff"
-color-link preproc "#ff66ff"
-
-color-link underlined "#00d9ff"
-color-link error "bold #ff2244"
-color-link todo "bold #ff00ff"
-
-color-link diff-added "#00ff00"
-color-link diff-modified "#ffff00"
-color-link diff-deleted "#ff2244"
-
-color-link gutter-error "#ff2244"
-color-link gutter-warning "#ffff00"
-
-color-link statusline "#ffffff,#20003d"
-color-link tabbar "#ffffff,#20003d"
-color-link indent-char "#4b0654"
-color-link line-number "#818181"
-color-link current-line-number "#ffffff"
-
-color-link cursor-line "#1a0033,#ffffff"
-color-link color-column "#1a0033"
+# Colors: Hackerman (Omarchy, MIT: https://github.com/omacom/omarchy/tree/dev/themes/hackerman),
+# each role uses the color Hackerman's syntax table gives it
+color-link default "#ddf7ff,#0b0c16"
+color-link comment "#6a6e95"
+color-link identifier "#7cf8f7"
+color-link identifier.class "#50f7d4"
+color-link identifier.var "#ddf7ff"
+color-link constant "#50f7a3"
+color-link constant.number "#50f7a3"
+color-link constant.string "#4fe88f"
+color-link symbol "#c4d2ed"
+color-link symbol.brackets "#6a6e95"
+color-link symbol.tag "#50f872"
+color-link type "#50f7d4"
+color-link type.keyword "#cddbf4"
+color-link special "#cddbf4"
+color-link statement "#cddbf4"
+color-link preproc "#cddbf4"
+color-link underlined "#829dd4"
+color-link error "bold #50f872"
+color-link todo "bold #82fb9c"
+color-link diff-added "#4fe88f"
+color-link diff-modified "#50f7d4"
+color-link diff-deleted "#50f872"
+color-link gutter-error "#50f872"
+color-link gutter-warning "#50f7d4"
+color-link statusline "#ddf7ff,#151828"
+color-link tabbar "#ddf7ff,#151828"
+color-link indent-char "#2d3450"
+color-link line-number "#6a6e95"
+color-link current-line-number "#ddf7ff"
+color-link cursor-line "#10121f,#ddf7ff"
+color-link color-column "#10121f"
 color-link type.extended "default"

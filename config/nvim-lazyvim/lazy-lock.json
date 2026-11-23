@@ -1,4 +1,6 @@
 {
+  "aether.nvim": { "branch": "main", "commit": "567efb778534e11ee1072d4fe27178f705a27d8a" },
+  "hackerman.nvim": { "branch": "main", "commit": "d7699ce7639686b8f3a5ae108b496a32ee5c076d" },
   "LazyVim": { "branch": "main", "commit": "0fa4a847929fc6beae40a3063615a58115678c34" },
   "SchemaStore.nvim": { "branch": "main", "commit": "92e7b3b2dbd1505fcbcb20f1fdd987b35e9cd34b" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
@@ -37,7 +39,6 @@
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "render-markdown.nvim": { "branch": "main", "commit": "9c235bedc4f96145e63fcad5b78cd78bce8822c4" },
   "sidekick.nvim": { "branch": "main", "commit": "3d80a47e6375f6d647c9695d3afea6fa1b3275df" },
-  "silkcircuit": { "branch": "main", "commit": "3ee8269b311476ffea5772c4d851f5e99198638e" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
   "sshfs.nvim": { "branch": "main", "commit": "a4c61a8b49639dbd37d0c272e0f93a5ffe85e81d" },
   "telescope-orgmode.nvim": { "branch": "main", "commit": "214fe56e105bb3d0638f33320ed959911a1bfcb1" },

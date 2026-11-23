@@ -35,12 +35,10 @@ export LESS=-R
 export LESS='--mouse --wheel-lines=3'
 export COLUMNS=80
 
-# Setup Bat ("ansi" uses the terminal's colors, i.e. the SilkCircuit Glow palette)
+# Setup Bat ("ansi" uses the terminal's colors, i.e. the Hackerman palette)
 export BAT_PAGER="less -RF"
 export BAT_THEME="ansi"
 
-# eza theme (SilkCircuit, config/eza/theme.yml); same path on every OS
-export EZA_CONFIG_DIR="$HOME/.config/eza"
 
 # Setup FASD
 #eval "$(fasd --init auto)"

@@ -126,44 +126,44 @@ mouse = "Middle"
 
 [bell]
 animation = "EaseOutExpo"
-color = "0xffff00"
+color = "0x50f7d4"
 duration = 4
 
-# Colors: SilkCircuit Glow (https://github.com/hyperb1iss/silkcircuit, MIT)
+# Colors: Hackerman (Omarchy, MIT: https://github.com/omacom/omarchy/tree/dev/themes/hackerman)
 [colors]
 draw_bold_text_with_bright_colors = false
 
 [colors.bright]
-black = "0x818181"
-blue = "0x66ccff"
-cyan = "0x66ffff"
-green = "0x66ff66"
-magenta = "0xff66ff"
-red = "0xff6666"
-white = "0xffffff"
-yellow = "0xffff66"
+black = "0x2d3450"
+blue = "0xc4d2ed"
+cyan = "0xd1fffe"
+green = "0x9cf7c2"
+magenta = "0xcddbf4"
+red = "0x85ff9d"
+white = "0xddf7ff"
+yellow = "0xa4ffec"
 
 [colors.cursor]
-cursor = "0x00ffff"
-text = "0x0a0816"
+cursor = "0xddf7ff"
+text = "0x0b0c16"
 
 [colors.normal]
-black = "0x000000"
-blue = "0x0099ff"
-cyan = "0x00ffff"
-green = "0x00ff00"
-magenta = "0xff00ff"
-red = "0xff2244"
-white = "0xffffff"
-yellow = "0xffff00"
+black = "0x0b0c16"
+blue = "0x829dd4"
+cyan = "0x7cf8f7"
+green = "0x4fe88f"
+magenta = "0x86a7df"
+red = "0x50f872"
+white = "0xddf7ff"
+yellow = "0x50f7d4"
 
 [colors.primary]
-background = "0x0a0816"
-foreground = "0xffffff"
+background = "0x0b0c16"
+foreground = "0xddf7ff"
 
 [colors.selection]
-background = "0x4b0654"
-text = "0xffffff"
+background = "0x1f253a"
+text = "0xddf7ff"
 
 [cursor]
 style = "Block"

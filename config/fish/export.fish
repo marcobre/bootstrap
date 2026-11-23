@@ -38,12 +38,10 @@ set -gx LESS -R
 set -gx LESS '--mouse --wheel-lines=3'
 set -gx COLUMNS 80
 
-# Setup Bat ("ansi" uses the terminal's colors, i.e. the SilkCircuit Glow palette)
+# Setup Bat ("ansi" uses the terminal's colors, i.e. the Hackerman palette)
 set -gx BAT_PAGER "less -RF"
 set -gx BAT_THEME "ansi"
 
-# eza theme (SilkCircuit, config/eza/theme.yml); same path on every OS
-set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
 # Editor
 set -gx EDITOR "lvim"
